@@ -9,7 +9,7 @@
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Windows Update History\Get Windows Update History.ps1</FileName>
         <Parameters></Parameters>
-        <AdditionalFiles></AdditionalFiles>
+        <AdditionalFiles>C:\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</AdditionalFiles>
         <RowLimit value="100" />
         <TypeName>PowerShell</TypeName>
         <SourceScannerId value="49" />
