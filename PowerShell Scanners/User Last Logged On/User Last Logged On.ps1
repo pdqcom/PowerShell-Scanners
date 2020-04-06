@@ -8,7 +8,7 @@ param (
 $UserArray = New-Object System.Collections.ArrayList
 
 # Query all logon events with id 4624 
-Get-EventLog -LogName "Security" -InstanceId 4624 | ForEach-Object {
+Get-EventLog -LogName "Security" -InstanceId 4624 -ErrorAction "SilentlyContinue" | ForEach-Object {
 
     $EventMessage = $_
     $AccountName = $EventMessage.ReplacementStrings[5]
