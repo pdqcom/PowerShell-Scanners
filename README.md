@@ -29,7 +29,8 @@ An alternative download method if you can't/don't want to install Git.
 1. Rename `PowerShell-Scanners-master` to `PowerShell-Scanners`.
 
 #### Updating
-Delete `C:\PowerShell-Scanners` (as long as you haven't edited anything!), then follow the Setup instructions again.
+1. Delete `C:\PowerShell-Scanners` (as long as you haven't edited anything!).
+1. Follow the Setup instructions again.
 
 # Importing
 Now that you have this repository downloaded, it's time to import the PowerShell Scanner profile(s) that you want!
