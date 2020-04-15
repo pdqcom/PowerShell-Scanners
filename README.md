@@ -42,3 +42,6 @@ Now that you have this repository downloaded, it's time to import the PowerShell
 1. Click the Open button.
 
 That's it! To update your imported profile(s), follow the appropriate Updating section above. You shouldn't have to re-import any Scan Profiles unless you see a note telling you to in that profile's README file.
+
+# Contributing
+If you have created a PowerShell Scanner that you would like to add to this repository, please read the [Contributing guide](Policies/Contributing.md).
