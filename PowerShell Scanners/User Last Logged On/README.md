@@ -14,3 +14,6 @@ Queries the Security Event Log to determine the last time each user logged on to
 ## Lowercase
 
 Transforms the Username field to lowercase so it groups properly in Inventory. If you don't want this behavior, remove `-Lowercase` from the Parameters field.
+
+# Author
+Nate Blevins

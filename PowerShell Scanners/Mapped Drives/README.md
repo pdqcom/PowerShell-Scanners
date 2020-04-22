@@ -7,3 +7,6 @@ This scanner looks at the HKEY_USERS registry hive to find the mapped drives of 
 ## Verbose
 
 Enables Verbose log messages. If you don't want Verbose messages in your Output Log, remove `-Verbose` from the Parameters field.
+
+# Author
+Colby Bouma

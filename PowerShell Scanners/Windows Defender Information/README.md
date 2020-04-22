@@ -6,3 +6,6 @@ Gathers basic Windows Defender Information such as product version and signature
 
 * Windows 10/Server 2016 or higher
 * The Windows Defender service must be running
+
+# Author
+Nate Blevins
