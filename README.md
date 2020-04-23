@@ -12,18 +12,18 @@ The best way to use this repository is with Git. It makes updating very easy.
 #### Setup
 1. Install Git. We have a package for this in [PDQ Deploy](https://www.pdq.com/pdq-deploy/)'s [Package Library](https://www.pdq.com/package-library/) ;)
 1. Clone this repository to the root of your C drive. This is necessary because the [PowerShell Scanner](https://link.pdq.com/docs-inventory-beta?powershell-scanner.htm) feature does not currently support variables.
-    ```PowerShell
-    cd C:\
-    git clone https://github.com/pdq/PowerShell-Scanners.git
-    ```
+```PowerShell
+cd C:\
+git clone https://github.com/pdq/PowerShell-Scanners.git
+```
 
 #### Updating
 1. Navigate to your clone of this repository.
 1. Run a git pull.
-    ```PowerShell
-    cd C:\PowerShell-Scanners
-    git pull
-    ```
+```PowerShell
+cd C:\PowerShell-Scanners
+git pull
+```
 
 ## ZIP
 An alternative download method if you can't/don't want to install Git.
