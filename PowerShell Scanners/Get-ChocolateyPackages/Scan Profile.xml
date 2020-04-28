@@ -4,8 +4,8 @@
     <Collections type="list" />
     <Scanners type="list">
       <Scanner>
-        <ModifiedDate>2020-04-06T11:57:58.0000000-06:00</ModifiedDate>
-        <Name>User Last Logged On</Name>
+        <ModifiedDate>2020-04-28T11:57:58.0000000-06:00</ModifiedDate>
+        <Name>Chocolatey Package Information</Name>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Chocolatey Packages\Get-ChocolateyPackageData.ps1</FileName>
         <AdditionalFiles></AdditionalFiles>
