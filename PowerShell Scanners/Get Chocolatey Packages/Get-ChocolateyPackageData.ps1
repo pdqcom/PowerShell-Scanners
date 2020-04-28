@@ -3,7 +3,7 @@ param(<#reserved for future use#>)
 
 begin {
     try {
-        Get-Command choco -ErrorAction Stop 
+        $null = Get-Command choco -ErrorAction Stop 
     } catch {
         throw "choco not installed, or not found on PATH."
     }
@@ -44,24 +44,29 @@ process {
                 
                 $props = $_.split('|')
                 
-                $hash = @{
-                name = $props[0]
-                version = $props[1]
-                }
-
-                if($Audit){
+                if(-not $Audit){
+                    $hash = @{
+                        name = $props[0]
+                        version = $props[1]
+                        InstalledBy = $null
+                        Domain = $null
+                        RequestedBy = $null
+                        'InstallDate(UTC)' = $null
+                    }
+                } else {
                     #The following get picked up with using the --audit flag in C4B.
-                    $AuditHash = @{    
+                    $hash = @{    
+                        name = $props[0]
+                        version = $props[1]
                         InstalledBy = $props[2] -replace ('User:','')
                         Domain = $props[3] -replace ('Domain:','')
                         RequestedBy = $props[4] -replace ('Original User:','')
                         'InstallDate(UTC)' = $props[5] -replace ('InstallDateUtc:','')   
                     }
-
-                    $hash = $hash + $AuditHash
-                    
                 }
+
                 [pscustomobject]$hash
+
             }
         }
     }

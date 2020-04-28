@@ -4,7 +4,7 @@ Queries a machine for Chocolatey Package information. If using FOSS choco, you g
 
 # Requirements
 
-* A version of choco to be installed on the workstation/server
+A version of choco to be installed on the workstation/server
 
 # Parameters
 
