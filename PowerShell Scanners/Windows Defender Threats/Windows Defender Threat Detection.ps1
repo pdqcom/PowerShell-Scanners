@@ -1,5 +1,5 @@
-﻿if (-Not(Get-Command Get-MpComputerStatus -ErrorAction SilentlyContinue)) {
-    throw "Unable to find Get-MpComputerStatus. Available on Windows 10/Server 2016 or higher"
+﻿if (-Not(Get-Command Get-MpThreatDetection -ErrorAction SilentlyContinue)) {
+    throw "Unable to find Get-MpThreatDetection. Available on Windows 10/Server 2016 or higher"
 }
 
 $DefenderStatus = (Get-Service WinDefend -ErrorAction SilentlyContinue).Status
