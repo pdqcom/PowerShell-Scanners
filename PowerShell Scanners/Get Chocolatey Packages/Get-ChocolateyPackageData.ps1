@@ -26,7 +26,7 @@ process {
             choco list -lo -r | ConvertTo-ChocoObject
 
             .EXAMPLE
-            choco list -lo -r --audit | ConnvertTo-ChocoObject -Audit
+            choco list -lo -r --audit | ConvertTo-ChocoObject -Audit
             #>
         [CmdletBinding()]
         Param (
