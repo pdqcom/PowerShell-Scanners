@@ -9,7 +9,7 @@ param (
 # Install the module if it is not already installed, then load it.
 Try {
 
-    $null = Get-InstalledModule $ModuleName
+    $null = Get-InstalledModule $ModuleName -ErrorAction Stop
 
 } Catch {
 
