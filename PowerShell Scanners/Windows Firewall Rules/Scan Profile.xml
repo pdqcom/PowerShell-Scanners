@@ -8,7 +8,7 @@
         <Name>Windows Firewall Rules</Name>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Windows Firewall Rules\Windows Firewall Rules.ps1</FileName>
-        <Parameters>-Verbose</Parameters>
+        <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
         <TypeName>PowerShell</TypeName>
