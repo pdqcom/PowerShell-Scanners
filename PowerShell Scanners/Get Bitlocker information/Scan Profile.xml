@@ -15,7 +15,7 @@
         <SourceScannerId value="53" />
       </Scanner>
     </Scanners>
-    <Description></Description>
+    <Description>Retrieves the Bitlocker information of a target.</Description>
     <ScanProfileId value="17" />
     <Name>PS - Bitlocker</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
