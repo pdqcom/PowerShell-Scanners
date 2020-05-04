@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.40.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-05-04T11:19:45.0000000+01:00</ModifiedDate>
+        <Name>Bitlocker Information</Name>
+        <Script>if (-Not(Get-Command Get-BitlockerVolume -ErrorAction SilentlyContinue)) {
+    throw "Unable to find Get-BitlockerVolume. Available on Windows 10 or Server 2016 with the Bitlocker feature installed"
+}
+
+Get-BitlockerVolume</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="53" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="17" />
+    <Name>PS - Bitlocker</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
