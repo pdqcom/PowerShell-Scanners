@@ -10,7 +10,7 @@
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Windows Firewall Rules\Windows Firewall Rules.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
-        <RowLimit value="100" />
+        <RowLimit value="300" />
         <TypeName>PowerShell</TypeName>
         <SourceScannerId value="51" />
       </Scanner>
