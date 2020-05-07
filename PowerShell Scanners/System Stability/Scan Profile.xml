@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.40.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-05-07T10:59:41.0000000+10:00</ModifiedDate>
+        <Name>System Stability Index</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\System Stability Index\System Stability.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="1" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="45" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="19" />
+    <Name>System Stability</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>1.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-05-13T00:00:00.0000000+10:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-05-06T00:00:00.0000000+10:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
