@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.0.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-04-02T12:12:46.0000000-06:00</ModifiedDate>
+        <Name>Windows Firewall Rules</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Windows Firewall Rules\Windows Firewall Rules.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="300" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="51" />
+      </Scanner>
+    </Scanners>
+    <Description>Retrieves the Windows Firewall Rules of a target.</Description>
+    <ScanProfileId value="25" />
+    <Name>PS - Windows Firewall Rules</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
