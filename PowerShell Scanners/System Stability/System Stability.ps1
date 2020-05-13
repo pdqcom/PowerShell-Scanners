@@ -5,13 +5,13 @@ param (
 )
 
 # Gather $Count worth of ReliabilityStabilityMetrics
-$StabilityMetrcs = Get-WmiObject -ClassName Win32_ReliabilityStabilityMetrics | Select-Object -First $Count
+$StabilityMetrcs = Get-CimInstance -ClassName Win32_ReliabilityStabilityMetrics | Select-Object -First $Count
 
 # Generate Min/Max/Average stability for our collected window.
 $StabilityStats = $StabilityMetrcs | Measure-Object -Average -Maximum  -Minimum -Property systemStabilityIndex
 
 # Get the most recent stability and when it was generated
-$LastStabitiyMetric = $StabilityMetrcs | Select-Object -First 1 -Property systemStabilityIndex, @{N = "Date"; E = { $_.ConvertToDatetime($_.TimeGenerated) } }
+$LastStabitiyMetric = $StabilityMetrcs | Select-Object -First 1 -Property systemStabilityIndex, TimeGenerated
 
 # Output the collected data
 [PSCustomObject]@{
@@ -19,5 +19,5 @@ $LastStabitiyMetric = $StabilityMetrcs | Select-Object -First 1 -Property system
     Average = [math]::Round($StabilityStats.Average, 2) #round to two decimal places for sanity
     Maximum = [math]::Round($StabilityStats.Maximum)
     Last = $LastStabitiyMetric.systemStabilityIndex
-    LastDate = [DateTime]$LastStabitiyMetric.Date
+    LastDate = [DateTime]$LastStabitiyMetric.TimeGenerated
 }
