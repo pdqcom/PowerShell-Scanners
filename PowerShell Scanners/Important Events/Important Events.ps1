@@ -2,14 +2,14 @@
 [CmdletBinding()]
 param (
     # Number of days worth of entries to collect
-    [int]$Days = 28, # Defaults to Four weeks
+    [uint]$Days = 28, # Defaults to Four weeks
     # Limit the number of returned events
-    [int]$EventLimit = 30, # Defaults to 30 events
+    [uint]$EventLimit = 30, # Defaults to 30 events
     [ValidateSet("System","Application")]
     [string]$EventLog = "System", # Defaults to "System"
     # The level of events to gather
     [ValidateRange(0,4)]
-    [int]$EventLevel = 1 # Critical
+    [uint]$EventLevel = 1 # Critical
 )
 
 # Set the start date to be $Days before now
