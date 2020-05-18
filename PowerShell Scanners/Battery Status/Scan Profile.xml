@@ -7,7 +7,7 @@
         <ModifiedDate value="null" />
         <Name>Battery Status</Name>
         <Script></Script>
-        <FileName>\\LT-BRETTP-DEV\C$\PowerShell-Scanners\PowerShell Scanners\Battery Status\Battery Status.ps1</FileName>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Battery Status\Battery Status.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
