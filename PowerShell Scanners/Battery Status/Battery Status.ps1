@@ -9,12 +9,13 @@
 
 
 $Batteries = (Get-WmiObject -Class "BatteryStatus" -Namespace "ROOT\WMI" -ErrorAction SilentlyContinue)
+$AllBatteryData = Get-WmiObject -Class "BatteryStaticData" -Namespace "ROOT\WMI"
+$AllCharges = (Get-WmiObject -Class "BatteryFullChargedCapacity" -Namespace "ROOT\WMI").FullChargedCapacity
 $BatteryIndex = 0
 foreach($Battery in $Batteries){
-    $BatteryData = Get-WmiObject -Class "BatteryStaticData" -Namespace "ROOT\WMI"
-    $BatteryName = $BatteryData.DeviceName.split(" ")[$BatteryIndex]
-    $DesignedCapacity = $BatteryData.DesignedCapacity[$BatteryIndex]
-    $FullCharge = (Get-WmiObject -Class "BatteryFullChargedCapacity" -Namespace "ROOT\WMI").FullChargedCapacity[$BatteryIndex]
+    $BatteryName = $AllBatteryData.DeviceName.split(" ")[$BatteryIndex]
+    $DesignedCapacity = $AllBatteryData.DesignedCapacity[$BatteryIndex]
+    $FullCharge = $AllCharges[$BatteryIndex]
     $Health = [math]::Round($FullCharge/$DesignedCapacity * 100,2)
 
     Return-Battery $BatteryName $DesignedCapacity $FullCharge $Health
