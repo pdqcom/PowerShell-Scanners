@@ -7,7 +7,7 @@
         <ModifiedDate>2020-05-04T11:19:45.0000000+01:00</ModifiedDate>
         <Name>BitLocker Information</Name>
         <Script></Script>
-        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Bitlocker Information\BitLocker Information.ps1</FileName>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get BitLocker Information\BitLocker Information.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
