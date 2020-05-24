@@ -1,8 +1,6 @@
 # Description
 
-Returns the desired list of events from the eventlog
-
-# Requirements
+Returns the desired list of events from the event log
 
 # Parameters
 
