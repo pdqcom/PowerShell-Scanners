@@ -28,7 +28,7 @@
     </Scanners>
     <Description></Description>
     <ScanProfileId value="21" />
-    <Name>Important Events</Name>
+    <Name>PS - Important Events</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
     </ScheduleTriggerSet>
