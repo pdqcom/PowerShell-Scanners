@@ -1,17 +1,17 @@
 [CmdletBinding()]
 param (
     # Number of System Stability Indexes to return (generated hourly)
-    [Int]$Count = (24 * 7 * 4) #-Four week rolling window
+    [UInt32]$Count = (24 * 7 * 4) #-Four week rolling window
 )
 
 # Gather $Count worth of ReliabilityStabilityMetrics
-$StabilityMetrcs = Get-CimInstance -ClassName Win32_ReliabilityStabilityMetrics | Select-Object -First $Count
+$StabilityMetrics = Get-CimInstance -ClassName Win32_ReliabilityStabilityMetrics | Select-Object -First $Count
 
 # Generate Min/Max/Average stability for our collected window.
-$StabilityStats = $StabilityMetrcs | Measure-Object -Average -Maximum  -Minimum -Property SystemStabilityIndex
+$StabilityStats = $StabilityMetrics | Measure-Object -Average -Maximum -Minimum -Property SystemStabilityIndex
 
 # Get the most recent stability and when it was generated
-$LastStabitiyMetric = $StabilityMetrcs | Select-Object -First 1 -Property SystemStabilityIndex, TimeGenerated
+$LastStabitiyMetric = $StabilityMetrics | Select-Object -First 1 -Property SystemStabilityIndex, TimeGenerated
 
 # Output the collected data
 [PSCustomObject]@{

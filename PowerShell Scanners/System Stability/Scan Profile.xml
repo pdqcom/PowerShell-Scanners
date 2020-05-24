@@ -5,7 +5,7 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-05-07T16:21:53.0000000+10:00</ModifiedDate>
-        <Name>System Stability</Name>
+        <Name>PS - System Stability</Name>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\System Stability\System Stability.ps1</FileName>
         <Parameters></Parameters>
