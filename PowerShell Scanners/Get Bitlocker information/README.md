@@ -1,6 +1,6 @@
 # Description
 
-Runs `Get-BitlockerVolume` and returns Bitlocker volumes and status. 
+Runs `Get-BitLockerVolume` and returns BitLocker volumes and status. 
 
 # Requirements
 

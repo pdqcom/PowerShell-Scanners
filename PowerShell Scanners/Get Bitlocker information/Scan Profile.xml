@@ -5,9 +5,9 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-05-04T11:19:45.0000000+01:00</ModifiedDate>
-        <Name>Bitlocker Information</Name>
+        <Name>BitLocker Information</Name>
         <Script></Script>
-        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Bitlocker information\Bitlocker Information.ps1</FileName>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Bitlocker Information\BitLocker Information.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
@@ -15,9 +15,9 @@
         <SourceScannerId value="53" />
       </Scanner>
     </Scanners>
-    <Description>Retrieves the Bitlocker information of a target.</Description>
+    <Description>Retrieves the BitLocker information of a target.</Description>
     <ScanProfileId value="17" />
-    <Name>PS - Bitlocker</Name>
+    <Name>PS - BitLocker</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
     </ScheduleTriggerSet>

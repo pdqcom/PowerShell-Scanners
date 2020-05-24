@@ -1,3 +1,3 @@
 #Requires -Modules BitLocker
 
-Get-BitlockerVolume
+Get-BitLockerVolume
