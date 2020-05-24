@@ -1,4 +1,4 @@
-﻿function Return-Battery($BatteryName = "No Battery Detected", $DesignedCapacity = 0, $FullCharge = 0, $Health = 0) {
+﻿function Format-Battery($BatteryName = "No Battery Detected", $DesignedCapacity = 0, $FullCharge = 0, $Health = 0) {
     [PSCustomObject]@{
         Name             = $BatteryName
         DesignedCapacity = $DesignedCapacity
@@ -18,6 +18,6 @@ foreach ($Battery in $Batteries) {
     $FullCharge = $AllCharges[$BatteryIndex]
     $Health = [math]::Round($FullCharge / $DesignedCapacity * 100, 2)
 
-    Return-Battery $BatteryName $DesignedCapacity $FullCharge $Health
+    Format-Battery $BatteryName $DesignedCapacity $FullCharge $Health
     $BatteryIndex++
 }
