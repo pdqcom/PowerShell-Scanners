@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 Runs `Get-BitLockerVolume` and returns BitLocker volumes and status. 

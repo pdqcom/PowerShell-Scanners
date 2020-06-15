@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 Returns the desired list of events from the event log

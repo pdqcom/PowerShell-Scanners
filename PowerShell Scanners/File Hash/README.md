@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 Runs `Get-FileHash` on files in a directory to calculate their hash values
 

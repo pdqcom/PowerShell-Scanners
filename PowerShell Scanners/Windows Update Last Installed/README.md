@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 Installs the PSWindowsUpdate module, then runs the following cmdlets:

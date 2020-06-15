@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 This scanner looks at the HKEY_USERS registry hive to find the mapped drives of logged on users.

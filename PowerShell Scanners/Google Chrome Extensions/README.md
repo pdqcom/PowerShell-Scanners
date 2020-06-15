@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 Reads the Preferences JSON file of each user on the system to determine which extensions each user has installed.
 

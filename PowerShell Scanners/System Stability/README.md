@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 Collects System Stability statistics from Win32_ReliabilityStabilityMetrics and returns:

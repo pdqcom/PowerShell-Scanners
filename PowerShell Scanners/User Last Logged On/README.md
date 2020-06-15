@@ -1,3 +1,6 @@
+# Instructions
+[How to use this repository](../../README.md)
+
 # Description
 
 Queries the Security Event Log to determine the last time each user logged on to the target machine.
