@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.40.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate value="null" />
+        <Name>Google Chrome Extensions</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Google Chrome Extensions\Google Chrome Extensions.ps1</FileName>
+        <Parameters>-Verbose</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="1000" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="74" />
+      </Scanner>
+    </Scanners>
+    <Description>Gathers data about the Chrome extensions each user has installed.</Description>
+    <ScanProfileId value="46" />
+    <Name>PS - Google Chrome Extensions</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
