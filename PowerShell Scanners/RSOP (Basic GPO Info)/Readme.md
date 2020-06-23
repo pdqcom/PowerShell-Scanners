@@ -3,11 +3,11 @@
 
 # Description
 
-Uses Get-CimInstance to pull basic GPO information on the target.
-Returns the following:
-* Name (Name of the GPO)
-* Enabled (Is the GPO applied)
-* filterAllowed (Is the target restricted from applying the GPO)
+Uses Get-CimInstance to pull basic GPO information on the target.  
+Returns the following:  
+* Name (Name of the GPO)  
+* Enabled (Is the GPO applied)  
+* filterAllowed (Is the target restricted from applying the GPO)  
 
-# Author
+# Author  
 Ryan Joachim
