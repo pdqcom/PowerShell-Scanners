@@ -5,7 +5,7 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-06-16T18:17:28.0000000-06:00</ModifiedDate>
-        <Name>RSPO (Basic GPO Info)</Name>
+        <Name>RSOP (Basic GPO Info)</Name>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\RSOP (Basic GPO Information)\RSOP (Basic GPO Information).ps1</FileName>
         <Parameters></Parameters>
