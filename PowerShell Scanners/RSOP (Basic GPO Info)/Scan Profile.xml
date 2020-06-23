@@ -5,7 +5,7 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-06-16T18:17:28.0000000-06:00</ModifiedDate>
-        <Name>RSOP (Basic GPO Info)</Name>
+        <Name>RSOP (Basic GPO Information)</Name>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\RSOP (Basic GPO Information)\RSOP (Basic GPO Information).ps1</FileName>
         <Parameters></Parameters>
@@ -17,7 +17,7 @@
     </Scanners>
     <Description></Description>
     <ScanProfileId value="23" />
-    <Name>PS - RSOP (Basic GPO Info)</Name>
+    <Name>PS - RSOP (Basic GPO Information)</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
     </ScheduleTriggerSet>
