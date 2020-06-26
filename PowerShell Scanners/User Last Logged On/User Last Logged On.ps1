@@ -44,7 +44,7 @@ Get-EventLog -LogName "Security" -InstanceId 4624 -ErrorAction "SilentlyContinue
             [PSCustomObject]@{
                 Username  = $AccountName
                 LogonType = $LogonTypeName
-                LastLogon = $EventMessage.TimeGenerated.ToString("yyyy-MM-dd HH:mm:ss")
+                LastLogon = [DateTime]$EventMessage.TimeGenerated.ToString("yyyy-MM-dd HH:mm:ss")
             }  
 
         }
