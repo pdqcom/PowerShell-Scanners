@@ -4,20 +4,6 @@ param (
     [Switch]$EnablePermissions
 )
 
-function Convert-UtcToLocal {
-    param(
-        [parameter(Mandatory = $true)]
-        [String]$UtcTime
-    )
-
-    $CurrentTimeZone = (Get-CimInstance Win32_TimeZone 4>null).StandardName
-    $TZ = [System.TimeZoneInfo]::FindSystemTimeZoneById($CurrentTimeZone)
-    
-    [System.TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, $TZ)
-}
-
-
-
 Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
 
     # Get profile folder
@@ -71,7 +57,7 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
         $InstallTime = ($InstallTime - 11644473600000000) / 1000000
         $UtcTime = Get-Date -Date "1970-01-01 00:00:00"
         $UtcTime = $UtcTime.AddSeconds($InstallTime)
-        $LocalTime = Convert-UtcToLocal($UtcTime)
+        $LocalTime = [System.TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, (Get-TimeZone))
     
         $Output = [PSCustomObject]@{
             Name           = [String]  $Name
