@@ -60,7 +60,7 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
             $UtcTime = $UtcTime.AddSeconds($InstallTime)
             $LocalTime = [System.TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, (Get-TimeZone))
         
-            $Output = @{
+            $Output = [Ordered]@{
                 User         = [String]  $User
                 Name         = [String]  $Extension.DefaultLocale.Name
                 Version      = [String]  $Extension.Version
