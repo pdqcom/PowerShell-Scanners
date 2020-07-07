@@ -15,11 +15,16 @@ foreach($line in $HostFile){
     $IPAddress = $entryArray[0]
     $HostName = $entryArray[1]
     
-    #Remove the $IPAddress and $HostName from the $entryArray
-    $entryArray.RemoveRange(0,2)
+    #Avoid incomplete entries
+    if ( $entryArray.Count -ge 2 ) {
     
-    #Convert $entryArray back to a string for the Comments field
-    $Comments = [string]$entryArray
+        #Remove the $IPAddress and $HostName from the $entryArray
+        $entryArray.RemoveRange(0,2)
+        
+        #Convert $entryArray back to a string for the Comments field
+        $Comments = [string]$entryArray
+
+    }
 
     #Return host file entry
     [PSCustomObject]@{
