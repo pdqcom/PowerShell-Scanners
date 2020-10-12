@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-10-01T09:29:02.0000000-07:00</ModifiedDate>
+        <Name>PS - DellBios Scanner</Name>
+        <UID>24596336a2234e9da0fef704ce27a02c</UID>
+        <Script>IF (Get-WmiObject -Class:Win32_ComputerSystem -Filter:"Manufacturer LIKE '%Dell%'"){
+Install-Module DellBIOSProvider -force
+Import-Module DellBIOSProvider -force
+Get-ChildItem dellsmbios:\ | ForEach-Object {
+$Category = $_.Category
+Get-ChildItem dellsmbios:\"$Category" | ForEach-Object {
+[PSCustomObject]@{
+Category = $Category
+Attribute = $_.Attribute
+Description = $_.Description
+CurrentValue = $_.CurrentValue
+}
+} 
+}
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="63" />
+      </Scanner>
+    </Scanners>
+    <Description>Get Current Dell BIOS Settings.</Description>
+    <ScanProfileId value="20" />
+    <Name>PS - Dell BIOS Scan</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
