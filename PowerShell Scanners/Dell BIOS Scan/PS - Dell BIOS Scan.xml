@@ -4,25 +4,11 @@
     <Collections type="list" />
     <Scanners type="list">
       <Scanner>
-        <ModifiedDate>2020-10-12T14:08:07.0000000-07:00</ModifiedDate>
+        <ModifiedDate>2020-10-12T15:28:08.0000000-07:00</ModifiedDate>
         <Name>PS - DellBios Scanner</Name>
         <UID>24596336a2234e9da0fef704ce27a02c</UID>
-        <Script>IF (Get-WmiObject -Class:Win32_ComputerSystem -Filter:"Manufacturer LIKE '%Dell%'"){
-$null = Install-Module DellBIOSProvider -force
-$null = Import-Module DellBIOSProvider -force
-Get-ChildItem dellsmbios:\ | ForEach-Object {
-$Category = $_.Category
-Get-ChildItem dellsmbios:\"$Category" | ForEach-Object {
-[PSCustomObject]@{
-Category = $Category
-Attribute = $_.Attribute
-Description = $_.Description
-CurrentValue = $_.CurrentValue
-}
-} 
-}
-}</Script>
-        <FileName></FileName>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Dell BIOS Scan\Get Dell BIOS Information.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
