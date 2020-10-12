@@ -3,7 +3,7 @@
 
 # Description
 
-Uses DellBIOSProvider module to gather current BIOS settings. Current script is setup for no password set on the BIOS.
+Uses DellBIOSProvider module to gather current BIOS settings. Script will is not setup for passwords on BIOS.
 
 # Author
 James Wood
