@@ -3,7 +3,7 @@
 
 # Description
 
-This scanner looks for Local and/or Network Printers with Get-CimInstance which requires PowerShell 3.0 or higher
+This scanner looks for Local and/or Network Printers with Get-CimInstance which requires PowerShell 3.0 or higher.
 
 # Parameters
 
