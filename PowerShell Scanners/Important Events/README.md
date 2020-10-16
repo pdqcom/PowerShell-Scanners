@@ -24,24 +24,31 @@ Defaults to "System"
 
 ## EventLevel
 
-Sets the severity of events to collect.
+Sets the severity of events to collect. Accepts a list of integers.
+
+Example: `1,2,3`
+
+Mostly based on [this list](https://docs.microsoft.com/en-us/windows/win32/wes/eventmanifestschema-leveltype-complextype#remarks).
 
 Defaults to 1 (Critical)
 
-0 - LogAlways  
-No level filtering is done on the event.
+0 - Mistake
+Applications should not use this level, but it can happen.
 
 1 - Critical  
-This level corresponds to a critical error, which is a serious error that has caused a major failure.
+An abnormal exit or termination event.
 
 2 - Error  
-This level adds standard errors that signify a problem.
+A severe error event.
 
 3 - Warning  
-This level adds warning events (for example, events that are published because a disk is nearing full capacity).
+A warning event such as an allocation failure.
 
 4 - Informational  
-This level adds informational events or messages that are not errors. These events can help trace the progress or state of an application.
+A non-error event such as an entry or exit event.
+
+5 - Verbose
+A detailed trace event.
 
 # Notes
 
