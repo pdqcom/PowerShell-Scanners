@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-10-16T11:12:14.0000000-05:00</ModifiedDate>
+        <Name>Printers</Name>
+        <UID>5b2211cb67024cd58cb121b1974c925e</UID>
+        <Script></Script>
+        <FileName>\\SERVER-12\C$\PowerShell-Scanners\PowerShell Scanners\Printers\Printers.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="44" />
+      </Scanner>
+    </Scanners>
+    <Description>Scans for Local and Networked Printers on the target machine</Description>
+    <ScanProfileId value="17" />
+    <Name>PS - Printers</Name>
+    <ScanAs>LoggedOnUser</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
