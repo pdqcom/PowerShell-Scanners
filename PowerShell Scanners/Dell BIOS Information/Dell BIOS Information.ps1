@@ -1,4 +1,4 @@
-if (Get-CimInstance -ClassName Win32_ComputerSystem -Filter:"Manufacturer LIKE '%Dell%'") {
+if (Get-CimInstance -ClassName Win32_ComputerSystem -Filter "Manufacturer LIKE '%Dell%'") {
     $ModuleName = "DellBIOSProvider"
     if (-not [Environment]::Is64BitOperatingSystem) {
         $ModuleName += "X86"
@@ -13,6 +13,6 @@ if (Get-CimInstance -ClassName Win32_ComputerSystem -Filter:"Manufacturer LIKE '
                 Description  = $_.Description
                 CurrentValue = $_.CurrentValue
             }
-        } 
+        }
     }
-} 
+}
