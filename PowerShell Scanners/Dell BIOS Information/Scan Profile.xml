@@ -5,10 +5,10 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-10-12T15:28:08.0000000-07:00</ModifiedDate>
-        <Name>PS - DellBios Scanner</Name>
+        <Name>Dell BIOS Information</Name>
         <UID>24596336a2234e9da0fef704ce27a02c</UID>
         <Script></Script>
-        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Dell BIOS Scan\Get Dell BIOS Information.ps1</FileName>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Dell BIOS Information\Dell BIOS Information.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
@@ -18,7 +18,7 @@
     </Scanners>
     <Description>Get Current Dell BIOS Settings.</Description>
     <ScanProfileId value="20" />
-    <Name>PS - Dell BIOS Scan</Name>
+    <Name>PS - Dell BIOS Information</Name>
     <ScanAs>Admin</ScanAs>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
