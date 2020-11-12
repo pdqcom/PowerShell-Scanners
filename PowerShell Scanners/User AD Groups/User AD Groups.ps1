@@ -53,7 +53,7 @@ foreach($group in $groups){
         'GroupScope' = $groupinfo.GroupScope
         'Name' = $groupinfo.name[0]
         'SamAccountName' = $groupinfo.samaccountname[0]
-        'mail' = if($groupinfo.mail -ne $null){ $groupinfo.mail[0]}else{""}
+        'mail' = if($groupinfo.mail){ $groupinfo.mail[0] }else{ "" }
     }
 
 }
