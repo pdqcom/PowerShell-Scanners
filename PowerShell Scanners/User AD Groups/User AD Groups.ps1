@@ -55,5 +55,4 @@ foreach($group in $groups){
         'SamAccountName' = $groupinfo.samaccountname[0]
         'mail' = if($groupinfo.mail){ $groupinfo.mail[0] }else{ "" }
     }
-
 }
