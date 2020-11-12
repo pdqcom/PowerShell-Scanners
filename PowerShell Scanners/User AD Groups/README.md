@@ -3,20 +3,17 @@
 
 # Description
 
-Uses a registry key to determine the last logged in user.
-Uses system.DirectoryServices.DirectorySearcher to then
+Uses a registry key to determine the last logged in user then
+uses system.DirectoryServices.DirectorySearcher to 
 find active directory groups that user is associated with.
 
-Returns the following:  
-* User
-    * Last Logged in User
-* Group
-    * DistinguishedName 
-    * GroupCategory
-    * GroupScope
-    * Name
-    * SamAccountName
-    * mail
+Returns the following Group Information:
+* DistinguishedName 
+* GroupCategory
+* GroupScope
+* Name
+* SamAccountName
+* mail
 
 # Author  
 Matt Henry
