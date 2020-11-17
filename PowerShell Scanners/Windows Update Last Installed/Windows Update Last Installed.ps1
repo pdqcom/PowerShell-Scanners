@@ -7,5 +7,5 @@ $lastResults = Get-WULastResults
 [PSCustomObject]@{
     LastInstallationDate = [DateTime] $lastResults.LastInstallationSuccessDate
     LastScanSuccessDate  = [DateTime] $lastResults.LastSearchSuccessDate
-    IsPendingReboot      = [Bool] (Get-WURebootStatus).RebootRequired
+    IsPendingReboot      = [Bool] (Get-WURebootStatus -Silent)
 }
