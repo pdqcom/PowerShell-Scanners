@@ -38,7 +38,7 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
     # https://github.com/pdq/PowerShell-Scanners/issues/23
     Add-Type -AssemblyName System.Web.Extensions
     $PreferencesText = Get-Content $PreferencesFile
-    $JsonParser = [System.Web.Script.Serialization.JavaScriptSerializer]::New()
+    $JsonParser = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
     $PreferencesJson = $JsonParser.DeserializeObject($PreferencesText)
 
     Foreach ( $Extension in $PreferencesJson.extensions.settings.GetEnumerator() ) {
@@ -54,7 +54,7 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
             Continue
 
         }
-            
+
         # Convert Install_Time
         $InstallTime = [Double]$Extension.install_time
         # Divide by 1,000,000 because we are going to add seconds on to the base date
@@ -62,7 +62,7 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
         $UtcTime = Get-Date -Date "1970-01-01 00:00:00"
         $UtcTime = $UtcTime.AddSeconds($InstallTime)
         $LocalTime = [System.TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, (Get-TimeZone))
-    
+
         $Output = [Ordered]@{
             Name           = [String]  $Name
             Version        = [String]  $Extension.manifest.version
