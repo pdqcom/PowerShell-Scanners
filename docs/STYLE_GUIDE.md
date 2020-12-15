@@ -6,7 +6,7 @@
 
 # Recommendations
 ### Lists instead of arrays
-Using an `ArrayList` or `List[T]` is a lot faster than regular arrays, especially when you're dealing with a lot of data. https://foxdeploy.com/2016/03/23/coding-for-speed/
+Using an [ArrayList](https://docs.microsoft.com/en-us/dotnet/api/system.collections.arraylist) or [List[T]](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1) is a lot faster than regular arrays, especially when you're dealing with a lot of data. https://foxdeploy.com/2016/03/23/coding-for-speed/
 
 Use this:
 ```PowerShell
@@ -46,7 +46,7 @@ if ( $Drives ) {
 or this:
 ```PowerShell
 $Drives = Get-ItemProperty "Registry::HKEY_USERS\*\Network\*"
-if ( $null -eq $Drives ) {
+if ( $null -ne $Drives ) {
     Do-FancyThings
 }
 ```
@@ -89,7 +89,7 @@ if ( -Not ( Test-Path "File2.exe" ) ) {
 ```
 
 # Do not use `Out-Null` to erase output
-In PowerShell version 5 and earlier, `Out-Null` is slower than `$null =` or `[void]` and while this won't make a large performance difference for most scripts we'd prefer to use the technically better option.
+In PowerShell versions 1 through 5, `Out-Null` is slower than `$null =` or `[void]` and while this won't make a large performance difference for most scripts we'd prefer to use the technically better option.
 
 Use this:
 ```PowerShell
