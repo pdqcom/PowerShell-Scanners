@@ -5,8 +5,8 @@
 * Indentation. IDEs like Visual Studio Code will help you with this.
 
 # Recommendations
-### ArrayList instead of arrays
-Using an ArrayList is a lot faster than regular arrays, especially when you're dealing with a lot of data. https://foxdeploy.com/2016/03/23/coding-for-speed/
+### Lists instead of arrays
+Using an `ArrayList` or `List[T]` is a lot faster than regular arrays, especially when you're dealing with a lot of data. https://foxdeploy.com/2016/03/23/coding-for-speed/
 
 Use this:
 ```PowerShell
@@ -18,7 +18,7 @@ For ( $Count = 1; $Count -le 10000000; $Count ++ ) {
 
 or this:
 ```PowerShell
-$MyArray = New-Object System.Collections.Generic.List[UInt32]
+$MyArray = New-Object System.Collections.Generic.List[object]
 For ( $Count = 1; $Count -le 10000000; $Count ++ ) {
     $MyArray.Add($Count)
 }
@@ -39,6 +39,14 @@ Use this:
 ```PowerShell
 $Drives = Get-ItemProperty "Registry::HKEY_USERS\*\Network\*"
 if ( $Drives ) {
+    Do-FancyThings
+}
+```
+
+or this:
+```PowerShell
+$Drives = Get-ItemProperty "Registry::HKEY_USERS\*\Network\*"
+if ( $null -eq $Drives ) {
     Do-FancyThings
 }
 ```
@@ -80,12 +88,18 @@ if ( -Not ( Test-Path "File2.exe" ) ) {
 }
 ```
 
-# Use "$null =" to erase output
-It's faster than `Out-Null`, which probably doesn't matter for most scripts, but why not go with the faster option? :)
+# Do not use `Out-Null` to erase output
+In PowerShell version 5 and earlier, `Out-Null` is slower than `$null =` or `[void]` and while this won't make a large performance difference for most scripts we'd prefer to use the technically better option.
 
 Use this:
 ```PowerShell
 $null = Install-Module -Name "FancyPants" -Force
+```
+
+or this:
+```PowerShell
+$MyArray = New-Object System.Collections.ArrayList
+[void]$MyArray.Add(1)
 ```
 
 instead of this:

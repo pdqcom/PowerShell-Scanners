@@ -7,19 +7,18 @@
 
 # Downloading
 ## Git
-The best way to use this repository is with Git. It makes updating very easy.
+The best way to use this repository is with Git. It makes updating very easy and allows you to contribute your own PowerShell scanners or fixes.
 
 #### Setup
 1. Install Git. We have a package for this in [PDQ Deploy](https://www.pdq.com/pdq-deploy/)'s [Package Library](https://www.pdq.com/package-library/) ;)
-1. Clone this repository to the root of your C drive. This is necessary because the [PowerShell Scanner](https://link.pdq.com/docs-inventory?powershell-scanner.htm) feature does not currently support variables.
+1. Clone this repository to the root of your C drive. This is necessary because the [PowerShell Scanner](https://link.pdq.com/docs-inventory?powershell-scanner.htm) feature does not currently support variables all will assume `C:\PowerShell-Scanners`.
 ```PowerShell
-cd C:\
-git clone https://github.com/pdq/PowerShell-Scanners.git
+git clone https://github.com/pdq/PowerShell-Scanners.git C:\PowerShell-Scanners
 ```
 
 #### Updating
 1. Navigate to your clone of this repository.
-1. Run a git pull.
+1. Run `git pull`.
 ```PowerShell
 cd C:\PowerShell-Scanners
 git pull
@@ -51,4 +50,4 @@ Now that you have this repository downloaded, it's time to import the PowerShell
 That's it! To update your imported profile(s), follow the appropriate Updating section above. You shouldn't have to re-import any Scan Profiles unless you see a note telling you to in that profile's README file.
 
 # Contributing
-If you have created a PowerShell Scanner that you would like to add to this repository, please read the [Contributing guide](Policies/Contributing.md).
+If you have created a PowerShell Scanner that you would like to add to this repository, please read the [Contributing guide](docs/CONTRIBUTING.md).
