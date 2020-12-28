@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="2135" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-23T16:47:01.0000000-05:00</ModifiedDate>
+        <Name>multicast-query</Name>
+        <UID>3cf796f8c56a445d86f8f0447675dbc2</UID>
+        <Script>
+$Multicast = Get-ItemProperty -Path 'HKLM:SOFTWARE\Policies\Microsoft\Windows NT\DNSClient\' -Name 'EnableMulticast'
+
+
+if( $Multicast.EnableMultiCast -eq 0){
+  $Enabled = $false
+} else{
+    $Enabled = $true
+}
+
+[PSCustomObject]@{
+    Host = $env:COMPUTERNAME
+    Enabled  = $Enabled
+    PSPath = $Multicast.PSPath
+} </Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="49" />
+      </Scanner>
+    </Scanners>
+    <Description>Checks to see if LLMNR is enabled on devices</Description>
+    <ScanProfileId value="15" />
+    <Name>LLMNR Query</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

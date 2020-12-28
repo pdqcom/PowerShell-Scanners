@@ -1,4 +1,18 @@
-$LogName = 'Microsoft-Windows-TerminalServices-LocalSessionManager/Operational'
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="2798" />
+        <ScanProfileId value="14" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-28T14:06:01.0000000-05:00</ModifiedDate>
+        <Name>Last RDP Logoff</Name>
+        <UID>7f7f145c52944570a231c48e314ba6b0</UID>
+        <Script>$LogName = 'Microsoft-Windows-TerminalServices-LocalSessionManager/Operational'
 $Results = New-Object System.Collections.ArrayList
 $logs = Get-WinEvent -LogName $LogName
 $UserArray = New-Object System.Collections.ArrayList
@@ -36,4 +50,21 @@ foreach ($log in $logs) {
             } 
         }
     }
-}
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="48" />
+      </Scanner>
+    </Scanners>
+    <Description>Get last log off times for users</Description>
+    <ScanProfileId value="14" />
+    <Name>Last Log Off</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
