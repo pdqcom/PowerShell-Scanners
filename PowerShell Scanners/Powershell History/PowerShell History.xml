@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-03T12:22:59.0000000-05:00</ModifiedDate>
+        <Name>history</Name>
+        <UID>7ef7a774cdd04462a0a47f271f430e5c</UID>
+        <Script>$user = (Get-WmiObject -Class Win32_Process -Filter 'Name="explorer.exe"').GetOwner().User
+$history =  Get-Content "C:\Users\$user\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt"
+[array]::Reverse($history)
+$commandarray =  New-Object System.Collections.ArrayList
+
+foreach($command in $history){
+    if($commandarray -notcontains $command){
+        [void]$commandarray.Add($command)
+        [PSCustomObject]@{
+            User = $user
+            Host = $env:COMPUTERNAME
+            Command = $command
+        }
+    }
+
+}
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="200" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="50" />
+      </Scanner>
+    </Scanners>
+    <Description>Get Powershell History</Description>
+    <ScanProfileId value="16" />
+    <Name>Powershell History</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
