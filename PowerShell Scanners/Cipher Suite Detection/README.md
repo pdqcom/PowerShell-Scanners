@@ -2,7 +2,7 @@
 [How to use this repository](../../README.md)
 
 # Description
-Gets the last logged off users for RDP Session along with additional information
+Gets the enabled cipher suites on a machine.
 
 
 # Authors
