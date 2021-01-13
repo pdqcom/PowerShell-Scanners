@@ -1,0 +1,1 @@
+Get-Module -ListAvailable | Select-Object Name, ModuleType, Version, PowerShellVersion, Author, CompanyName, Copyright, Path, Description, ProjectUri, LicenseUri
