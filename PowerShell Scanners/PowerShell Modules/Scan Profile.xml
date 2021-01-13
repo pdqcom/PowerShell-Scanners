@@ -15,7 +15,7 @@
         <SourceScannerId value="69" />
       </Scanner>
     </Scanners>
-    <Description>Returns a list PowerShell modules installed to the computer.</Description>
+    <Description>Returns a list of PowerShell modules installed to the computer.</Description>
     <ScanProfileId value="96" />
     <Name>PS - PowerShell Modules</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
