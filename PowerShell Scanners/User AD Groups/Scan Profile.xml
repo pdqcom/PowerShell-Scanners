@@ -5,7 +5,7 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-11-12T12:17:19.0000000-06:00</ModifiedDate>
-        <Name>Current User AD Groups</Name>
+        <Name>User AD Groups</Name>
         <UID>c0b2b9583d954fefb8f029632fa39e70</UID>
         <Script></Script>
         <FileName>C:\PowerShell-Scanners\PowerShell Scanners\User AD Groups\User AD Groups.ps1</FileName>
@@ -18,7 +18,7 @@
     </Scanners>
     <Description>Pulls additional information regarding the currently signed in user.</Description>
     <ScanProfileId value="15" />
-    <Name>PS - User Group Info</Name>
+    <Name>PS - User AD Groups</Name>
     <ScanAs>Admin</ScanAs>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
