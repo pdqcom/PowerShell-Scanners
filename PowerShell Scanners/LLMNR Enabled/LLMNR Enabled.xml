@@ -10,23 +10,9 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2020-12-23T16:47:01.0000000-05:00</ModifiedDate>
-        <Name>multicast-query</Name>
+        <Name>LLMNR Enabled</Name>
         <UID>3cf796f8c56a445d86f8f0447675dbc2</UID>
-        <Script>
-$Multicast = Get-ItemProperty -Path 'HKLM:SOFTWARE\Policies\Microsoft\Windows NT\DNSClient\' -Name 'EnableMulticast'
-
-
-if( $Multicast.EnableMultiCast -eq 0){
-  $Enabled = $false
-} else{
-    $Enabled = $true
-}
-
-[PSCustomObject]@{
-    Host = $env:COMPUTERNAME
-    Enabled  = $Enabled
-    PSPath = $Multicast.PSPath
-} </Script>
+        <Script>C:\PowerShell-Scanners\PowerShell Scanners\LLMNR Enabled\LLMNR Enabled.ps1</Script>
         <FileName></FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
@@ -37,7 +23,7 @@ if( $Multicast.EnableMultiCast -eq 0){
     </Scanners>
     <Description>Checks to see if LLMNR is enabled on devices</Description>
     <ScanProfileId value="15" />
-    <Name>LLMNR Query</Name>
+    <Name>LLMNR Enabled</Name>
     <ScanAs>Admin</ScanAs>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />

@@ -9,7 +9,6 @@ if( $Multicast.EnableMultiCast -eq 0){
 }
 
 [PSCustomObject]@{
-    Host = $env:COMPUTERNAME
     Enabled  = $Enabled
     PSPath = $Multicast.PSPath
 } 
