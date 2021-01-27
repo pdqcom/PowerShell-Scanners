@@ -1,14 +1,24 @@
 
-$Multicast = Get-ItemProperty -Path 'HKLM:SOFTWARE\Policies\Microsoft\Windows NT\DNSClient\' -Name 'EnableMulticast'
+$Multicast = 'HKLM:SOFTWARE\Policies\Microsoft\Windows NT\DNSClient\'
 
-
-if( $Multicast.EnableMultiCast -eq 0){
-  $Enabled = $false
-} else{
-    $Enabled = $true
+if(Test-Path -Path $Multicast){
+  if( (Get-ItemProperty -Path $Multicast -ErrorAction SilentlyContinue -Name 'EnableMulticast') -eq 0){
+    $Enabled = $false
+    $PSPath = Get-ItemProperty -Path $Multicast -ErrorAction SilentlyContinue  -Name 'EnableMulticast'
+    $PSPath = $PSPath.PSPath
+  } elseif ((Get-ItemProperty -Path $Multicast -ErrorAction SilentlyContinue  -Name 'EnableMulticast') -eq 1) {
+      $Enabled = $true
+      $PSPath = Get-ItemProperty -Path $Multicast -ErrorAction SilentlyContinue  -Name 'EnableMulticast'
+      $PSPath = $PSPath.PSPath
+  } else{
+    $Enabled = "EnableMulticast key may not be present in registry. Please investigate further."
+  }
+} else {
+  $Enabled = "Key not found in registry. Please investigate further."
 }
+
 
 [PSCustomObject]@{
     Enabled  = $Enabled
-    PSPath = $Multicast.PSPath
+    PSPath = $PSPath.PSPath
 } 
