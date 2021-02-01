@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.40.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate value="null" />
+        <Name>Speed Test</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Speed Test\Speed Test.ps1</FileName>
+        <Parameters>-Verbose</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="74" />
+      </Scanner>
+    </Scanners>
+    <Description>Uses Speedtest CLI to measure the target's internet connection.</Description>
+    <ScanProfileId value="46" />
+    <Name>PS - Speed Test</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
