@@ -1,0 +1,3947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+  <!-- v 2.1, Copyright (C) 2015-2018 Dell Inc.  All rights reserved.-->
+  <providerHelp>
+    <Name>
+DellSmbiosProv
+</Name>
+    <Drives>
+      <Para>DellSmbios:</Para>
+    </Drives>
+    <Synopsis>
+	Provides access to Dell Client BIOS attributes.
+</Synopsis>
+    <DetailedDescription>
+      <para>The Dell Command BIOS provider for Windows PowerShell lets you query and change the SMBIOS attributes on Dell Client systems. The Dell Command BIOS provider adds the Dellsmbios: drive to Windows PowerShell. Dell Command BIOS provider is compatible with PowerShell 3.0 and later. The DellSmbios: drive has the following two level:
+-- Categories, which are high level containers that group the attributes of BIOS.
+-- Attributes, each of which represents a BIOS setting
+
+Organization of the DellSmbios: Drive
+
+The Dell Command BIOS provider provider exposes a Windows PowerShell drive with a directory structure that corresponds to a logical grouping of Dell SMBIOS attributes in F2 setup menu. These groupings are known as categories.                                                                          
+Dellsmbios:\
+-- SystemInformation
+-- MemoryInformation
+-- ProcessorInformation
+-- BatteryInformation
+-- BootSequence
+-- AdvancedBootOptions 
+-- BIOSSetupAdvancedMode 
+-- SystemConfiguration
+-- StealthModeControl
+-- Video
+-- Security
+-- SecureBoot
+-- IntelSoftwareGuardExtensions
+-- Performance
+-- PowerManagement
+-- POSTBehavior
+-- Manageability
+-- VirtualizationSupport
+-- Wireless  
+-- Maintenance
+-- SystemLogs
+-- TPMSecurity
+-- MiscellaneousDevices
+-- USBConfiguration
+-- AdvancedConfigurations
+-- SupportAssistSystemResolution
+-- ThermalConfiguration
+-- PreEnabled
+
+Custom Provider Help
+--------------------
+The BootSequence, Security, PeakShiftDayConfiguration, AdvancedBatteryChargeConfiguration, AutoOn, PrimaryBattChargeCfg, KeyboardBacklightEnabledColors, KeyboardBacklightActiveColor, KeyboardBacklightCustom1Color, KeyboardBacklightCustom2Color, TPMSecurity and SecureBoot provider paths provide specific Set-Item support.  Type "get-help Set-Item" in the relevant path for custom help.</para>
+    </DetailedDescription>
+    <Capabilities>
+      <para>None</para>
+    </Capabilities>
+    <Filters>
+      <para />
+    </Filters>
+    <Notes />
+    <Tasks>
+      <Task>
+        <Title>
+			Navigating the DellSmbios: Drive
+		</Title>
+        <Description>
+          <para />
+        </Description>
+        <Examples>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 1 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Set-Location cmdlet to change the current location to the DellSmbios: drive.</para>
+            </Introduction>
+            <Code>
+					Set-Location DellSmbios:
+				</Code>
+            <Remarks>
+              <para />
+            </Remarks>
+          </Example>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 2 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Set-Location (alias CD) command to change the current location to the 'BootSequence' directory which represents the 'Boot Sequence' menu in F2 Setup.  Use a backslash (\) or forward slash (/) to indicate a level of the Dellsmbios: drive.</para>
+            </Introduction>
+            <Code>
+					Set-Location -Path  DellSmbios:\BootSequence
+				</Code>
+            <Remarks>
+              <para>If you are not in the DellSmbios: drive, begin the path with the drive name.
+
+</para>
+            </Remarks>
+          </Example>
+        </Examples>
+      </Task>
+      <Task>
+        <Title>
+			Displaying the Contents of the DellSmbios: Drive
+		</Title>
+        <Description>
+          <para />
+        </Description>
+        <Examples>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 1 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Get-Childitem cmdlet to display the categories as in F2 Setup on the local system.</para>
+            </Introduction>
+            <Code>
+					get-childitem -path Dellsmbios:
+				</Code>
+            <Remarks>
+              <para>If you are in the DellSmbios: drive, you can omit the drive name.</para>
+              <para></para>
+            </Remarks>
+          </Example>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 2 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Get-Childitem cmdlet to display the fields under the category 'USB Configuration'.</para>
+            </Introduction>
+            <Code>
+					get-childitem -path DellSmbios:\USBConfiguration			</Code>
+            <Remarks>
+              <para>If you are in the DellSmbios: drive, you can omit the drive name.
+
+</para>
+            </Remarks>
+          </Example>
+        </Examples>
+      </Task>
+      <Task>
+        <Title>
+			Providing the password to validate in a secure manner
+		</Title>
+        <Description>
+          <para />
+        </Description>
+        <Examples>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 1 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Get-Childitem cmdlet to display the categories as in F2 Setup on the local system.</para>
+            </Introduction>
+            <Code>PS DellSmbios:\PowerManagement&gt; Si .\AutoOn "SelectDays" -PasswordSecure (Read-Host "Enter secure password" -AsSecureStr
+ing)</Code>
+            <Remarks>
+              <para>Function Write-DellBIOSPassword can be used to store the password in a file. In a later seesion Read-DellBIOSPassword can be executed to retrieve the password form the file.</para>
+              <para></para>
+            </Remarks>
+          </Example>
+          <Example>
+            <Title>
+					-------------------------- EXAMPLE 2 --------------------------
+				</Title>
+            <Introduction>
+              <para>This command uses the Get-Childitem cmdlet to display the fields under the category 'USB Configuration'.</para>
+            </Introduction>
+            <Code>PS DellSmbios:\&gt; $SecurePwd = Read-DellBIOSPasswordPS DellSmbios:\PowerManagement&gt; Si .\AutoOn "SelectDays" -PasswordSecure $SecurePwd</Code>
+            <Remarks>
+              <para></para>
+            </Remarks>
+          </Example>
+        </Examples>
+      </Task>
+    </Tasks>
+    <DynamicParameters>
+      <DynamicParameter>
+        <Name>Password</Name>
+        <CmdletSupported>Set-Item</CmdletSupported>
+        <Type>
+          <Name>String</Name>
+        </Type>
+        <Description>Specifies the BIOS password in plain text to validate in order to change the current value of an attribute. This parameter is valid for all settable attributes.</Description>
+        <PossibleValues>
+          <PossibleValue>
+            <Value />
+            <Description>
+              <para />
+            </Description>
+          </PossibleValue>
+        </PossibleValues>
+      </DynamicParameter>
+      <DynamicParameter>
+        <Name>PasswordSecure</Name>
+        <CmdletSupported>Set-Item</CmdletSupported>
+        <Type>
+          <Name>SecureString</Name>
+        </Type>
+        <Description>Specifies the BIOS password in encrypted text to validate in order to change the current value of an attribute. This parameter is valid for all settable attributes.</Description>
+        <PossibleValues>
+          <PossibleValue>
+            <Value />
+            <Description>
+              <para />
+            </Description>
+          </PossibleValue>
+        </PossibleValues>
+      </DynamicParameter>
+    </DynamicParameters>
+    <RelatedLinks>
+      <navigationLink>
+        <linkText />
+        <uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</uri>
+      </navigationLink>
+    </RelatedLinks>
+    <CmdletHelpPaths>
+      <CmdletHelpPath ID="Security">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the Dell Client BIOS attributes.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Get-ChildItem cmdlet retrieves the SMBIOS attributes on Dell Client systems.                                                                                                   In the Security directory, you can get the password related settings. Note that a password can not be reported.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-ChildItem.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\Security;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command retrieves the password related attributes from the category Security. Please note that passowrds can not be reported.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\Security | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command retrieves the PossibleValues field which is not shown in default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="Security">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In this location, the Set-Item command configures the password related attributes.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. In the Security category, you can set, change and clear the Setup passowrd and System password.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>password</maml:name>
+                <maml:description>
+                  <maml:para>
+                  Specifies the Setup password or System passowrd.
+                </maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+                <maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">System.String</maml:name>
+                <maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+                <maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+              </dev:type>
+              <maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+                <maml:para>
+                  <!-- description  -->You can pipe a string for the new value to Set-Item.</maml:para>
+                <maml:para>
+                  <!-- description  -->"Locked" | Set-Item -Path DellSmbios:\Security\StrongPassword </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\adminpassowrd $NewPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command sets the admin (or setup) password. The admin password enables several security features. When set, it-   
+              </maml:para>
+                <maml:para>* Restricts changes to the settings in Setup.                                                                                                   </maml:para>
+                <maml:para>* Restricts the boot devices listed in the F12 Boot Menu to those enabled in the "Boot Sequence" field.  </maml:para>
+                <maml:para>* Substitues for the system password if the system prompts for a password during power on.</maml:para>
+                <maml:para>* Successful changes to this passowrd take effect immediately. </maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine></command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\adminpassowrd $NewPwd -passowrd $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command changes the admin passowrd from the current value to a new value. Current value of the password is specified by the parameter -password. 
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 3 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\adminpassowrd "" -PasswordSecure $SecurePwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command clears (or delete)  the admin passowrd. An empty string is specified as the new value to clear the password. Current value of the secure password is specified by the parameter -passwordsecure. 
+              </maml:para>
+                <maml:para>Note: If you delete the admin password, the system password, if set, is also deleted. Also, the admin password can be used to delete teh HDD password. For this reason, you cannot set an admin password if a system password or HDD password is already set. The admin password must be set first if an admin password is used with a system password and/or HDD password.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!-- HDD Password Help Starts Here -->
+      <CmdletHelpPath ID="HDDPassword">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the Security category, the Set-Item cmdlet configures the HDD password for system using HDDPassword attribute on Dell Client BIOS systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. HDDPassword attribute is available in Security category. In the Security category, by using HDDPassword attribute, the Set-Item cmdlet configures the password for Hard disk drive of system. The same password is configured for all available hard disks. After configuring the HDDPassword, restart the system to apply the changes.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>password</maml:name>
+                <maml:description>
+                  <maml:para>
+                  Specifies the Setup password or System passowrd.
+                </maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>AdminPassword</maml:name>
+              <maml:description>
+                <maml:para>Specifies that admin password must be provided while setting HDD password if administrator has restricted the changes to HDD password.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>ATAMaximumSecurityMode</maml:name>
+              <maml:description>
+                <maml:para>Specifies the ATA Maximum Security Mode. Provide the value as '0' if you want HDD to be configured in ATA High Security Mode or '1' if you want HDD to be configured in ATA maximum Security Mode (Secure Erase).</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+                <maml:name xmlns:maml="http://schemas.microsoft.com/maml/2004/10">System.String</maml:name>
+                <maml:uri xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+                <maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10" />
+              </dev:type>
+              <maml:description xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+                <maml:para>
+                  <!-- description  -->You can pipe a string for the new value to Set-Item.</maml:para>
+                <maml:para>
+                  <!-- description  -->"Locked" | Set-Item -Path DellSmbios:\Security\StrongPassword </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\HDDPassword $NewPwd -ATAMaximumSecurityMode 1;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command sets the hard disk drive (HDD) password. Provide the ATA maximum security mode as '1' using -ATAMaximumSecurityMode parameter if you want HDD to be configured in maximum security mode (Secure Erase). Defaul value is '0' for -ATAMaximumSecurityMode paramaeter. When HDD password is set, it-   
+              </maml:para>
+                <maml:para>* Restricts the configuration of admin password</maml:para>
+                <maml:para>* Changes the password successfully after the system restart</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine></command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\HDDPassowrd $NewPwd -Password $PlainTxtPwd -AdminPassword $AdminPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command changes the HDD passowrd. Current value of the password is specified by the parameter -password. Provide the admin password by using -AdminPassword paramaeter if administrator has restricted the password changes.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 3 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\Security\HDDPassword "" -PasswordSecure $SecurePwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command clears (or deletes) the HDD passowrd. An empty string is specified as the new value to clear the password. Current value of the secure password is specified by the parameter -passwordsecure. 
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!-- HDD Password Help Ends Here -->
+      <!-- PeakShiftDayConfiguration Help Starts here -->
+      <CmdletHelpPath ID="PeakShiftDayConfiguration">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. In the PowerManagement category, for PeakShiftDayConfiguration attribute, the Get-ChildItem cmdlet retrieves the Peakshift charge configurations on Dell Client systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu.PeakShiftDayConfiguration attribute is available in PowerManagement category. In the PowerManagement category, for PeakShiftDayConfiguration attribute, the Get-ChildItem cmdlet retrieves the PeakShift charge StartTime, EndTime, and ChargeStartTime for all days on Dell Client systems. PeakShift minimizes the consumption of AC power during peak demand. AC power will not be consumed from PeakShift StartTime until PeakShift EndTime unless PeakShift Battery Threshold is reached. AC power will be consumed if available, from PeakShift EndTime until PeakShift ChargeStartTime; however the battery does not charge. For the rest of the time, AC power is consumed, if available, and the battery will charge.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PeakShiftDayConfiguration settings from the PowerManagement category. The StartTime, EndTime, and ChargeStartTime is displayed for all days.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="PeakShiftDayConfiguration">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. PeakShiftDayConfiguration attribute is available in PowerManagement category. In the PowerManagement Category, for PeakShiftDayConfiguration attribute, the Set-Item cmdlet configures the peak shift charge settings for all days.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+ The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location i.e. Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. In the PowerManagement category, for the PeakShiftDayConfiguration attribute, the Set-Item cmdlet configures the peak shift StartTime, EndTime and ChargeStartTime for all days. PeakShift minimizes consumption of AC power during peak demand. AC power will not be consumed from PeakShift StartTime until PeakShift EndTime unless PeakShift Battery Threshold is reached. AC power will be consumed if available, from PeakShift EndTime until PeakShift ChargeStartTime; however the battery does not charge. For the rest of the time, AC power is consumed, if available, and the battery will charge.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>StartTime</maml:name>
+              <maml:description>
+                <maml:para>Specifies the time when system starts consuming battery power. System will continue consuming the battery power till either peakshift battery threshold is reached or peakshift end time is reached.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>EndTime</maml:name>
+              <maml:description>
+                <maml:para> Specifies the time when system stops consuming battery power and starts consuming AC power, if available; however, the system does not charge battery.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>ChargeStartTime</maml:name>
+              <maml:description>
+                <maml:para>Specifies the time when the system starts charging battery while consuming AC power, if available.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration Sunday -StartTime "12:45" -EndTime "14:30" -ChargeStartTime "16:15";
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Configures the PeakShift charging StartTime, EndTime, and ChargeStartTime for Sunday.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration Monday -ChargeStartTime "14:30" -Password $PlainTxtPwd
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Configures the PeakShift charging StartTime for Sunday. PeakShift StartTime and EndTime remains the same as before. Provide the password, if set, using password parameter
+              </maml:para>
+                <maml:para>* Note: Similarly, only StartTime or EndTime can also be configured. </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!-- AdvancedBatteryChargeConfiguration Help Starts here -->
+      <CmdletHelpPath ID="AdvancedBatteryChargeConfiguration">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the Dell Client BIOS settings for the SMBIOS attribute. The Get-ChildItem cmdlet retrieves the advanced battery charge settings on Dell Client BIOS systems for AdvancedBatteryChargeConfiguration attribute in the PowerManagement category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. AdvancedBatteryChargeConfiguration attribute is available in PowerManagement category. In the PowerManagement category, the Get-ChildItem cmdlet configures the Advanced Battery Charge BeginningOfDay time and WorkPeriod time duration for individual days using AdvancedBatteryChargeConfiguration attribute on Dell Client systems.
+Advanced Battery charge mode uses standard charging algorithm and other methods during non-working hours to maximize battery health. During working hours, ExpressCharge is used to charge the batteries faster. You can configure the days and the time period using BeginningOfDay and WorkPeriod parameters during which the battery has to be charged.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the Advance Battery Charge Day Configuration settings from the PowerManagement category. 
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="AdvancedBatteryChargeConfiguration">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. The Set-Item cmdlet configures the Advance Battery Charge settings on Dell Client BIOS systems for AdvancedBatteryChargeConfiguration attribute in the PowerManagement category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. AdvancedBatteryChargeConfiguration attribute is part of PowerManagement category. In the PowerManagement category, the Set-Item cmdlet configures the Advanced Battery charge BeginningOfDay time and WorkPeriod time duration for all days using  AdvancedBatteryChargeConfiguration attribute on Dell Client systems.
+Advanced Battery charge mode uses standard charging algorithm and other methods during non-working hours to maximize battery health. During working hours, ExpressCharge is used to charge the batteries faster. You can configure the days and the time period using BeginningOfDay and WorkPeriod parameters during which the battery has to be charged.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>BeginningOfDay</maml:name>
+              <maml:description>
+                <maml:para>Specifies the start time when ExpressCharge will be used for charging the batteries faster.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WorkPeriod</maml:name>
+              <maml:description>
+                <maml:para>Specifies the duration of time when ExpressCharge is used for charging the batteries faster.</maml:para>
+              </maml:description>
+              <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              <dev:type>
+                <maml:name>string</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue></dev:defaultValue>
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration Sunday -Beginningofday "12:45" -Workperiod "4:00";
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Configures the Advance Battery charging start time (BeginningOfDay) and duration (WorkPeriod) for Sunday.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration Monday -BeginningOfDay "14:30" -Password $PlainTxtPwd
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                 Configures the Advance Battery charge start time (BeginningOfDay) for Monday; retains the WorkPeriod value same as before. Provide the password, if set, using the password parameter.
+              </maml:para>
+                <maml:para> Note: Similarly, only WorkPeriod can also be configured. </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!-- AutoOn Help Starts here -->
+      <CmdletHelpPath ID="AutoOn">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. In the PowerManagement category, for an AutoOn attribute, the Get-ChildItem cmdlet retrieves the Auto On settings on Dell Client BIOS systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+ The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. AutoOn attribute is available in PowerManagement category. In the PowerManagement category, for an AutoOn attribute, the Get-ChildItem cmdlet retrieves the AutoOn days when system will turn on automatically on a time specified by AutoOnHour and AutoOnMinute attributes. Possible values for an AutoOn attribute are 'Disabled', 'Weekdays', 'Every Day', and 'Select Days'. If the Get-ChildItem cmdlet retrieves the value as 'Select Days', then use the Get-ChildItem cmdlet on attributes AutoOnSunday, AutoOnMonday, etc. to know which days are enabled or disabled.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\AutoOn;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the status of the AutoOn attribute. It can be any one of the following: 'Disabled', 'Weekdays', 'EveryDay', or 'SelectDays' . 
+              </maml:para>
+                <maml:para>* If the status retrieved as 'SelectDays', then to know which days are enabled or disabled, retrieve AutoOnSun, AutoOnMon, etc. </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\AutoOn | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="AutoOn">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the PowerManagement category, the Set-Item cmdlet configures the AutoOn settings using AutoOn attribute on Dell Client BIOS systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. AutoOn attribute is available in PowerManagement category. In the PowerManagement category, for an AutoOn attribute, the Set-Item cmdlet configures the AutoOn days when the system will turn on automatically on a time specified by AutoOnHr and AutoOnMn attributes. Possible values for an AutoOn attribute are 'Disabled', 'Weekdays', 'EveryDay', and 'SelectDays'. To turn on the system on a particular days, set AutoOn as 'SelectDays' and then enable or disable individual days by configuring AutoOnSun, AutoOnMon… etc. 
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\AutoOn "Weekdays" –Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the AutoOn attribute to turn on the system automatically on weekdays at a particular time specified by AutoOnHr and AutoOnMn attributes. Provide the password, if set, using the password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\AutoOn "SelectDays";
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the AutoOn attribute to turn on the system automatically on selected days at a particular time specified by AutoOnHr and AutoOnMn attributes. If 'SelectDays' value is chosen,  
+              </maml:para>
+                <maml:para>* Seven other attributes such as AutoOnSun, AutoOnMon to AutoOnSat will be available in the PowerManagement category.</maml:para>
+                <maml:para>* Individual days can be enabled or disabled.</maml:para>
+                <maml:para>* C:\PS&gt;Set-Item -Path DellSmbios:\PowerManagement\AutoOnSun enabled command can be used to turn on the system on Sunday.</maml:para>
+                <maml:para>* C:\PS&gt;Set-Item -Path DellSmbios:\PowerManagement\AutoOnTue disabled command can be used to disable the turning on the system on Tuesday.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine></command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="PrimaryBattChargeCfg">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. The Get-Item cmdlet retrieves the Primary Battery Charge Configuration settings on Dell Client BIOS systems for PrimaryBattChargeCfg attribute in the PowerManagement category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. PrimaryBattChargeCfg attribute is available in PowerManagement category. In the PowerManagement category, for a PrimaryBattChargeCfg attribute, the Get-ChildItem cmdlet retrieves the primary battery charging mode. Possible values for PrimaryBattChargeCfg attribute are 'Adaptive', 'Standard', 'PrimAcUse', 'Express', and 'Custom'. If the Get-ChildItem cmdlet retrieves the value as 'Custom', then use the Get-ChildItem cmdlet on attributes CustomChargeStart and CustomChargeStop to know the percentage when charging should start and the percentage when charging should end.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the mode of PrimaryBattChargeCfg attribute. It can be any one of the following: 'Adaptive', 'Express', 'PrimAcUse', 'Standard' or 'Custom'. 
+              </maml:para>
+                <maml:para>* If the status retrieved as 'Custom', then to know the percentage when charging will start and end, retrieve CustomChargeStart and CustomChargeStop attributes. </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="PrimaryBattChargeCfg">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the PowerManagement category, the Set-Item cmdlet configures the primary battery charging mode using PrimaryBattChargeCfg attribute on Dell Client BIOS systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. PrimaryBattChargeCfg attribute is available in PowerManagement category. In the PowerManagement category, for a PrimaryBattChargeCfg attribute, the Set-Item cmdlet configures the Primary Battery Charging mode. The selected charging mode applies to all batteries installed in the system. Possible values for PrimaryBattChargeCfg attribute are 'Standard', 'Adaptive', 'PrimAcUse', 'Express' and 'Custom'. To charge battery based on user settings, set PrimaryBattChargeCfg as 'Custom' and then configure the CustomChargeStart attribute as battery percentage when charging should start and CustomChargeStop attribute as battery percentage when charging should end.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg "Adaptive" –PasswordSecure $SecureTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the PrimaryBattChargeCfg attribute to charge battery by adaptively optimized settings based on your typical battery usage pattern. Provide the password, if set, using the password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg "Custom";
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the PrimaryBattChargeCfg attribute to charge battery based on user settings specified in CustomChargeStart and CustomChargeStop attributes. If the value 'Custom' is chosen,  
+              </maml:para>
+                <maml:para>* Charging starts based on the battery percentage defined in CustomChargeStart.</maml:para>
+                <maml:para>* Charging ends based on the battery percentage defined in CustomChargeStop.</maml:para>
+                <maml:para>* C:\PS&gt;Set-Item -Path DellSmbios:\PowerManagement\CustomChargeStart 65 command can be used to start battery charging at 65%</maml:para>
+                <maml:para>* C:\PS&gt;Set-Item -Path DellSmbios:\PowerManagement\CustomChargeStart 95 command can be used to stop battery charging at 95%</maml:para>
+                <maml:para>* Possible value for CustomChargeStart percentage must be ranging from 50 to 95 and for CustomChargeStop percentage must be ranging from 55 to 100.</maml:para>
+                <maml:para>* CustomChargeStart percentage must be less than CustomChargeStop and minimum difference between CustomChargeStop and CustomChargeStart should be 5.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine></command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!--  Keyboard Backlight Color Get-Help   -->
+      <CmdletHelpPath ID="KeyboardBacklightEnabledColors">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. The Get-Item cmdlet retrieves the enabled colors for keyboard backlight on Dell Client BIOS rugged systems using KeyboardBacklightEnabledColors attribute in the SystemConfiguration category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. KeyboardBacklightEnabledColors attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightEnabledColors attribute, the Get-ChildItem cmdlet retrieves the list of enabled colors for keyboard backlight. There are six available colors: four predefined colors (white, red, green, blue), and two user configurable colors (custom1, and custom2). Multiple colors out of the six colors will be retrieved as enabled colors. You can switch among the enabled colors by pressing &lt;Fn+C&gt; keys. If Enabled colors is retrieved as 'NoColor' that means no color is selected. NOTE: If value 'NoColor' is retrieved, keyboard backlight color switching by pressing &lt;Fn+C&gt; keys will not be possible.
+           </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the list of enabled colors of KeyboardBacklightEnabledColors attribute. It can be a combination of the following colors: 'White', 'Red', 'Green', 'Blue', 'Custom1' and 'Custom2'. It can also be 'NoColor' if none of the other colors is selected.  
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightEnabledColors">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the SystemConfiguration category, the Set-Item cmdlet configures the colors to be enabled for keyboard backlight using KeyboardBacklightEnabledColors attribute on Dell Client BIOS rugged systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. KeyboardBacklightEnabledColors attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightEnabledColors attribute, the Set-Item cmdlet configures the list of enabled colors for keyboard backlight. There are six available colors: four predefined colors (white, red, green, blue), and two user configurable colors (custom1, and custom2). Multiple colors out of the six colors can be configured as enabled colors. After enabling colors, you can switch among the enabled colors by pressing &lt;Fn+C&gt; keys. Enabled colors can be configured as 'NoColor' that means no color is selected. NOTE: If value 'NoColor' is provided, keyboard backlight color switching by pressing &lt;Fn+C&gt; keys will not be possible. The value 'NoColor' cannot be combined with any other color.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors "Red,Green,Custom1,Custom2" –PasswordSecure $SecureTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the list of enabled colors as red, green, custom1, and custom2 for KeyboardBacklightEnabledColors attribute. Provide the secure password, if set, using the passwordsecure parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors "NoColor" -passowrd $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the enabled colors as NoColor for KeyboardBacklightEnabledColors attribute. Provide the password, if set, using the password parameter
+              </maml:para>
+                <maml:para>* 'NoColor' can not be combined with any other color.</maml:para>
+                <maml:para>* It disables the &lt;Fn+C&gt; key switching between enabled colors.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine></command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightActiveColor">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. The Get-Item cmdlet retrieves the active color for keyboard backlight on Dell Client BIOS rugged systems using KeyboardBacklightActiveColor attribute in the SystemConfiguration category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. KeyboardBacklightActiveColor attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightActiveColor attribute, the Get-ChildItem cmdlet retrieves the active color for keyboard backlight. There are six available colors: four predefined colors (white, red, green, blue), and two user configurable colors (custom1, and custom2). Active color indicates the color to be used on startup. Any one color out of the six colors will be retrieved as active color.
+           </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the active color for the Keyboard backlight. It can be any one of the following colors: 'White', 'Red', 'Green', 'Blue', 'Custom1', or 'Custom2'.   
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightActiveColor">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the SystemConfiguration category, the Set-Item cmdlet configures the color to be active for keyboard backlight using KeyboardBacklightActiveColor attribute on Dell Client BIOS rugged systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. KeyboardBacklightActiveColor attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightActiveColor attribute, the Set-Item cmdlet configures the active color for keyboard backlight. There are six available colors: four predefined colors (white, red, green, blue), and two user configurable colors (custom1, and custom2). Active color indicates the color to be used on startup. Any one of the six colors can be configured as active color. 
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor "Custom2" –PasswordSecure $SecureTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the custom2 color as an active color for KeyboardBacklightActiveColor attribute. Provide the secure password, if set, using the secure password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightCustom1Color">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. The Get-Item cmdlet retrieves the RGB values of Custom1 color for keyboard backlight on Dell Client BIOS rugged systems using KeyboardBacklightCustom1Color attribute in the SystemConfiguration category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. KeyboardBacklightCustom1Color attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightCustom1Color attribute, the Get-ChildItem cmdlet retrieves the RGB value in R:G:B format of Custom1 color for keyboard backlight.
+           </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the RGB value in R:G:B format of Custom1 color for Keyboard backlight.    
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightCustom1Color">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the SystemConfiguration category, the Set-Item cmdlet configures the RGB value for Custom1 Color for keyboard backlight using KeyboardBacklightCustom1Color attribute on Dell Client BIOS rugged systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. KeyboardBacklightCustom1Color attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightCustom1Color attribute, the Set-Item cmdlet configures the RGB value in R:G:B format of Custom1 color for keyboard backlight.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color "234:35:56" –PasswordSecure $SecureTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the red as 234, green as 35 and blue as 56 for Custom1 color using KeyboardBacklightCustom1Color attribute. Provide the secure password, if set, using the secure password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightCustom2Color">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the SMBIOS attribute setting of Dell Client BIOS. The Get-Item cmdlet retrieves the RGB values of Custom2 color for keyboard backlight on Dell Client BIOS rugged systems using KeyboardBacklightCustom2Color attribute in the SystemConfiguration category.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. KeyboardBacklightCustom2Color attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightCustom2Color attribute, the Get-ChildItem cmdlet retrieves the RGB value in R:G:B format of Custom2 color for keyboard backlight.
+           </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-Item.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description></maml:description>
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the RGB value in R:G:B format of Custom2 color for Keyboard backlight.    
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color | Select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Retrieves the PossibleValues field that is not displayed in the default view.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="KeyboardBacklightCustom2Color">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the SMBIOS attribute setting of Dell Client BIOS. In the SystemConfiguration category, the Set-Item cmdlet configures the RGB value for Custom2 Color for keyboard backlight using KeyboardBacklightCustom2Color attribute on Dell Client BIOS rugged systems.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems. KeyboardBacklightCustom2Color attribute is available in SystemConfiguration category. In the SystemConfiguration category, for a KeyboardBacklightCustom2Color attribute, the Set-Item cmdlet configures the RGB value in R:G:B format of Custom2 color for keyboard backlight.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+			   -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color "234:35:56" –PasswordSecure $SecureTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                Sets the red as 234, green as 35 and blue as 56 for Custom2 color using KeyboardBacklightCustom2Color attribute. Provide the secure password, if set, using the secure password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://dell.com/command</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <!--  Keyboard Backlight Color Get-Help   -->
+      <CmdletHelpPath ID="BootSequence">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the Dell Client BIOS attributes.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+The default location for Dell Command BIOS provider is DellSmbios: drive that represents the F2 setup menu. In this location, i.e. in Dellsmbios: drive, the Get-ChildItem cmdlet retrieves the SMBIOS attributes on Dell Client systems.                                                 
+In the BootSequence category, you can get the current boot sequence and boot mode.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>password</maml:name>
+                <maml:description>
+                  <maml:para>
+                  Specifies the Setup password or System passowrd.
+                </maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->You can pipe a string that contains a path (in quotation marks) to Get-ChildItem.</maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  --> The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\BootSequence\BootSequence | Select-Object -expand CurrentValue;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command retrieves the order of the boot devices.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="BootSequence">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>Configures the Dell Client BIOS attributes.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+            The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems in the drive DellSmbios:.
+In the BootSequence directory, you can use the Set-Item cmdlet to configute the boot mode and boot sequence.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>password</maml:name>
+                <maml:description>
+                  <maml:para>
+                  Specifies the Setup password or System passowrd.
+                </maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string for the new value to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\BootSequence\BootSequence "2,3,4" -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command changes the boot sequence of the boot devices to an hypothetical order 2,3,4. Each number in the order is the device number of the boot device. To find the current boot order with name, device number,short form and Active/Inactive state, you can execute the Get-ChildItem in BootSequence directory.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\BootSequence\BootSequence "hdd,cdrom,embnicipv4,embnicipv6" -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command changes the boot sequence of the boot devices to an hypothetical order hdd,cdrom,embnicipv4,embnicipv6. Each device name in the order is the short form of the boot device. To find the current boot order with name, device number, short form and Active/Inactive state, you can execute the Get-ChildItem in BootSequence directory.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 3 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\BootSequence\BootList Uefi -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command changes the current boot mode to Uefi. Supply the password, if set, through the -Password parameter.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="TPMSecurity">
+        <!-- v 1.1.0.9 -->
+        <!-- Get-ChildItem -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Get-ChildItem
+          </command:name>
+            <maml:description>
+              <maml:para>Gets the Dell Client BIOS attributes.</maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Get</command:verb>
+            <command:noun>ChildItem</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+          Get-ChildItem cmdlet retrieves the SMBIOS attributes on Dell Client systems in DellSmbios: drive which represents the F2 Setup menu. 
+TPMSecurity directory represents the BIOS Setup menu for the TPM. 
+          </maml:para>
+            <maml:para></maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Get-ChildItem</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>password</maml:name>
+                <maml:description>
+                  <maml:para>
+                  Specifies the Setup password or System passowrd.
+                </maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+              <maml:name>WhatIf</maml:name>
+              <maml:description>
+                <maml:para>Describes what would happen if you executed the command without actually executing the command.</maml:para>
+              </maml:description>
+              <command:parameterValue required="false" variableLength="true">SwitchParameter</command:parameterValue>
+              <dev:type>
+                <maml:name>SwitchParameter</maml:name>
+                <maml:uri />
+              </dev:type>
+              <dev:defaultValue />
+            </command:parameter>
+          </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String[]</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a string that contains a path (in quotation marks) to Get-ChildItem.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>System.Object</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  --> The type of object that Get-ChildItem displays is determined by the objects in the provider drive path.</maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\TPMSecurity;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command retrieves the TPM related all attributes from the category TPMSecurity.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\TPMSecurity\TPMSecurity;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command retrieves the BIOS Setup setting "TPMSecurity" for the TPM. The "TPMSecurity" setting is a master switch for all the rest of the TPM fields.
+              </maml:para>
+                <maml:para>System restart is required after changing the TPMSecurity setting.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 3 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Get-ChildItem -Path DellSmbios:\TPMSecurity\TpmActivation | select Attribute, CurrentValue, PossibleValues;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                "TpmActivation" is a setting which is available when the "TPMSecurity" is enabled. 'Deactive' is the default value of the 'TpmActivation' after enabling the 'TPMSecurity'. Other values are 'Activate'. 'Activate' activates and enable the TPM.  
+              </maml:para>
+                <maml:para>System restart is required after changing the TPMSecurity setting.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="TPMSecurity">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>
+            The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems in the drive DellSmbios:.
+In the TPMSecurity directory, you can use the Set-Item cmdlet to configure the TPM related settings.
+          </maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+            The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems.
+In the TPMSecurity category, you can use the Set-Item comdlet to configure a TPM related SMBIOS attribute.
+          </maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>Password</maml:name>
+                <maml:description>
+                  <maml:para>Specifies the Admin password or System password which needs to be supplied to change the setting of an attribute.</maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a value for the new setting to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\TPMSecurity\TPMSecurity Enabled -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command configures the 'TPMSecurity' attribute to be enabled. Please note that system restart is required after changing 'TPMSecurity' setting. If a Admin or System password is set, specify it using the parameter -Password.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\TPMSecurity\TpmActivation Activate -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command configures the 'TpmActivation' setting to 'Activate'. "TpmActivation" is a setting which is offered when the "TPMSecurity" is enabled. “Activate” will activate and enable the TPM—normal state for TPM use.
+              </maml:para>
+                <maml:para>Please note that Admin password must be installed and 'TPMSecurity' should have been enabled to activate the 'TpmActivation'.</maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+      <CmdletHelpPath ID="SecureBoot">
+        <!-- v 1.1.0.9 -->
+        <!-- Set-Item -->
+        <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+          <command:details>
+            <command:name>
+            Set-Item
+          </command:name>
+            <maml:description>
+              <maml:para>
+            The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems in the drive DellSmbios:.
+In the SecureBoot directory, you can use the Set-Item cmdlet to enable the 'Secure Boot'.
+          </maml:para>
+            </maml:description>
+            <maml:copyright>
+              <maml:para></maml:para>
+            </maml:copyright>
+            <command:verb>Set</command:verb>
+            <command:noun>Item</command:noun>
+            <dev:version></dev:version>
+          </command:details>
+          <maml:description>
+            <maml:para>
+            The Set-Item cmdlet configures the SMBIOS attributes on Dell Client systems.
+In the 'SecureBoot' category, you can use the Set-Item comdlet to Enable the Secure Boot. 
+Note that this tool can not disable the Secure Boot.</maml:para>
+          </maml:description>
+          <!-- Cmdlet syntax section-->
+          <command:syntax>
+            <command:syntaxItem>
+              <maml:name>Set-Item</maml:name>
+              <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+                <maml:name>Password</maml:name>
+                <maml:description>
+                  <maml:para>Specifies the Admin password or System password which needs to be supplied to change the setting of an attribute.</maml:para>
+                </maml:description>
+                <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+              </command:parameter>
+            </command:syntaxItem>
+          </command:syntax>
+          <!-- Cmdlet parameter section  -->
+          <command:parameters>
+			<command:parameter>
+            </command:parameter>
+		  </command:parameters>
+          <!-- Input - Output section-->
+          <command:inputTypes>
+            <command:inputType>
+              <dev:type>
+                <maml:name>System.String</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                You can pipe a value for the new setting to the Set-Item cmdlet.
+              </maml:para>
+              </maml:description>
+            </command:inputType>
+          </command:inputTypes>
+          <command:returnValues>
+            <command:returnValue>
+              <dev:type>
+                <maml:name>None</maml:name>
+                <maml:uri />
+                <maml:description />
+              </dev:type>
+              <maml:description>
+                <maml:para>
+                  <!-- description  -->
+                </maml:para>
+              </maml:description>
+            </command:returnValue>
+          </command:returnValues>
+          <!-- Error section-->
+          <command:terminatingErrors />
+          <command:nonTerminatingErrors />
+          <!-- Notes section  -->
+          <maml:alertSet>
+            <maml:title></maml:title>
+            <maml:alert></maml:alert>
+            <maml:alert>
+              <maml:para></maml:para>
+            </maml:alert>
+          </maml:alertSet>
+          <!-- Example section  -->
+          <command:examples>
+            <command:example>
+              <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+              <maml:introduction>
+                <maml:para>C:\PS&gt;</maml:para>
+              </maml:introduction>
+              <dev:code>
+              Set-Item -Path DellSmbios:\SecureBoot\SecureBoot Enabled -Password $PlainTxtPwd;
+            </dev:code>
+              <dev:remarks>
+                <maml:para>
+                This command enables the 'Secure Boot' field.  Specify the password, if set, using the -Password parameter. Note that in order to enable Secure Boot, the system must be using a UEFI Boot Path and the “Enable Legacy Option ROMs" feature must be turned off; i.e. Secure Boot requires that there be no legacy-style option ROMs loaded by the BIOS.
+              </maml:para>
+                <maml:para></maml:para>
+                <maml:para></maml:para>
+              </dev:remarks>
+              <command:commandLines>
+                <command:commandLine>
+                  <command:commandText></command:commandText>
+                </command:commandLine>
+              </command:commandLines>
+            </command:example>
+          </command:examples>
+          <!-- Link section  -->
+          <maml:relatedLinks>
+            <maml:navigationLink>
+              <maml:linkText>Online version:</maml:linkText>
+              <maml:uri>http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-command-powershell-provider</maml:uri>
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>about_Providers</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Get-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+            <maml:navigationLink>
+              <maml:linkText>Set-Item</maml:linkText>
+              <maml:uri />
+            </maml:navigationLink>
+          </maml:relatedLinks>
+        </command:command>
+      </CmdletHelpPath>
+    </CmdletHelpPaths>
+  </providerHelp>
+</helpItems>

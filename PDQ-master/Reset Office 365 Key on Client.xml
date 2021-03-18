@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="17.1.0.0" MinimumVersion="15.0">
+  <CustomTool>
+    <CredentialsId value="null" />
+    <ScanAfter>DoNotScan</ScanAfter>
+    <ScanProfileId value="null" />
+    <SuccessCodesText>0</SuccessCodesText>
+    <Timeout>00:03:00</Timeout>
+    <WakeOnLan value="false" />
+    <CustomToolType>Remote</CustomToolType>
+    <CommandLine>#store the license info into an array
+$license = cscript 'C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS' /dstatus
+#license name from /dstatus
+$o365 = "Office16O365ProPlusR_Subscription1 edition"
+#loop till the end of the array searching for the $o365 string 
+for ($i = 0; $i -lt $license.Length; $i++) {
+    if ($license[$i] -match $o365) {
+        $i += 7
+        #jumping seven lines to get to the product key line in the array
+        $keyline = $license[$i]
+        #extra step
+        $prodkey = $keyline.substring($keyline.length – 5, 5)
+        #getting the last 5 characters of the line (prodkey)
+    } 
+}
+#removing the key from the workstation 
+cscript 'C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS' /unpkey:$prodkey</CommandLine>
+    <DefaultIconKey></DefaultIconKey>
+    <LibraryToolId value="null" />
+    <Modified value="null" />
+    <ShellOpenMode>LeaveShellOpen</ShellOpenMode>
+    <Mode>PowerShell</Mode>
+    <Description></Description>
+    <IconKey>Icon-PowerShell</IconKey>
+    <KeyGesture></KeyGesture>
+    <Title>Reset Office 365 Key on Client</Title>
+    <TypeName>CustomTool</TypeName>
+  </CustomTool>
+</AdminArsenal.Export>

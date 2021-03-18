@@ -1,0 +1,23 @@
+1. DellCommandPowerShellProvider2.3.0_<BuildNumber>.zip  might be blocked on your system.
+   Use the following PowerShell Cmdlet to unblock the file -  
+		Unblock-File .\DellCommandPowerShellProvider2.3.0_<BuildNumber>.zip 
+
+2. Extract the contents of the zip after it is unblocked.
+ 
+
+3. For a 32-bit OS, copy the files from DellBIOSProviderX86 folder to the following location:
+	   
+Use  ${env:ProgramFiles}\WindowsPowerShell\Modules\DellBIOSProviderX86
+	
+   For a 64-bit OS, copy the files from DellBIOSProvider folder to the following location:
+	    ${env:ProgramFiles}\WindowsPowerShell\Modules\DellBIOSProvider
+
+
+    Note: - You can create a module folder using following command from PowerShell console -
+     
+        New-Item -Type Container -Force -path <folder path>
+
+4. Open Windows PowerShell console and import the DellBIOSProvider module. 
+  Or you can modify the Load-DellBIOSProvider.ps1 as per your requirements and then run the script file.
+
+   Note: - To automatically load then module when Windows PowerShell is started, add Import-Module DellBIOSProvider to the Windows PowerShell Profile.ps1 file.

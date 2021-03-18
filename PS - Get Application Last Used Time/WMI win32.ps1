@@ -1,0 +1,1 @@
+﻿select * from win32_softwarefeature where IdentifyingNumber ='{90150000-0011-0000-1000-0000000FF1CE}' and LastUse is not null and productname = 'Microsoft Office Professional Plus 2013' and InstallState=3 and Version like '15%' and (name = 'OutlookFiles' or name = 'ExcelFiles' or name = 'AccessFiles' or name = 'WordFiles' or name = 'PPTFiles') 

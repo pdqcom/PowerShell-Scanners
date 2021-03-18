@@ -1,0 +1,4136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.2.174.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-18T14:05:13.0000000-05:00</ModifiedDate>
+        <Name>**PS - Dell Bios Information</Name>
+        <UID>dab547c93cc94a3cb786af0e47cd57a8</UID>
+        <Script>#gwmi DCIM_AssetWarrantyInformation -namespace root\dcim\sysman -erroraction silentlycontinue
+
+Get-CimInstance -Namespace root/DCIM/SYSMAN -ClassName DCIM_AssetWarrantyInformation
+
+</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="244" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-11T16:20:58.0000000-05:00</ModifiedDate>
+        <Name>PS - BIOS - DCIM_BIOSService</Name>
+        <UID>7fbc6ec99f094300a2a7857961963e12</UID>
+        <Script>gwmi DCIM_BIOSService -namespace root\dcim\sysman</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="245" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-11T17:01:57.0000000-05:00</ModifiedDate>
+        <Name>PS - Bios - Dell SMBios Info</Name>
+        <UID>cac7afa003d94f5781a797360e10d6ac</UID>
+        <Script></Script>
+        <FileName>\\IPSWICH2\C$\PowerShell Scanners\PS - Dell Bios Info.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="246" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-18T19:00:01.0000000-05:00</ModifiedDate>
+        <Name>*PS Bios Enumerate</Name>
+        <UID>1cd8e21dde5a4b5796652f2799f01f73</UID>
+        <Script>Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class StringAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class EnumerationAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class IntegerAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class BIOSAttributeInterface
+Get-WmiObject -NameSpace root/dcim/sysman -Class DCIM_AssetWarrantyInformation
+#Get-WmiObject -Namespace root/dcim/sysman/wmisecurity -Class SecurityInterface
+#https://downloads.dell.com/manuals/common/dell-agentless-client-manageability.pdf</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="253" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-18T19:00:01.0000000-05:00</ModifiedDate>
+        <Name>*****PS Warranty</Name>
+        <UID>85f67a56386b48f0a5bec62a9859b1cc</UID>
+        <Script>$computer = $env:COMPUTERNAME
+$namespace = "ROOT\DCIM\SYSMAN"
+$classname = "DCIM_AssetWarrantyInformation"
+
+Get-WmiObject -Class $classname -ComputerName $computer -Namespace $namespace |
+    Select-Object Name, WarrantyStartDate, WarrantyEndDate
+    Format-List -Property [a-z]*
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="254" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="72" />
+    <Name>**Dell Bios Information</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1463" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-18T19:42:32.0000000-05:00</ModifiedDate>
+        <Name>PS - Warranty Info - CimInstance</Name>
+        <UID>57df19d729184664b187364edb2a006c</UID>
+        <Script>Get-CimInstance -Namespace root/DCIM/SYSMAN -ClassName DCIM_AssetWarrantyInformation | Select-Object Name, WarrantyStartDate, WarrantyEndDate</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="207" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-12T14:00:31.0000000-05:00</ModifiedDate>
+        <Name>PS - Dell - Get-DellBiosSettings</Name>
+        <UID>90819d14c638428eaa73b630beebbf17</UID>
+        <Script>Get-DellBiosSettings</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="250" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="66" />
+    <Name>*Correct Dell Bios Warranty Info</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>90.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-12-05T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-28T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-12-06T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-30T07:30:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Once</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-04T11:19:05.0000000-05:00</ModifiedDate>
+        <Name>*Adobe</Name>
+        <UID>62cf818184a8448e82619101476c9f03</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Files and Directories\Get Adobe Flash Info.ps1</FileName>
+        <Parameters>@(Bypass) @(Error Hander)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="309" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Error Hander</Name>
+            <Value></Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-04T11:47:25.0000000-05:00</ModifiedDate>
+        <Name>Software - Get Flash Version</Name>
+        <UID>849fad6487774f11a0a9b54c3227c653</UID>
+        <Script></Script>
+        <FileName>\\IPSWICH2.efwnow.local\C$\PowerShell Scanners\Files and Directories\Get Flash Version.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="311" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-04T17:28:35.0000000-05:00</ModifiedDate>
+        <Name>*Adobe Flash Last Access Time</Name>
+        <UID>7bc29e9b4fbc46558ee936103325bd66</UID>
+        <Script>Get-ChildItem -Path "C:\Windows\*\Macromed\Flash\flash*.ocx" |
+Get-ItemProperty | select name,lastaccesstime | sort -Property lastaccesstime
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="316" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="84" />
+    <Name>*Flash</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>1.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2021-01-11T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2021-01-04T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-24T21:50:50.0000000-05:00</ModifiedDate>
+        <Name>Dell Activity Log</Name>
+        <UID>3e26701912cf4cbfb314659b5022f10f</UID>
+        <Script>$XMLReport = get-content "C:\ProgramData\Dell\UpdateService\Log\ActivityLog.xml"
+
+
+$BIOSUpdates        = ($XMLReport.updates.update | Where-Object {$_.type -eq "BIOS"}).name.Count
+$ApplicationUpdates = ($XMLReport.updates.update | Where-Object {$_.type -eq "Application"}).name.Count
+$DriverUpdates      = ($XMLReport.updates.update | Where-Object {$_.type -eq "Driver"}).name.Count
+$FirmwareUpdates    = ($XMLReport.updates.update | Where-Object {$_.type -eq "Firmware"}).name.Count
+$OtherUpdates       = ($XMLReport.updates.update | Where-Object {$_.type -eq "Other"}).name.Count
+$PatchUpdates       = ($XMLReport.updates.update | Where-Object {$_.type -eq "Patch"}).name.Count
+$UtilityUpdates     = ($XMLReport.updates.update | Where-Object {$_.type -eq "Utility"}).name.Count
+$UrgentUpdates      = ($XMLReport.updates.update | Where-Object {$_.Urgency -eq "Urgent"}).name.Count</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="262" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="78" />
+    <Name>*PS - Dell Update History</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-28T19:23:18.0000000-05:00</ModifiedDate>
+        <Name>*tEST</Name>
+        <UID>3d856d0f6fa948c8bf26756fa668a2c6</UID>
+        <Script>Test-Path \\$env:computername\admin$</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="270" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-28T21:34:26.0000000-05:00</ModifiedDate>
+        <Name>*Get Admin$ Permissions</Name>
+        <UID>d751a21ec94f47d98b59391b79abd257</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\TechNet-Gallery\AclInRegistry\Get-AclInRegistry.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="271" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T15:05:18.0000000-05:00</ModifiedDate>
+        <Name>*Get Sessions</Name>
+        <UID>d0328f73bdfa436ca56b603721980cec</UID>
+        <Script></Script>
+        <FileName>\\IPSWICH2\C$\PowerShell Scanners\TechNet-Gallery\AclInRegistry\Get-AclInRegistry.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="273" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="80" />
+    <Name>*Test</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>ActiveDirectory</TypeName>
+        <SourceScannerId value="161" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="58" />
+    <Name>Active Directory</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-11-18T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-11T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>5.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-04T09:56:52.0000000-05:00</ModifiedDate>
+        <Name>Get Flash Last Access Times</Name>
+        <UID>05c5121964b64033af8551c267ebe34b</UID>
+        <Script>Get-ChildItem -Recurse -Path "C:\Windows\System32\Macromed\Flash\" $_.PSIsContainer| Select-Object FullName,  *time</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="303" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-04T10:57:33.0000000-05:00</ModifiedDate>
+        <Name>Get Flash Install Locations 1</Name>
+        <UID>e605186f422b43e0b2265aaf6d69e23b</UID>
+        <Script>Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\* | % { Get-ItemProperty $_.PsPath } | Select DisplayName,InstallLocation
+Get-ChildItem HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | % { Get-ItemProperty $_.PsPath } | Select DisplayName,InstallLocation</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="304" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-04T09:59:33.0000000-05:00</ModifiedDate>
+        <Name>Get Flash Install Location - WMI</Name>
+        <UID>8a909e8132e14ca393475567ce180d88</UID>
+        <Script>Get-WmiObject -Class Win32_Product -Filter 'Name like "%flash%"' | 
+Select Caption,InstallLocation</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="305" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-04T10:11:23.0000000-05:00</ModifiedDate>
+        <Name>PS - Software Audits - Google Chrome Extensions</Name>
+        <UID>f0d897d5c9c74a1db866299e9ed2ec05</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Google Chrome Extensions\Google Chrome Extensions.ps1</FileName>
+        <Parameters>@(Bypass) -Verbose</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="75" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="306" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Policies\Google\Chrome\RunAllFlashInAllowMode</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="307" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SOFTWARE\Policies\Google\Chrome\EnabledPlugins</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="308" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="83" />
+    <Name>Adobe Flash</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>Applications</TypeName>
+        <SourceScannerId value="18" />
+      </Scanner>
+    </Scanners>
+    <Description>Scan installed applications, hot fixes and basic computer info</Description>
+    <ScanProfileId value="2" />
+    <Name>Applications</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-10-03T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-26T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>4.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-18T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-11T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:38.0000000-05:00</ModifiedDate>
+        <Name>PS Enumerate Bios Info</Name>
+        <UID>0387b548d0ac4002a04de9a1f8fd2010</UID>
+        <Script>Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class StringAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class EnumerationAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class IntegerAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class BIOSAttributeInterface
+#Get-WmiObject -NameSpace root/dcim/sysman -Class DCIM_AssetWarrantyInformation
+Get-WmiObject -Namespace root/dcim/sysman/wmisecurity -Class SecurityInterface
+#https://downloads.dell.com/manuals/common/dell-agentless-client-manageability.pdf</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="208" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="67" />
+    <Name>Bios Info Test</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-12-06T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-30T06:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Once</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1128" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>Computer</TypeName>
+        <SourceScannerId value="20" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Printers</TypeName>
+        <SourceScannerId value="141" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Services</TypeName>
+        <SourceScannerId value="142" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Shares</TypeName>
+        <SourceScannerId value="143" />
+      </Scanner>
+      <Scanner>
+        <TypeName>UsersAndGroups</TypeName>
+        <SourceScannerId value="144" />
+      </Scanner>
+      <Scanner>
+        <TypeName>WindowsFeatures</TypeName>
+        <SourceScannerId value="145" />
+      </Scanner>
+      <Scanner>
+        <TypeName>WindowsTaskSchedules</TypeName>
+        <SourceScannerId value="146" />
+      </Scanner>
+      <Scanner>
+        <TypeName>EnvironmentVariables</TypeName>
+        <SourceScannerId value="147" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Displays</TypeName>
+        <SourceScannerId value="148" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Disks</TypeName>
+        <SourceScannerId value="149" />
+      </Scanner>
+      <Scanner>
+        <TypeName>HardwareDevices</TypeName>
+        <SourceScannerId value="180" />
+      </Scanner>
+      <Scanner>
+        <TypeName>NetworkAdapters</TypeName>
+        <SourceScannerId value="181" />
+      </Scanner>
+      <Scanner>
+        <TypeName>MemoryModules</TypeName>
+        <SourceScannerId value="182" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-07T22:22:54.0000000-05:00</ModifiedDate>
+        <Name>NTFS Last Access Timestamp</Name>
+        <UID>21a37509ea8e48b8ad8d5475ea19afa0</UID>
+        <Script>fsutil behavior query disablelastaccess
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="230" />
+      </Scanner>
+    </Scanners>
+    <Description>Basic Computer Information: name, current user, up time, operating system, etc.</Description>
+    <ScanProfileId value="3" />
+    <Name>Computer Info</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-10-05T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-28T12:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>10.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-10-06T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-09-29T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>Disks</TypeName>
+        <SourceScannerId value="119" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="52" />
+    <Name>Critical Disk</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <TimeOfDay>20:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-09-24T02:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-17T02:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Daily</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>1.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SOFTWARE\DELL\UpdateService\Service\UpdateScheduler\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="225" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="71" />
+    <Name>Dell Update Registry Scan</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>Both</FileScanType>
+        <IncludePatterns type="list">
+          <item>%SYSTEMDRIVE%\Users\**\</item>
+          <item>%PROGRAMFILES%*\**\</item>
+          <item>%SYSTEMDRIVE%\Windows\*.exe</item>
+        </IncludePatterns>
+        <DateCreated>2020-11-22T18:44:43.0000000-05:00</DateCreated>
+        <DateModified>2021-01-03T16:14:28.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>%SYSTEMDRIVE%\Users\**\
+%PROGRAMFILES%*\**\
+%SYSTEMDRIVE%\Windows\*.exe</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="177" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-25T10:06:55.0000000-05:00</ModifiedDate>
+        <Name>PS - User Desktop Files</Name>
+        <UID>e972ca5862314e0db2a02d8542a3f096</UID>
+        <Script>Get-ChildItem "$env:userprofile\desktop\*.lnk" -File -Erroraction SilentlyContinue</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="204" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>C:\*.csv</item>
+          <item>C:\*.xlsx</item>
+          <item>C:\DellBiosDump.csv</item>
+        </IncludePatterns>
+        <DateCreated>2020-12-29T19:52:18.0000000-05:00</DateCreated>
+        <DateModified>2020-12-29T19:52:55.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>C:\*.csv
+C:\*.xlsx
+C:\DellBiosDump.csv</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="277" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>C:\Users\Public\Desktop\*.lnk</item>
+        </IncludePatterns>
+        <DateCreated>2020-12-31T10:21:04.0000000-05:00</DateCreated>
+        <DateModified>2020-12-31T10:21:22.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>C:\Users\Public\Desktop\*.lnk</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="291" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>Both</FileScanType>
+        <IncludePatterns type="list">
+          <item>C:\Windows\*\Macromed\Flash\**\</item>
+          <item>C:\Windows\SysWOW64\Macromed\Flash\**\</item>
+          <item>c:\windows\system32\macromed\flash\**\</item>
+        </IncludePatterns>
+        <DateCreated>2021-01-04T14:06:22.0000000-05:00</DateCreated>
+        <DateModified>2021-01-04T14:43:11.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>C:\Windows\*\Macromed\Flash\**\
+C:\Windows\SysWOW64\Macromed\Flash\**\
+c:\windows\system32\macromed\flash\**\</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="314" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="63" />
+    <Name>Files &amp; Directories</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>3.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-30T19:07:48.0000000-04:00</ModifiedDate>
+        <Name>PS - ConvertToDateTime Formrat</Name>
+        <UID>21d1dea883b6404183c0ce3c1cc4ee7e</UID>
+        <Script>get-wmiobject win32_softwarefeature | Select Caption, ProductName, Name,@{name="LastUsedDate";
+ Expression={$_.ConvertToDateTime($_.LastUse)}} where LastUse &gt; 20200928000000.000000+000</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles>\\IPSWICH2\C$\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="93" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-27T17:34:54.0000000-04:00</ModifiedDate>
+        <Name>PS - System.Management.ManagementDateTime Conversion ConverttoDateTime</Name>
+        <UID>0bf472b74f054bf3ba092ccbd890c65a</UID>
+        <Script>gwmi win32_operatingsystem | Select Caption,@{name="LastBoot";
+ Expression={[System.Management.ManagementDateTimeConverter]::ToDateTime(
+ $_.LastBootUpTime)
+ }}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="25" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="94" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T19:07:48.0000000-04:00</ModifiedDate>
+        <Name>PS - ConvertToDateTime Forat (2)</Name>
+        <UID>917a41ddbc9f4eb0affe4efb35935dc8</UID>
+        <Script>get-wmiobject win32_softwarefeature | Select *,@{name="LastUsedDate";
+ Expression={$_.ConvertToDateTime($_.LastUse)}}</Script>
+        <FileName></FileName>
+        <Parameters>powershell.exe -executionpolicy bypass -noprofile</Parameters>
+        <AdditionalFiles>@(PowerShell Scanners)\_Shared\Install and Import Module.ps1</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="95" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T19:07:48.0000000-04:00</ModifiedDate>
+        <Name>PS - (Date File) Get Creation Date Greater Than 2 days ago</Name>
+        <UID>8f79beb5d11d41fb8aa4858d043f153f</UID>
+        <Script>strMonth = "09"
+strDay = "28"
+strYear = "2020"
+
+strDate = strYear &amp; strMonth &amp; strDay &amp; "000000.000000+000"
+#strDate = "20200928" &amp; "000000.000000+000"
+
+intNumberOfFiles = 0
+intTotalSize = 0
+
+strComputer = $env:computername
+
+#Set objWMIService = GetObject("winmgmts:\\" &amp; strComputer &amp; "\root\cimv2")
+
+Set colFiles = objWMIService.ExecQuery _
+    ("Select * From CIM_DataFile Where CreationDate &gt;= '" &amp; strDate &amp; "' AND Drive = 'C:'")</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>\\IPSWICH2\C$\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="139" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T19:09:11.0000000-04:00</ModifiedDate>
+        <Name>PS - Get OS Info Filters</Name>
+        <UID>c8c0f17598c94bbfbe13e5aaded61803</UID>
+        <Script>select * from Win32_OperatingSystem WHERE (Version like "10.%" OR Version &gt;= "6.1") AND ProductType="1"</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="140" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description>https://jdhitsolutions.com/blog/powershell/170/friendly-wmi-dates/</Description>
+    <ScanProfileId value="42" />
+    <Name>FOR REFERENCE: WMI DateTime Function</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1401" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-27T17:30:56.0000000-04:00</ModifiedDate>
+        <Name>DateTimeFunction</Name>
+        <UID>0f14251391be4bd68be71b897b75cd49</UID>
+        <Script>$date = [system.management.ManagementDateTimeConverter]::ToDmtfDateTime((Get-Date))
+$UTCDate = $date.substring(0,8)
+$Query = "SELECT * FROM Win32_ReliabilityStabilityMetrics WHERE Timegenerated &gt;= $UTCdate"
+$ReliabilityIndex = get-wmiobject -query $query -ComputerName $env:computername | Select-Object -first 1
+$ReliabilityIndex</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="15" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="86" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="39" />
+    <Name>Functions</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-29T01:14:19.0000000-04:00</ModifiedDate>
+        <Name>PS - Application Usage</Name>
+        <UID>afaea202729f4bb78d5521bdff994069</UID>
+        <Script>gwmi win32_softwareFeature | select-object productname,lastuse -unique | Format-table -autosize</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles>\\IPSWICH2\C$\Admin Tools\PsExec.exe</AdditionalFiles>
+        <RowLimit value="50" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="105" />
+      </Scanner>
+    </Scanners>
+    <Description>https://community.spiceworks.com/topic/514110-get-a-program-s-last-used-date-remotely</Description>
+    <ScanProfileId value="49" />
+    <Name>Get - Get Last Used Date (All)</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:39.0000000-05:00</ModifiedDate>
+        <Name>Get CIM_BiosElement</Name>
+        <UID>03b4430adea342608c52f735586ba317</UID>
+        <Script>Get-CimInstance -ClassName CIM_BIOSElement</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="209" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="68" />
+    <Name>Get Bios Information</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1105" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1128" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-27T17:40:02.0000000-04:00</ModifiedDate>
+        <Name>PS - Get OS Info w/ Reboot Time (CIMInstance)</Name>
+        <UID>76951163553e49f595a306f43be5b80e</UID>
+        <Script>Get-CimInstance  -Class CIM_OperatingSystem -ErrorAction SilentlyContinue | Select-Object *</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="2" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-27T14:29:01.0000000-04:00</ModifiedDate>
+        <Name>PS - Get Last Boot Time (CIMInstance)</Name>
+        <UID>95f8dc9d407a459eb3b0978625e75507</UID>
+        <Script>Get-CimInstance -ComputerName localhost -Class CIM_OperatingSystem -ErrorAction Stop | Select-Object CSName, LastBootUpTime </Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="91" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-22T19:55:01.0000000-05:00</ModifiedDate>
+        <Name>PS - Get Last Reboot Time with DateTime Formatting</Name>
+        <UID>6e194a638a234b59b91b6810eb6c3331</UID>
+        <Script>gwmi win32_operatingsystem | Select Caption,@{name="LastBoot";
+ Expression={$_.ConvertToDateTime($_.LastBootUpTime)}}
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="2" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="92" />
+      </Scanner>
+    </Scanners>
+    <Description>https://improvescripting.com/get-the-last-boot-time-using-powershell-script/</Description>
+    <ScanProfileId value="41" />
+    <Name>Get Last Reboot Time</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>7.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName></WMIClassName>
+        <ModifiedDate>2020-09-30T11:00:53.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Software Audits - Windows Keys</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>Select description, partialproductkey, licensefamily, productkeychannel from SoftwareLicensingProdct where productkeychannel is not null</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="48" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_Battery</WMIClassName>
+        <ModifiedDate>2020-09-30T10:56:43.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Audits - Battery Information</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT * FROM Win32_Battery WHERE DeviceID IS NOT NULL</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="110" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T11:50:39.0000000-04:00</ModifiedDate>
+        <Name>PS - Software Audits - Mozilla Firefox Extensions</Name>
+        <UID>e2a9c97be61045daa7601199c555805e</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Mozilla Firefox Extensions\Mozilla Firefox Extensions.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="131" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T12:04:28.0000000-04:00</ModifiedDate>
+        <Name>PS - Software Audits - Startup Applications</Name>
+        <UID>afea62eda96b44bbb9aecd3bfa43309f</UID>
+        <Script>Get-Item -Path HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run -ErrorAction SilentlyContinue | Select * #-ExpandProperty Property
+Get-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -ErrorAction SilentlyContinue | Select Name, CreationDate -ExpandProperty Property 
+Get-Item -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -ErrorAction SilentlyContinue | Select * #-ExpandProperty Property
+Get-Item -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run\StartupFolder -ErrorAction SilentlyContinue | Select * # -ExpandProperty Property</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="50" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="132" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <WMIClassName>SoftwareLicensingProduct</WMIClassName>
+        <ModifiedDate>2020-09-30T10:57:03.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Audits - Microsoft Keys</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT description, partialproductkey, licensefamily, productkeychannel FROM  SoftwareLicensingProduct Where productkeychannel is not null</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="133" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T12:04:28.0000000-04:00</ModifiedDate>
+        <Name>PS - Software Audits - Windows Defender Threats</Name>
+        <UID>38c71fc00609436280e189267433926a</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Windows Defender Threats\Windows Defender Threat Detection.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="136" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_NTLogEvent</WMIClassName>
+        <ModifiedDate>2020-09-25T12:52:31.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Get some PDQ Event Viewer logs (2)</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT * FROM Win32_NTLogEvent WHERE Type != 'Information' AND SourceName LIKE 'PDQ%'</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="155" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T11:24:12.0000000-05:00</ModifiedDate>
+        <Name>PS - Bad Devices in Device Manager</Name>
+        <UID>5a839e2cc0ca4555bd9ef0002117fb97</UID>
+        <Script>$baddevices = Get-WmiObject Win32_PNPEntity | where {$_.ConfigManagerErrorcode -ne 0}
+" Total Bad devices: {0}" -f $baddevices.count
+foreach ($device in $baddevices) {
+    "Name : {0}" -f $device.name
+    "Class Guid : {0}" -f $device.Classguid
+    "Description : {0}" -f $device.Description
+    "Device ID : {0}" -f $device.deviceid
+    "Manufacturer : {0}" -f $device.manufactuer
+    "PNP Devcice Id : {0}" -f $device.PNPDeviceID
+    "Service Name : {0}" -f $device.service
+    ""
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="216" />
+      </Scanner>
+    </Scanners>
+    <Description>https://www.pdq.com/blog/webcast-recap-hardware-and-software-auditing/</Description>
+    <ScanProfileId value="23" />
+    <Name>Hardware and Software Audits</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>1.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-10-07T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-09-30T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2021-01-11T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2021-01-04T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <TimeSpan>1.00:00:00</TimeSpan>
+          <Description></Description>
+          <EndDateTime>2021-01-11T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2021-01-04T15:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Interval</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-28T15:24:14.0000000-05:00</ModifiedDate>
+        <Name>**Get-Trusted Hosts</Name>
+        <UID>a873e962e6fe4c50ab7e530c623c93b4</UID>
+        <Script>Get-Item wsman:\localhost\Client\TrustedHosts | Format-Table -auto</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="268" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-28T15:26:26.0000000-05:00</ModifiedDate>
+        <Name>*Trusted Hosts Value</Name>
+        <UID>f146d3139f4e42439324af990ad0d432</UID>
+        <Script>(Get-Item WSMan:\localhost\Client\TrustedHosts).value</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="269" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-29T17:00:47.0000000-05:00</ModifiedDate>
+        <Name>PS - WinRM - Get Winrm Config</Name>
+        <UID>8caebf9e55254b53a19a357cb28c9168</UID>
+        <Script>winrm get winrm/config
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="274" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-29T17:12:52.0000000-05:00</ModifiedDate>
+        <Name>Get all information from WMI</Name>
+        <UID>89a8609e3d46474dae0839bd303affdc</UID>
+        <Script>Get-WSManInstance -ResourceURI wmicimv2/win32_service -SelectorSet @{name="winrm"} # -ComputerName "Server01"
+
+# https://docs.microsoft.com/en-us/powershell/module/microsoft.wsman.management/get-wsmaninstance?view=powershell-7.1</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="276" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T10:32:05.0000000-05:00</ModifiedDate>
+        <Name>PS - WSMan - Test-WSMan</Name>
+        <UID>3d2c36e2599a42f8913664670f26848c</UID>
+        <Script>Test-WSMan</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="278" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T10:32:05.0000000-05:00</ModifiedDate>
+        <Name>Get Windows Remote Management Firewall Rule</Name>
+        <UID>8681de4f31a74678a72cf8f35424edd4</UID>
+        <Script>Get-NetFirewallRule -Name 'WINRM*' | Select *</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="279" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T11:51:10.0000000-05:00</ModifiedDate>
+        <Name>PS - Get Firewall Rules and Ports</Name>
+        <UID>d8c27f5644134dc89ffc9f38edc01239</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell Scanners\Windows Firewall\GetFirewallRulesAndPorts.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="280" />
+      </Scanner>
+      <Scanner>
+        <TypeName>NetworkAdapters</TypeName>
+        <SourceScannerId value="281" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T10:32:05.0000000-05:00</ModifiedDate>
+        <Name>Get-NetConnectionProfile</Name>
+        <UID>d05da332f5154db3bc3418d0e5304471</UID>
+        <Script>Get-NetConnectionProfile</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="282" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T11:07:22.0000000-05:00</ModifiedDate>
+        <Name>Check VPN Status</Name>
+        <UID>3c6019d15c2a41feae21cbb1b9ec5b90</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Networking\Check VPN Status.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="283" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T11:59:41.0000000-05:00</ModifiedDate>
+        <Name>Get Hosts</Name>
+        <UID>f4d2a9f7c842419c805b50cee07d317f</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell Scanners\Hosts File\Hosts File.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="285" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T16:01:30.0000000-05:00</ModifiedDate>
+        <Name>Test-path "$env:computername\ADMIN$" -verbose</Name>
+        <UID>576addde1aa840c59ff6d1306d74bc77</UID>
+        <Script>Test-path "$env:computername\ADMIN$" -verbose</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="288" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-03T16:35:05.0000000-05:00</ModifiedDate>
+        <Name>Get-Privilege and Accounts</Name>
+        <UID>b64ab1be06974197b97e023bfbde07eb</UID>
+        <Script>Install-Module -Name PoshPrivilege -force | import-module
+Get-Privilege</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="301" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-03T19:33:09.0000000-05:00</ModifiedDate>
+        <Name>Get Administrators Local Group Members</Name>
+        <UID>43bbcb631ee94e6cac0ccf8c6d9ea091</UID>
+        <Script>Get-LocalGroupMember -Group "Administrators"</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="302" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="79" />
+    <Name>Network Configuration</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>10.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2021-01-04T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-12-28T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-10T14:28:57.0000000-05:00</ModifiedDate>
+        <Name>PS - Modules - Get-InstalledModule</Name>
+        <UID>0df8aafee14d4f6693c825e999ca14a2</UID>
+        <Script>Get-InstalledModule</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="238" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-10T14:28:57.0000000-05:00</ModifiedDate>
+        <Name>PS - Settings - $PSVersionTable</Name>
+        <UID>240d3e0aac0a4f359ad919827904e88a</UID>
+        <Script>$PSVersionTable
+
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="239" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-10T15:49:23.0000000-05:00</ModifiedDate>
+        <Name>PS - Modules - Get-PackageProvider -ListAvailable</Name>
+        <UID>e6604e9910d9403a831cfbb4247dfa6e</UID>
+        <Script>Get-PackageProvider -ListAvailable</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="241" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>C:\Program Files\WindowsPowerShell\Modules\*\*.psm1</item>
+          <item>%userprofile%\documents\windowsPowerShell\*.psm1</item>
+        </IncludePatterns>
+        <DateCreated>2021-01-01T14:47:24.0000000-05:00</DateCreated>
+        <DateModified>2021-01-03T16:15:12.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>C:\Program Files\WindowsPowerShell\Modules\*\*.psm1
+%userprofile%\documents\windowsPowerShell\*.psm1</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="296" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="62" />
+    <Name>PowerShell Modules</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>10.00:30:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-12T14:07:09.0000000-05:00</ModifiedDate>
+        <Name>Get-PSDrive</Name>
+        <UID>6a1ee4b914894afbbc46fc2963171bc8</UID>
+        <Script>Get-PSDrive</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="164" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-23T18:48:26.0000000-05:00</ModifiedDate>
+        <Name>Get PSModule Path</Name>
+        <UID>894c85af37b247f99a728ab301401f4b</UID>
+        <Script>$env:PSModulePath -split ';'</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="191" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-28T14:57:04.0000000-05:00</ModifiedDate>
+        <Name>Get-WSMan - TrustedHosts</Name>
+        <UID>30079fd563824c0fac83626687bfee4d</UID>
+        <Script>Get-Item wsman:\localhost\Client\TrustedHosts | Format-Table -auto</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="199" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-02T10:27:51.0000000-05:00</ModifiedDate>
+        <Name>PS - Display Current Services</Name>
+        <UID>310807bc40024391a3db98f9dea2dfbd</UID>
+        <Script>Get-CimInstance -ClassName Win32_Service | Format-Table -Property Status,Name,DisplayName -AutoSize -Wrap
+# https://docs.microsoft.com/en-us/powershell/scripting/samples/collecting-information-about-computers?view=powershell-7.1</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="219" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-02T10:27:51.0000000-05:00</ModifiedDate>
+        <Name>Listing Local Users and Owner</Name>
+        <UID>b57f89f0f12f474ebc9ab6bee3839fc2</UID>
+        <Script>Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *user*</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="220" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-02T10:27:51.0000000-05:00</ModifiedDate>
+        <Name>Getting Logon Session Information</Name>
+        <UID>536d04e773ee4fa680e27e1fe6a04f21</UID>
+        <Script>Get-CimInstance -ClassName Win32_LogonSession</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="221" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-02T17:17:33.0000000-05:00</ModifiedDate>
+        <Name>Test-ComputerSecureChannel</Name>
+        <UID>9b84d3bea1664aa183e79eca07e2f04c</UID>
+        <Script>#Test-ComputerSecureChannel -Server "ipswich2.efwnow.local" -verbose
+Test-ComputerSecureChannel  -verbose</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="267" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="60" />
+    <Name>PowerShell Settings</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>45.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-12-01T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-24T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1980" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-03T15:56:45.0000000-05:00</ModifiedDate>
+        <Name>Get Printer Configuration</Name>
+        <UID>ee93e98db6d24817a500842023cf0c08</UID>
+        <Script>#$Printers = Get-Printer *
+#Foreach ($Printer in $Printers){Get-PrintConfiguration -PrinterName $Printer.name}
+Get-PrintConfiguration</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="297" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-03T15:56:45.0000000-05:00</ModifiedDate>
+        <Name>Get-Printer</Name>
+        <UID>8f48620e5603432b9e50d05013ba0e3b</UID>
+        <Script>Get-Printer</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="299" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="82" />
+    <Name>Printer Information</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>30.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2021-01-10T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2021-01-03T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1211" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1215" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1209" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1212" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-09T14:52:18.0000000-05:00</ModifiedDate>
+        <Name>Battery Status</Name>
+        <UID>5d9fd26456274b3ebc19b2080e744991</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Battery Status\Battery Status.ps1</FileName>
+        <Parameters>NoLogo -ExecutionPolicy Bypass</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="5" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="37" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_Battery</WMIClassName>
+        <ModifiedDate>2020-09-28T23:32:31.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Battery Information</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT * FROM Win32_Battery WHERE DeviceID IS NOT NULL</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="104" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_Battery</WMIClassName>
+        <ModifiedDate>2020-11-13T20:23:50.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Battery Info</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>select * from win32_battery</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="168" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName></WMIClassName>
+        <ModifiedDate>2020-11-24T16:22:11.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Get Warranty Info</Name>
+        <Namespace>DCIIM</Namespace>
+        <WQL>SELECT * FROM DCIM_AssetWarrantyInformation</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="201" />
+      </Scanner>
+    </Scanners>
+    <Description>Retrieves general information about the batteries connected to a device.</Description>
+    <ScanProfileId value="12" />
+    <Name>PS - Battery Status</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>60.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-18T23:48:18.0000000-05:00</ModifiedDate>
+        <Name>BitLocker Information</Name>
+        <UID>e58d1a67b5804d248c17c2f99bc7765b</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Get BitLocker Information\BitLocker Information.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="255" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description>Retrieves the BitLocker information of a target.</Description>
+    <ScanProfileId value="74" />
+    <Name>PS - BitLocker</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1463" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-26T00:40:30.0000000-05:00</ModifiedDate>
+        <Name>**Dell BIOS Information</Name>
+        <UID>24596336a2234e9da0fef704ce27a02c</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Dell BIOS Information\Dell BIOS Information.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="160" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T12:53:39.0000000-05:00</ModifiedDate>
+        <Name>PS - Get Warranty Information -- Right</Name>
+        <UID>31adf8cdc3a74d0ba874325e457dd97b</UID>
+        <Script></Script>
+        <FileName>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\Scripts\CheckDellWarranty.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="200" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <WMIClassName>DCIM_LogEntry</WMIClassName>
+        <ModifiedDate>2020-12-18T22:56:21.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>DCIM_LogEntry</Name>
+        <Namespace>dcim\sysman</Namespace>
+        <WQL>select * from DCIM_LogEntry</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="256" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-03T16:06:41.0000000-05:00</ModifiedDate>
+        <Name>Dell Powershell Provider Examples</Name>
+        <UID>131a5d918d604d97861de78969bdf866</UID>
+        <Script>#https://www.configjon.com/working-with-the-dell-command-powershell-provider/
+
+#List all available BIOS Settings
+$DellSettings = Get-ChildItem -Path DellSmbios:\
+ForEach ($Setting in $DellSettings)
+{
+    Get-ChildItem -Path "DellSmbios:\$($Setting.Category)" -WarningAction SilentlyContinue  | Select-Object PSChildName,Attribute,CurrentValue,PossibleValues
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="300" />
+      </Scanner>
+    </Scanners>
+    <Description>Get Current Dell BIOS Settings.</Description>
+    <ScanProfileId value="57" />
+    <Name>PS - Dell BIOS Information</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>45.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-22T17:30:00.0000000-05:00</ModifiedDate>
+        <Name>File Hash</Name>
+        <UID>95adf7aa3d2e457e9e40472aa9003d4e</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\File Hash\File Hash.ps1</FileName>
+        <Parameters>-Path "C:\Windows"</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="38" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="13" />
+    <Name>PS - File Hash</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>45.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-24T19:39:55.0000000-05:00</ModifiedDate>
+        <Name>Hosts File</Name>
+        <UID>849962cae5304d42b5df0f3f8b9f7440</UID>
+        <Script></Script>
+        <FileName>\\l2dz9433.int.efwnow.com\it\scripts\PowerShell-Scanners\PowerShell Scanners\Hosts File\Hosts File.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="99" />
+      </Scanner>
+    </Scanners>
+    <Description>Audit hosts file entries</Description>
+    <ScanProfileId value="45" />
+    <Name>PS - Get Hosts File</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1217" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-25T09:14:41.0000000-04:00</ModifiedDate>
+        <Name>PS - Office Applications Last Accessed Time</Name>
+        <UID>dae7e8f581384e159927e10efa562d6b</UID>
+        <Script>##Get Last Access Time of Executable
+
+
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "Excel.exe" | Get-ItemProperty | Select name, lastaccesstime
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "Outlook.exe" | Get-ItemProperty  | Select name, lastaccesstime 
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "POWERPNT.EXE" | Get-ItemProperty  |  Select name, lastaccesstime
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "ONENOTE.EXE" | Get-ItemProperty  | Select name, lastaccesstime  
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "MSPUB.EXE" | Get-ItemProperty  | Select name, lastaccesstime  
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "WINWORD.EXE" | Get-ItemProperty  | Select name, lastaccesstime  
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15" -Filter "MSACCESS.EXE" | Get-ItemProperty  | Select name, lastaccesstime    
+
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="63" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:29:53.0000000-04:00</ModifiedDate>
+        <Name>PS - Get Application Last Used Time (Regex Filter)</Name>
+        <UID>784b36690d1147ffb2123a48da0427c6</UID>
+        <Script>#Executable Fullnames
+$Regex = @(
+    "Outlook.exe"
+    "Winword.exe"
+    "Excel.exe"
+    "MSAccess.exe"
+    "POWERPNT.EXE"
+    "MSPUB.EXE"
+    "ONENOTE.EXE"
+    "OfficeClickToRun.exe"
+
+
+    )
+
+#Get All Executables Listed. Added \z to each entry so we don't get the signature and config files that have the same name.
+Get-ChildItem -Path "C:\Program Files\Microsoft Office\Office15\*\" -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -match ($Regex -join "\z|") + "\z"} | Get-ItemProperty | select name, lastaccesstime</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="15" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="65" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_SoftwareFeature</WMIClassName>
+        <ModifiedDate>2020-11-22T20:30:18.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Get Office Last Used Time</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>select * from win32_softwarefeature where IdentifyingNumber ='{90150000-0011-0000-1000-0000000FF1CE}' and LastUse is not null and productname = 'Microsoft Office Professional Plus 2013' and Version like '15%' and (name = 'OutlookFiles' or name = 'ExcelFiles' or name = 'AccessFiles' or name = 'WordFiles' or name = 'PPTFiles') and InstallState=3</WQL>
+        <Timeout value="90" />
+        <RowLimit value="25" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="179" />
+      </Scanner>
+    </Scanners>
+    <Description>https://www.youtube.com/watch?v=ENqeCcJomnI</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - Get Last Accessed Time</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>3.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1120" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-25T10:39:09.0000000-04:00</ModifiedDate>
+        <Name>PS - Application Last Accessed Time - Office 2013</Name>
+        <UID>4a16c10317314404b6dc29d54168dcc1</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell-Scanners\PowerShell Scanners\PS - Get Application Last Used Time\Office2013LastUsed.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="66" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:16:21.0000000-04:00</ModifiedDate>
+        <Name>PS - Get Office Last Used Date - Regex Filter</Name>
+        <UID>a605e7994a634d12a9b979c67e0ef86e</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell-Scanners\PowerShell Scanners\PS - Get Application Last Used Time\Win32_softwarefeature word excel outlook.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>\\IPSWICH2\C$\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</AdditionalFiles>
+        <RowLimit value="25" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="68" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:16:21.0000000-04:00</ModifiedDate>
+        <Name>PS - GetUnusedSoftware</Name>
+        <UID>0eae6687889141eab7055dc2dbed7541</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell-Scanners\PowerShell Scanners\PS - Get Application Last Used Time\GetUnusedSoftware.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="25" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="150" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:16:21.0000000-04:00</ModifiedDate>
+        <Name>Outlook-GetProcessCreationDate</Name>
+        <UID>e237e84157ad434280298aa6a0756d1f</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell-Scanners\PowerShell Scanners\PS - Get Application Last Used Time\Outlook-GetProcessCreationDate.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="50" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="151" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="35" />
+    <Name>PS - Get Office Application Usage - Last Used Date/Time</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-10T11:09:21.0000000-05:00</ModifiedDate>
+        <Name>PS - Get Outlook Creation DateTime</Name>
+        <UID>2bc079d117e948b7b0298b24cc8f41c6</UID>
+        <Script>Get-WmiObject -Class Win32_Process -Filter "name='Outlook.exe'" | 
+  ForEach-Object {
+    New-Object -Type PSCustomObject -Property @{
+      'Caption'      = $_.Caption
+      'CreationDate' = $_.ConvertToDateTime($_.CreationDate)
+    }
+  }</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="5" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="106" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-10T11:09:21.0000000-05:00</ModifiedDate>
+        <Name>PS - Get Excel Creation DateTime</Name>
+        <UID>eda4573e1a1e4db18e904afde80b2d34</UID>
+        <Script>Get-WmiObject -Class Win32_Process -Filter "name='Excel.exe'" | 
+  ForEach-Object {
+    New-Object -Type PSCustomObject -Property @{
+      'Caption'      = $_.Caption
+      'CreationDate' = $_.ConvertToDateTime($_.CreationDate)
+    }
+  }</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="5" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="107" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-10T11:09:21.0000000-05:00</ModifiedDate>
+        <Name>PS - LastUsedDateTime - No formatting</Name>
+        <UID>4efd94658ce54ba19bab92b06d142464</UID>
+        <Script>Get-WmiObject -Class win32_softwarefeature  |
+
+    Where-Object {$_.Caption -match 'Microsoft\sOffice|Microsoft\sOutlook|Microsoft\sExcel|Microsoft\sWord' -and -not( [int]$_.LastUse.Substring(0,8)-eq "19800000")} |
+      
+    Select-Object Caption, ProductName, Name, @{n='LastUse';e={[int]($_.Lastuse.Substring(0, 8))}},PSComputername, InstallDate
+</Script>
+        <FileName></FileName>
+        <Parameters>@(Import-Module)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="50" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="137" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description>Get date and timestamp of when the process was created</Description>
+    <ScanProfileId value="50" />
+    <Name>PS - Get Process Creation DateTime</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <TimeSpan>1.01:00:00</TimeSpan>
+          <Description></Description>
+          <EndDateTime>2020-10-07T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-30T12:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Interval</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:26:21.0000000-04:00</ModifiedDate>
+        <Name>PS - Get Explorer Start Time</Name>
+        <UID>332b91245a2e461b8eb6c8c9dc7886de</UID>
+        <Script>(Get-Date (Get-Process excel).StartTime).ToString('yyyyMMdd')</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="5" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="96" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T20:26:21.0000000-04:00</ModifiedDate>
+        <Name>PS - Get Outlook Start Time</Name>
+        <UID>fe8316641fe44c45bf9a3cab19a62982</UID>
+        <Script>(Get-Date (Get-Process outlook).StartTime).ToString('yyyyMMdd') -ErrorAction SilentlyContinue</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="5" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="97" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-29T17:06:20.0000000-05:00</ModifiedDate>
+        <Name>Get Chrome Last Access Time</Name>
+        <UID>6eec4d96539d4cdd9090a58836d59c2d</UID>
+        <Script>$Chrome = (Get-Item "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe").LastAccessTime</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="275" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T22:10:18.0000000-05:00</ModifiedDate>
+        <Name>Get Last Used Time (x86)</Name>
+        <UID>6376bfa90b3f469aa2b55612f65c541c</UID>
+        <Script>Get-ChildItem -Path ${env:ProgramFiles(x86)} -Filter "*.exe" -Recurse |
+Get-ItemProperty | select name,lastaccesstime | sort -Property lastaccesstime</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="289" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T22:10:18.0000000-05:00</ModifiedDate>
+        <Name>Get Last Used Date x64</Name>
+        <UID>e498c057d3e54c73873551580f9850c4</UID>
+        <Script>Get-ChildItem -Path ${env:ProgramFiles} -Filter "*.exe" -Recurse |
+Get-ItemProperty | select name,lastaccesstime | sort -Property lastaccesstime</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="290" />
+      </Scanner>
+    </Scanners>
+    <Description>https://stackoverflow.com/questions/34142041/how-to-get-the-process-start-time-in-powershell/34142140#34142140</Description>
+    <ScanProfileId value="43" />
+    <Name>PS - Get Processes Access / Start - Date / Time</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-28T12:34:11.0000000-05:00</ModifiedDate>
+        <Name>IIS App Pools</Name>
+        <UID>f70d367f1a044293937cd105c04cd3d2</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\IIS App Pools\IIS App Pools.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="102" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="48" />
+    <Name>PS - IIS App Pools</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-11T13:23:29.0000000-05:00</ModifiedDate>
+        <Name>Events - Critical System</Name>
+        <UID>3b49071c06454cc7b5d62afefd95f3a6</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Important Events\Important Events.ps1</FileName>
+        <Parameters>-EventLog System -EventLevel 1</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="30" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="158" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-20T10:45:34.0000000-05:00</ModifiedDate>
+        <Name>Events - Application Error</Name>
+        <UID>7634564d9ab74e73833426b23486d9fb</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Important Events\Important Events.ps1</FileName>
+        <Parameters>-EventLog Application -EventLevel 2</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="159" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-10T18:02:03.0000000-05:00</ModifiedDate>
+        <Name>Events - Microsoft Example</Name>
+        <UID>61892770275e4365ba993f14275311ce</UID>
+        <Script>Get-WmiObject -Class Win32_NTLogEvent -ComputerName | Where-Object {$_.LogFile -eq 'System'}
+foreach ($objEvent in $colLoggedEvents)
+{
+"Category: " + $objEvent.Category
+"Computer Name: " + $objEvent.ComputerName
+"Event Code: " + $objEvent.EventCode
+"Message: " + $objEvent.Message
+"Record Number: " + $objEvent.RecordNumber
+"Source Name: " + $objEvent.SourceName
+"Time Written: " + $objEvent.TimeWritten
+"Event Type: " + $objEvent.Type
+"User: " + $objEvent.Use
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="242" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="56" />
+    <Name>PS - Important Events</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>60.00:30:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-02T10:28:39.0000000-05:00</ModifiedDate>
+        <Name>Mapped Drives</Name>
+        <UID>013a8c7d84654469ade4bdc98271ca47</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Mapped Drives\Mapped Drives.ps1</FileName>
+        <Parameters>-Verbose</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="189" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description>Retrieves the mapped drives of logged-on users.</Description>
+    <ScanProfileId value="64" />
+    <Name>PS - Mapped Drives</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>1.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-30T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-23T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <DaysOfWeek>Monday</DaysOfWeek>
+          <TimeOfDay>15:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-11-30T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-23T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Weekly</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <DaysOfWeek>Monday</DaysOfWeek>
+          <TimeOfDay>01:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-11-30T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-23T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Weekly</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <DaysOfWeek>Thursday</DaysOfWeek>
+          <TimeOfDay>15:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-12-17T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-12-10T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Weekly</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-19T11:06:11.0000000-05:00</ModifiedDate>
+        <Name>RSOP (Basic GPO Information)</Name>
+        <UID>2c2076caea7c43479116566f6d14c214</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\RSOP (Basic GPO Information)\RSOP (Basic GPO Information).ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="257" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="75" />
+    <Name>PS - RSOP (Basic GPO Information)</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <DaysOfMonth>Day19</DaysOfMonth>
+          <DaysOfWeek>None</DaysOfWeek>
+          <MonthlyTriggerType>OnDay</MonthlyTriggerType>
+          <TimeOfDay>14:21:00</TimeOfDay>
+          <WeeksOfMonth>None</WeeksOfMonth>
+          <Description></Description>
+          <EndDateTime>2020-12-26T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-12-19T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Monthly</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-26T21:38:16.0000000-04:00</ModifiedDate>
+        <Name>Get Currently Running Processes</Name>
+        <UID>cef416936b6140c1945216177ef69815</UID>
+        <Script>gps | ? {$_.mainwindowhandle -ne 0} | select name, mainwindowtitle
+</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="89" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="40" />
+    <Name>PS - See Currently Running Tasks</Name>
+    <ScanAs>LoggedOnUser</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1105" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-11T13:22:38.0000000-05:00</ModifiedDate>
+        <Name>System Stability</Name>
+        <UID>0ce8b5fa52b64e16be4636257f21a91b</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\System Stability\System Stability.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="1" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="157" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="55" />
+    <Name>PS - System Stability</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>14.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-01T13:43:25.0000000-05:00</ModifiedDate>
+        <Name>Files &amp; Directories - Get Desktop Shortcuts</Name>
+        <UID>e75bea070841456a9cd17b1bfb39d334</UID>
+        <Script>$DesktopPath = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::Desktop)
+get-childitem $DesktopPath</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="293" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2021-01-01T14:17:25.0000000-05:00</ModifiedDate>
+        <Name>Files &amp; Directories - Get Desktop Shortcuts - All User Profiles</Name>
+        <UID>f97177b1028141a2bd2c1283d2e8063a</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell Scanners\Files and Directories\Get User Desktop Files.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="295" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="81" />
+    <Name>PS - User Desktop Shortcuts</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-12T15:01:36.0000000-05:00</ModifiedDate>
+        <Name>User Last Logged On</Name>
+        <UID>0a32aba4c29349cda2682c71f67784e4</UID>
+        <Script></Script>
+        <FileName>\\IPSWICH2\C$\PowerShell Scanners\User Last Logged On\User Last Logged On.ps1</FileName>
+        <Parameters>-Lowercase</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="42" />
+      </Scanner>
+    </Scanners>
+    <Description>Queries security logs for Username, Logon Type, and Last Logon to generate a user logon history</Description>
+    <ScanProfileId value="17" />
+    <Name>PS - User Last Logged On</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>2.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <TimeOfDay>08:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-12-01T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-24T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Daily</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <DaysOfWeek>All</DaysOfWeek>
+          <TimeOfDay>14:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-12-12T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-12-05T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Weekly</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <TimeSpan>03:00:00</TimeSpan>
+          <Description></Description>
+          <EndDateTime>2020-12-12T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-12-05T14:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>21:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="true" />
+          <TriggerType>Interval</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-09-30T13:45:23.0000000-04:00</ModifiedDate>
+        <Name>PS - Software Audits - Windows Defender Information</Name>
+        <UID>35b4fbe3558f476c94a794f61f1abda0</UID>
+        <Script>if ( -Not ( Get-Command Get-MpComputerStatus -ErrorAction SilentlyContinue ) ) {
+    throw "Unable to find Get-MpComputerStatus. Available on Windows 10/Server 2016 or higher"
+}
+
+$DefenderStatus = ( Get-Service WinDefend -ErrorAction SilentlyContinue ).Status
+
+if ( $DefenderStatus -ne "Running" ) {
+    throw "The Windows Defender service is not currently running"
+}
+
+Get-MpComputerStatus</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="31" />
+      </Scanner>
+    </Scanners>
+    <Description>Gathers basic Windows Defender Information such as product version and signature version using the built-in cmdlet 'Get-MpComputerStatus' found in the defender module.</Description>
+    <ScanProfileId value="7" />
+    <Name>PS - Windows Defender Information</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-11-09T14:59:22.0000000-05:00</ModifiedDate>
+        <Name>PS - Check Windows Store Updates</Name>
+        <UID>969f656da56f45d5b3d256d9f2c6d5f1</UID>
+        <Script>Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | 
+    Invoke-CimMethod -MethodName UpdateScanMethod
+
+#https://www.reddit.com/r/PowerShell/comments/94ikpc/any_way_to_update_windows_store_apps_via/</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="156" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="54" />
+    <Name>PS - Windows Store Updates</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-10T11:10:02.0000000-05:00</ModifiedDate>
+        <Name>Windows Update Last Installed</Name>
+        <UID>2d535147187d44baa50e74986df092c2</UID>
+        <Script></Script>
+        <FileName>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\Windows Update Last Installed\Windows Update Last Installed.ps1</FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="33" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T11:45:21.0000000-05:00</ModifiedDate>
+        <Name>Get Available Windows Updates (2)</Name>
+        <UID>4a31e8aa9ecd4cf0a1c01197fc746e39</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\Get Available Windows Updates\Get Available Windows Updates.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles>@(Import-Module)</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="284" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+          <CustomVariable>
+            <Name>Import-Module</Name>
+            <Value>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\PDQ\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="9" />
+    <Name>PS - Windows Updates</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>7.00:30:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_USERS</Hive>
+        <IncludePattern>*\Software\Microsoft\Windows\CurrentVersion\Run\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="22" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_USERS</Hive>
+        <IncludePattern>*\Software\Microsoft\Windows\CurrentVersion\RunOnce\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="23" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_USERS</Hive>
+        <IncludePattern>*\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="24" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_USERS</Hive>
+        <IncludePattern>*\Software\Wow64332Node\Microsoft\Windows\CurrentVersion\RunOnce\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="25" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Microsoft\Windows\CurrentVersion\Run\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="26" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Microsoft\Windows\CurrentVersion\RunOnce\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="27" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="28" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="29" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="67" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store\**\</IncludePattern>
+        <RowLimit value="50" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="69" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage\AppLaunch\**\</IncludePattern>
+        <RowLimit value="50" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="70" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage\AppSwitched\**\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="71" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\**\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="103" />
+      </Scanner>
+    </Scanners>
+    <Description>Windows Run and RunOnce Keys</Description>
+    <ScanProfileId value="5" />
+    <Name>Registry Run Keys</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <DaysOfWeek>Friday</DaysOfWeek>
+          <TimeOfDay>11:00:00</TimeOfDay>
+          <Description></Description>
+          <EndDateTime>2020-10-02T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-25T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Weekly</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>30.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-10-02T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-09-25T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-10-04T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-09-27T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Heartbeat</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Microsoft\Windows\CurrentVersion\Policies\System\LocalAccountTokenFilterPolicy</IncludePattern>
+        <RowLimit value="1" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="223" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SOFTWARE\Dell\**\
+SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\Schedule\**\
+SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\General\**\
+SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\CFG\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="224" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SYSTEM\CurrentControlSet\Control\FileSystem\</IncludePattern>
+        <RowLimit value="1" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="231" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SOFTWARE\Policies\Zoom\Zoom Meetings\General\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="258" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SYSTEM\CurrentControlSet\Services\lanmanserver\DefaultSecurity\SrvsvcFile
+SYSTEM\CurrentControlSet\Services\lanmanserver\Shares\Security\MyShare
+SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\Defaultecurity
+SYSTEM\CurrentControlSet\services\BITS\Security\Security
+SOFTWARE\Classes\AppID\{588E10FA-0618-48A1-BE2F-0AD93E899FCC}\LaunchPermission</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="272" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Front\DisableAutoUpdate</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="286" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Microsoft\Windows\CurrentVersion\Uninstall\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="292" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="310" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="70" />
+    <Name>Registry Settings</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>7.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2021-01-04T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-12-28T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>Computer</TypeName>
+        <SourceScannerId value="1" />
+      </Scanner>
+      <Scanner>
+        <TypeName>ActiveDirectory</TypeName>
+        <SourceScannerId value="2" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Applications</TypeName>
+        <SourceScannerId value="3" />
+      </Scanner>
+      <Scanner>
+        <TypeName>EnvironmentVariables</TypeName>
+        <SourceScannerId value="4" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Disks</TypeName>
+        <SourceScannerId value="5" />
+      </Scanner>
+      <Scanner>
+        <TypeName>HardwareDevices</TypeName>
+        <SourceScannerId value="6" />
+      </Scanner>
+      <Scanner>
+        <TypeName>HotFixes</TypeName>
+        <SourceScannerId value="7" />
+      </Scanner>
+      <Scanner>
+        <TypeName>UsersAndGroups</TypeName>
+        <SourceScannerId value="10" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Services</TypeName>
+        <SourceScannerId value="13" />
+      </Scanner>
+      <Scanner>
+        <TypeName>Shares</TypeName>
+        <SourceScannerId value="14" />
+      </Scanner>
+      <Scanner>
+        <TypeName>WindowsFeatures</TypeName>
+        <SourceScannerId value="15" />
+      </Scanner>
+      <Scanner>
+        <TypeName>WindowsTaskSchedules</TypeName>
+        <SourceScannerId value="16" />
+      </Scanner>
+    </Scanners>
+    <Description>Standard scan for basic inventory data</Description>
+    <ScanProfileId value="1" />
+    <Name>Standard</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>7.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-09-29T00:00:00.0000000-04:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-09-22T00:00:00.0000000-04:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>Win32_LogicalProgramGroupItem</WMIClassName>
+        <ModifiedDate>2020-12-20T12:42:13.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Start Menu</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>Select Caption, Description, InstallDate, Name, Status from Win32_LogicalProgramGroupItem</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="260" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="76" />
+    <Name>Start Menu Items</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>DCIM_AssetWarrantyInformation</WMIClassName>
+        <ModifiedDate>2020-11-28T18:21:11.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Get Asset Warranty Info</Name>
+        <Namespace>DCIM\sysman</Namespace>
+        <WQL>SELECT * FROM DCIM_AssetWarrantyInformation</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="202" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-28T17:18:51.0000000-05:00</ModifiedDate>
+        <Name>Get Quick Fix Engineering</Name>
+        <UID>0ee2b68ced604b50a7404264d2f2c45e</UID>
+        <Script></Script>
+        <FileName>\\Amznfsx4jnt7tn0.int.efwnow.com\efwit\_Helpdesk Stuff\Charley Bailey\Scripts\Get-WmiObject Class Win32_QuickFixEngin.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="206" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="61" />
+    <Name>Testing</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>DCIM_AssetWarrantyInformation</WMIClassName>
+        <ModifiedDate>2020-11-25T15:27:59.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Get Warranty Info</Name>
+        <Namespace>dcim\sysman</Namespace>
+        <WQL>SELECT * FROM DCIM_AssetWarrantyInformation WHERE InstanceID is not null</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="210" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:39.0000000-05:00</ModifiedDate>
+        <Name>PS - warranty Info</Name>
+        <UID>fb12e815729943a98e9ddf5755a421f5</UID>
+        <Script>$computer = $env:COMPUTERNAME
+$namespace = "ROOT\DCIM\SYSMAN"
+$classname = "DCIM_AssetWarrantyInformation"
+Get-WmiObject -Class $classname -ComputerName $computer -Namespace $namespace |
+    Select-Object * -ExcludeProperty PSComputerName, Scope, Path, Options, ClassPath, Properties, SystemProperties, Qualifiers, Site, Container |
+
+    Format-List -Property [a-z]*
+</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="211" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:39.0000000-05:00</ModifiedDate>
+        <Name>Test Dell Warranty 2</Name>
+        <UID>151f98b928b745cea943d359bff71d9b</UID>
+        <Script>Get-WmiObject -Impersonation 3 -NameSpace "root\dcim\sysman" -Class "DCIM_AssetWarrantyInformation"</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)  -Impersonation 3</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="212" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:39.0000000-05:00</ModifiedDate>
+        <Name>Test Dell Warranty 2 (CIM)</Name>
+        <UID>453e5b001574412188901a1d7b93d4c1</UID>
+        <Script>Get-CimInstance -Impersonation 3 -NameSpace "root\dcim\sysman" -Class "DCIM_AssetWarrantyInformation"</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)  -Impersonation 3</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="213" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-30T08:54:39.0000000-05:00</ModifiedDate>
+        <Name>Test Enumerate</Name>
+        <UID>c06dea3c76f84f37b703005aa613a94d</UID>
+        <Script>Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class StringAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class EnumerationAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class IntegerAttribute
+Get-WmiObject -Namespace root/dcim/sysman/biosattributes -Class BIOSAttributeInterface
+#Get-WmiObject -NameSpace root/dcim/sysman -Class DCIM_AssetWarrantyInformation
+Get-WmiObject -Namespace root/dcim/sysman/wmisecurity -Class SecurityInterface
+#https://downloads.dell.com/manuals/common/dell-agentless-client-manageability.pdf</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="214" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="69" />
+    <Name>Warranty Information</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <Description></Description>
+          <EndDateTime>2020-12-06T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-30T06:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Once</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="34" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1128" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+      <ScanProfileCollection>
+        <CollectionId value="1105" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>%systemroot%\System32\**\*.exe</item>
+        </IncludePatterns>
+        <DateCreated value="null" />
+        <DateModified>2020-09-22T13:05:02.0000000-04:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>%systemroot%\System32\**\*.exe</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="21" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>%PROGRAMFILES%*\**\</item>
+        </IncludePatterns>
+        <DateCreated>2020-11-21T17:07:03.0000000-05:00</DateCreated>
+        <DateModified>2020-11-21T17:07:12.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>%PROGRAMFILES%*\**\</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="172" />
+      </Scanner>
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>File</FileScanType>
+        <IncludePatterns type="list">
+          <item>C:\Windows\*.exe</item>
+        </IncludePatterns>
+        <DateCreated value="null" />
+        <DateModified>2020-12-10T14:22:15.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>C:\Windows\*.exe</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="236" />
+      </Scanner>
+    </Scanners>
+    <Description>All EXE files in the Windows\System32 directory</Description>
+    <ScanProfileId value="4" />
+    <Name>Windows EXEs</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>30.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-20T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-11-13T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1403" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>SOFTWARE\Policies\Microsoft\WindowsFirewall\**\</IncludePattern>
+        <RowLimit value="2500" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="30" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\*Profile\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="173" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>Software\Policies\Microsoft\Windows\WinRM\Service\**\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="174" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\**\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="175" />
+      </Scanner>
+      <Scanner>
+        <ExcludePattern></ExcludePattern>
+        <Hive>HKEY_LOCAL_MACHINE</Hive>
+        <IncludePattern>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\**\</IncludePattern>
+        <RowLimit value="100" />
+        <TypeName>Registry</TypeName>
+        <SourceScannerId value="176" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-24T11:21:25.0000000-05:00</ModifiedDate>
+        <Name>PS - Get WinRM Config - Listening</Name>
+        <UID>313d3a0313e246cd8537c47f535de495</UID>
+        <Script>winrm enumerate winrm/config/listener</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="194" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-28T15:18:34.0000000-05:00</ModifiedDate>
+        <Name>PS - WSMan - Get Trusted Hosts</Name>
+        <UID>4c217b4096d846de9d6e668b7c1c634f</UID>
+        <Script>Get-Item wsman:\localhost\Client\TrustedHosts | Format-Table -auto</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="263" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T15:36:06.0000000-05:00</ModifiedDate>
+        <Name>PS - Firewall - Get Enabled Firewall Rules</Name>
+        <UID>ba86c13ec8dc4dea804a99339a113a60</UID>
+        <Script></Script>
+        <FileName>\\ipswich2.efwnow.local\c$\PowerShell Scanners\Get Enabled Inbound Firewall Rules.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="266" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-30T15:30:13.0000000-05:00</ModifiedDate>
+        <Name>*Get Admin$ Permissions (2)</Name>
+        <UID>c42021951cdc4b09996519c7c838b9a1</UID>
+        <Script></Script>
+        <FileName>@(PowerShell Scanners)\TechNet-Gallery\AclInRegistry\Get-AclInRegistry.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="287" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>PowerShell Scanners</Name>
+            <Value>\\ipswich2.efwnow.local\c$\PowerShell Scanners</Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+    </Scanners>
+    <Description>Show the Firewall configuration settings for DomainProfile and StandardProfile</Description>
+    <ScanProfileId value="6" />
+    <Name>Windows Firewall Configuration</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <DaysOfMonth>Day12</DaysOfMonth>
+          <DaysOfWeek>None</DaysOfWeek>
+          <MonthlyTriggerType>OnDay</MonthlyTriggerType>
+          <TimeOfDay>11:00:00</TimeOfDay>
+          <WeeksOfMonth>None</WeeksOfMonth>
+          <Description></Description>
+          <EndDateTime>2020-11-19T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-12T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Monthly</TriggerType>
+        </ScheduleTrigger>
+        <ScheduleTrigger>
+          <ScanAge>14.00:00:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2021-01-04T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="true" />
+          <StartDateTime>2020-12-28T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>SoftwareLicensingProduct</WMIClassName>
+        <ModifiedDate>2020-09-23T16:32:48.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Windows Licensing Status</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE Name LIKE '%Windows%' AND PartialProductKey IS NOT NULL</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="58" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>SoftwareLicensingProduct</WMIClassName>
+        <ModifiedDate>2020-09-24T15:22:34.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI (Office Licensing Status)</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE Name LIKE '%Office%' AND PartialProductKey IS NOT NULL</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="62" />
+      </Scanner>
+    </Scanners>
+    <Description>https://help.pdq.com/hc/en-us/articles/115003468752-Inventory-WMI-Scanner-Usage-Examples</Description>
+    <ScanProfileId value="29" />
+    <Name>Windows Licensing Status</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <TypeName>Services</TypeName>
+        <SourceScannerId value="195" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-24T12:16:08.0000000-05:00</ModifiedDate>
+        <Name>Start-Service WinRM</Name>
+        <UID>5ff50b7ad8f546ebaf24c37bd11567c9</UID>
+        <Script>Start-Service -Name winrm -PassThru | Get-Member
+
+# https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/03-discovering-objects?view=powershell-7.1</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="196" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-24T13:04:25.0000000-05:00</ModifiedDate>
+        <Name>Get Dell Client Management Service</Name>
+        <UID>a05c06a22fb34f8588e6bc9161e394e2</UID>
+        <Script>Get-service -name 'DellClientManagementService'</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="197" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-24T14:56:03.0000000-05:00</ModifiedDate>
+        <Name>Get WinRM Config</Name>
+        <UID>85fda0e4a6db4b449244ba57f71346cf</UID>
+        <Script>winrm get winrm/config</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="198" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="65" />
+    <Name>Windows Services</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>SoftwareLicensingProduct</WMIClassName>
+        <ModifiedDate>2020-09-27T17:31:52.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Get Software Licensing Date</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT *  FROM SoftwareLicensingProduct where description like 'Office%'</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="83" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="26" />
+    <Name>WMI - Software Licensing Information</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>DCIM_AssetWarrantyInformation</WMIClassName>
+        <ModifiedDate>2020-12-11T19:15:55.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - AssetWarrantyInformation</Name>
+        <Namespace>dcim\sysman</Namespace>
+        <WQL>Select * from dcim_assetwarrantyinformation</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="247" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="73" />
+    <Name>WMI BIOS Test</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <WMIClassName>Win32_NetworkAdapterConfiguration</WMIClassName>
+        <ModifiedDate>2020-09-30T20:47:28.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>List all DNS Servers on the active NIC in order of preference</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT DNSServerSearchOrder FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled='True'</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="73" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_BIOS</WMIClassName>
+        <ModifiedDate>2020-09-25T12:54:18.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>Get (all) BIOS information</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT * FROM Win32_BIOS</WQL>
+        <Timeout value="90" />
+        <RowLimit value="2500" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="77" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_Tpm</WMIClassName>
+        <ModifiedDate>2020-09-30T20:48:47.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>TPM</Name>
+        <Namespace>CIMV2\Security\MicrosoftTpm</Namespace>
+        <WQL>SELECT * FROM Win32_Tpm</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="78" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>MSFT_Disk</WMIClassName>
+        <ModifiedDate>2020-09-30T20:47:41.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>MSFT_Disk</Name>
+        <Namespace>Microsoft\Windows\Storage</Namespace>
+        <WQL>SELECT PartitionStyle, SerialNumber FROM MSFT_Disk</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="79" />
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_Process</WMIClassName>
+        <ModifiedDate>2020-09-30T21:04:36.0000000-04:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Select Win32 Process</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>SELECT * FROM Win32_Process where caption='outlook.exe' or caption= 'excel.exe' or caption= 'msacceess.exe' or caption= 'mspub.exe' or caption='onenote.exe' or caption='winword.exe'</WQL>
+        <Timeout value="90" />
+        <RowLimit value="15" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="129" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T21:08:43.0000000-04:00</ModifiedDate>
+        <Name>Get WMI Object Win32Process query</Name>
+        <UID>f15366ddfae64adf843eed72cbf93985</UID>
+        <Script>$q = "Select * from Win32_Process where Name='winword.exe'" +
+  " or Name='excel.exe'"
+Get-WmiObject -Query $q</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="152" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-09-30T21:08:43.0000000-04:00</ModifiedDate>
+        <Name>WMI Queries - CIMInstance Example</Name>
+        <UID>178298fd6aeb4a9284f633527989dfec</UID>
+        <Script>$q = "Select * from Win32_Process `
+where (Name = 'winword.exe' or Name = 'excel.exe') and HandleCount &gt; 700"
+Get-CimInstance -Query $q</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="15" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="153" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-11-09T14:54:14.0000000-05:00</ModifiedDate>
+        <Name>PS - GET CIMINSTANCE SOFTWAREFEATRE</Name>
+        <UID>23ef1f9bf3b746189a2c7897469db8dc</UID>
+        <Script>Get-CIMinstance CIM_SoftwareFeature | Sort-Object LaseUse | Select * -First 25</Script>
+        <FileName></FileName>
+        <Parameters>@(Bypass)</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="154" />
+        <CustomVariables type="list">
+          <CustomVariable>
+            <Name>Bypass</Name>
+            <Value> -NoLogo -NoProfile -ExecutionPolicy Bypass </Value>
+          </CustomVariable>
+        </CustomVariables>
+      </Scanner>
+      <Scanner>
+        <WMIClassName>Win32_SoftwareFeature</WMIClassName>
+        <ModifiedDate>2020-12-07T21:40:16.0000000-05:00</ModifiedDate>
+        <UsePreferencesTimeout value="true" />
+        <Name>WMI - Get Microsoft Outlook Last Used Date</Name>
+        <Namespace>CIMV2</Namespace>
+        <WQL>select * from win32_softwarefeature where IdentifyingNumber ='{90150000-0011-0000-1000-0000000FF1CE}' and Accesses &gt; 1 and (Name = 'OutlookFiles')</WQL>
+        <Timeout value="90" />
+        <RowLimit value="5" />
+        <TypeName>WMI</TypeName>
+        <SourceScannerId value="232" />
+      </Scanner>
+      <Scanner>
+        <ModifiedDate>2020-12-11T16:01:32.0000000-05:00</ModifiedDate>
+        <Name>Verify Repository</Name>
+        <UID>9242b0e4b3f14400ae2f9e4413e2c68c</UID>
+        <Script>winmgmt /verifyrepository</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="243" />
+      </Scanner>
+    </Scanners>
+    <Description>https://help.pdq.com/hc/en-us/articles/115003468752</Description>
+    <ScanProfileId value="32" />
+    <Name>WMI Queries</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-12-21T12:00:53.0000000-05:00</ModifiedDate>
+        <Name>Zoom Path</Name>
+        <UID>e727455a381d4fdeaa31b982101ca4d8</UID>
+        <Script>$TargetFile = "$env:USERPROFILE\AppData\Roaming\Zoom\bin\zoom.exe"
+if(Test-Path $TargetFile)
+{
+      "$TargetFile exists."
+}else
+{
+      "$TargetFile does not exist."
+}</Script>
+        <FileName></FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="261" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="77" />
+    <Name>Zoom File Locations</Name>
+    <ScanAs>LoggedOnUser</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

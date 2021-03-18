@@ -1,0 +1,1 @@
+﻿Get-ChildItem "$env:userprofile\desktop\*.lnk" -File -Erroraction SilentlyContinue

@@ -1,0 +1,16 @@
+<Configuration>
+    <Add OfficeClientEdition="32" Channel="Monthly">
+        <Product ID="O365ProPlusRetail">
+            <Language ID="en-us"/>
+            <ExcludeApp ID="OneNote"/>
+            <ExcludeApp ID="Groove"/>
+	        <ExcludeApp ID="InfoPath"/>
+        </Product>
+    </Add>
+    <Updates Enabled="TRUE" Channel="Monthly"/>
+    <Property Name="FORCEAPPSHUTDOWN" Value="TRUE"/>
+    <Display AcceptEULA="TRUE" Level="None" />
+    <Logging Level="Standard" Path="%temp%" />
+    <Property Name="SharedComputerLicensing" Value="1" />
+    <!--Silent install of 32-Bit Office 365 ProPlus with Updates and Logging enabled-->
+</Configuration>

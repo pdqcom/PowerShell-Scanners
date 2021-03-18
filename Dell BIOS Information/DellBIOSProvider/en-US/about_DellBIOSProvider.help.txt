@@ -1,0 +1,271 @@
+TOPIC
+	about_DellBIOSProvider
+	
+SHORT DESCRIPTION
+	The Dell Command PowerShell Provider (DCPP) provides BIOS reporting and
+	configuration capability on Dell Optiplex, Latitude, Precision, and 
+	Venue 11 systems using PowerShell.
+	
+LONG DESCRIPTION
+	This is a PowerShell provider for configuring the SMBIOS on Dell Business
+	Client systems. Dell SMBIOS Provider works on the F2 (Setup) hierarchy 
+	and use the same strings as in F2 setup menu.
+
+	Dell Command PowerShell provider is built for PowerShell 3.0.
+	If the system is running PowerShell 2.0, update it to 3.0.
+	You can download PowerShell 3.0 from the following link: 
+	http://www.microsoft.com/en-us/download/details.aspx?id=34595
+	
+DRIVES
+	DellSmbios:
+
+NEW FEATURES
+	DCPP 2.3.0 includes the following new features.
+	-- New BIOS Features/Attributes 
+	-- New Category for BIOS Features/Attributes
+
+RUNTIME REQUIREMENTS
+	1. PowerShell 3.0 or later
+	2. Administrator access
+	3. Visual C++ runtime libraries for VS2010 and VS2015
+	
+WHAT IS SUPPORTED IN THE PROVIDER
+	-- Navigation via cd and dir commands
+	-- Reporting and Configuration of Dell Client BIOS attributes 
+	-- The attributes that are not supported on the system, are not reported. 
+	-- You can set, modify or clear BIOS administrator, BIOS system and HDD password.
+	-- TPM settings
+	-- Service tag, Asset Tag
+	-- BootSequence
+	-- SecureBoot ( This attribute does not support disable option)
+	-- Case insensitive no-space strings for category, attribute and current 
+	   value to set
+	-- Showing Unsupported Possible Values for BIOS features on particular platform 
+
+WHAT IS NOT SUPPORTED
+	-- Boot Sequence operations on UEFI incapable system like old generation Optiplex.
+
+NOTES
+	
+
+INSTALLATION
+	Perform the following steps:
+	1. Copy the downloaded zip file to the system. 
+	2. Follow Install-instructions.txt and Load-DellBIOSProvider.ps1 to 
+	   load the DellBIOSProvider module appropriately.
+	   
+GENERIC SYNTAX OF THE CMD-LETS
+	-- cd <Category>
+	-- Dir <attribute>
+	-- Set-Item <attribute> -value <possible value>  -password <PW value>
+	-- Get-Item .
+	
+EXAMPLES
+	-- cd DellSmbios:
+	-- cd DellSmbios:\SystemConfiguration
+	-- dir .
+	-- dir DellSmbios:\SystemConfiguration
+	-- dir -path DellSmbios:\SystemConfiguration\Serial1
+	-- dir -path DellSmbios: | select category, desc
+	-- dir -path DellSmbios:\SystemConfiguration| select attribute, 
+	   currentvalue, possiblevalues
+	-- set-item -path DellSmbios:\SystemConfiguration\Serial1 -value COM2 
+	   -password $PlainTxtPwd
+	-- dir DellSmbios:\SystemConfiguration\EmbNic1 | select 
+	   -expandproperty possiblevalues
+	
+INTEGRATED HELP
+	-- Get-Help About_DellBIOSProvider
+	-- Get-Help DellBIOSProvider
+	-- Get-Help DellSmbiosProv
+	-- Get-Help DellSmbios
+
+	-- Get-Help Get-ChildItem -Path DellSmbios:\Security -full
+	-- Get-Help Set-Item -Path DellSmbios:\Security -Examples
+	
+	-- Get-Help Set-Item -Path DellSmbios:\Security\HDDPassword -Full
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -full;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -Parameter StartTime;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -Parameter EndTime;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PeakShiftDayConfiguration -Parameter ChargeStartTime;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration -full;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration -Parameter BeginningOfDay;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration -Parameter WorkPeriod;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AdvancedBatteryChargeConfiguration -Examples;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\AutoOn -Examples;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\AutoOn -full;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AutoOn -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\AutoOn -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\PowerManagement\PrimaryBattChargeCfg -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightActiveColor -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightEnabledColors -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom1Color -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color -full;
+	-- Get-Help Get-ChildItem -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color -Examples;
+	-- Get-Help Set-Item -Path DellSmbios:\SystemConfiguration\KeyboardBacklightCustom2Color -full;
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\BootSequence -full
+	-- Get-Help Set-Item -Path DellSmbios:\BootSequence -Examples
+	
+	-- Get-Help Get-ChildItem -Path DellSmbios:\TPMSecurity -full
+	-- Get-Help Set-Item -Path DellSmbios:\TPMSecurity -Examples
+	
+	-- Get-Help Set-Item -Path DellSmbios:\SecureBoot -Full
+	
+DYNAMIC PARAMETERS
+	-Password  <System.String>
+		Required to validate the BIOS password. Provided in plain text string. This parameter is valid for all settable attributes.
+		Cmdlets supported: Set-Item
+		
+	-PasswordSecure <System.SecureString>
+		Required to validate the BIOS password. Provided in encrypted string. This parameter is valid for all settable attributes.
+		Cmdlets supported: Set-Item
+	
+	-BeginningOfDay
+		Specifies the start time when ExpressCharge will be used for charging the batteries faster. This parameter is used with AdvancedBatteryChargeConfiguration attribute.
+		Cmdlets supported: Set-Item
+		
+	-WorkPeriod
+		Specifies the duration of time when ExpressCharge is used for charging the batteries faster. This parameter is used with AdvancedBatteryChargeConfiguration attribute.
+		Cmdlets supported: Set-Item
+		
+	-StartTime
+		Specifies the time when system starts consuming battery power. System will continue consuming the battery power till either peakshift battery threshold is reached or peakshift end time is reached. This parameter is used with PeakShiftDayConfiguration attribute.
+		Cmdlets supported: Set-Item
+	
+	-EndTime
+		Specifies the time when system stops consuming battery power and starts consuming AC power, if available; however, the system does not charge battery. This parameter is used with PeakShiftDayConfiguration attribute.
+		Cmdlets supported: Set-Item
+	
+	-ChargeStartTime
+		Specifies the time when the system starts charging battery while consuming AC power, if available. This parameter is used with PeakShiftDayConfiguration attribute.
+		Cmdlets supported: Set-Item
+	
+	-AdminPassword
+		Specifies that admin password must be provided while setting HDD password if administrator has restricted the changes to HDD password. This parameter is used with HDDPassword attribute.
+		Cmdlets supported: Set-Item
+		
+	-ATAMaximumSecurityMode
+		Specifies the ATA Maximum Security Mode. Provide the value as '0' if you want HDD to be configured in ATA High Security Mode or '1' if you want HDD to be configured in ATA maximum Security Mode (Secure Erase). This parameter is used with HDDPassword attribute.
+		Cmdlets supported: Set-Item
+	
+	 Sample usage:
+		Set-Item DellSmbios:\PostBehavior\NumLock "Enabled" -Password $PlainTxtPwd
+		Set-Item DellSmbios:\PostBehavior\NumLock "Enabled" -PasswordSecure $SecurePwd
+		
+		(Get-Command -name si Dellsmbios:).Parameters['Password']
+		(Get-Command -name si Dellsmbios:).Parameters['PasswordSecure']
+		
+		Note: It is an error to provide -Password and -PasswordSecure together.
+		
+		Set-Item PeakShiftDayConfiguration -Value Friday -StartTime "11:45" -EndTime "13:30" -ChargeStartTime "15:30"
+		Set-Item AdvancedBatteryChargeConfiguration -Value Friday -BeginningOfDay "11:45" -WorkPeriod "5:00"
+		Set-Item -Path DellSmbios:\Security\HDDPassword $NewPwd -ATAMaximumSecurityMode 1;
+		Set-Item -Path DellSmbios:\Security\HDDPassowrd $NewPwd -Password $PlainTxtPwd -AdminPassword $AdminPwd;
+		
+ERROR REPORTING
+	Errors can be captured in the built-in variable -ErrorVariable.
+	
+BIOS PASSWORDS
+       cd DellSmbios:\Security
+	-- To Set,      Set-Item  AdminPassword $NewPwd
+			
+	-- To change, 	Set-Item  AdminPassword $NewPwd -Password $PlainTxtPwd
+					Set-Item  AdminPassword $NewPwd -PasswordSecure $SecurePwd
+					
+	-- To Clear,  	Set-Item  AdminPassword "" -Password $PlainTxtPwd
+					Set-Item  AdminPassword "" -PasswordSecure $SecurePwd
+					
+
+HDD PASSWORD
+	   cd DellSmbios:\Security	
+	-- To Set,      Set-Item  HDDPassword $NewPwd
+			
+	-- To change, 	Set-Item  HDDPassword $NewPwd -Password $PlainTxtPwd
+					Set-Item  HDDPassword $NewPwd -PasswordSecure $SecurePwd
+					
+	-- To Clear,  	Set-Item  HDDPassword "" -Password $PlainTxtPwd
+					Set-Item  HDDPassword "" -PasswordSecure $SecurePwd	   
+					
+ASSET TAG
+	-- Set-Item DellSmbios:\SystemInformation\assettag Dell -password $PlainTxtPwd
+	
+SystemConfiguration
+	
+	-- Set-Item KeyboardBacklightActiveColor "Red" -Password $PlainTxtPwd
+	-- Set-Item KeyboardBacklightEnabledColors "Red,Green,Custom1,Custom2,White" -Password $PlainTxtPwd
+	-- Set-Item KeyboardBacklightEnabledColors "NoColor" -Password $PlainTxtPwd
+	-- Set-Item KeyboardBacklightCustom1Color "234:35:56" -Password $PlainTxtPwd
+	-- Set-Item KeyboardBacklightCustom2Color "124:45:246" -Password $PlainTxtPwd
+
+PowerManagement
+
+	-- Set-Item AutoOn "Weekdays" -Password $PlainTxtPwd
+	-- Set-Item AutoOn "SelectDays"
+	-- Set-Item PeakShiftDayConfiguration -Value Friday -StartTime "11:45" -EndTime "13:30" -ChargeStartTime "15:30"
+	-- Set-Item PeakShiftDayConfiguration -Value Sunday -StartTime "11:45" -Password $PlainTxtPwd
+	-- Set-Item AdvancedBatteryChargeConfiguration -Value Friday -BeginningOfDay "11:45" -WorkPeriod "5:00"
+	-- Set-Item AdvancedBatteryChargeConfiguration -Value Sunday -WorkPeriod "5:00" -Password $PlainTxtPwd
+	-- Set-Item PrimaryBattChargeCfg "Adaptive" -Password $PlainTxtPwd;
+	-- Set-Item PrimaryBattChargeCfg "Custom";
+	
+BOOTSEQUENCE
+	-- dir DellSmbios:\BootSequence\BootList 
+	-- Set-Item DellSmbios:\bootsequence\BootList Uefi -Password $PlainTxtPwd
+	
+	Note: Ensure that "AdvancedBootOptions\LegacyOrom" is set to
+		  Enabled and SecureBoot is set to Disabled To set attribute 
+		  BootList to "Legacy".
+		
+	-- dir DellSmbios:\bootsequence\bootsequence | select-object -expand 
+	   currentvalue
+	-- Set-Item DelllSmbios:\BootSequence\bootsequence "2,3,4" -password $PlainTxtPwd
+	-- Set-Item DelllSmbios:\BootSequence\bootsequence "hdd,cdrom,embnicipv4,embnicipv6" -password $PlainTxtPwd
+    
+	Note: To change the bootsequence, check the current bootorder using
+		  dir command on the path DelllSmbios:\BootSequence\BootSequence.
+	
+SECUREBOOT
+	Note: This tool cannot disable the SecureBoot.
+	-- Set-Item DellSmbios:\SecureBoot\SecureBoot enabled -password $PlainTxtPwd
+
+	
+TPM SECURITY
+	-- Set-Item DellSmbios:\TPMSecurity\tpmsecurity enabled -password $PlainTxtPwd
+	Note: Restart the system after changing tpmsecurity.
+
+	-- Set-Item DellSmbios:\TPMSecurity\TpmActivation Enabled -password $PlainTxtPwd
+	Note - To activate the TpmActivation , Admin password must be installed and 
+		  tpmsecurity should be enabled.
+
+	
+SEE ALSO	
+	http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-Command-powershell-provider
+	
+
+

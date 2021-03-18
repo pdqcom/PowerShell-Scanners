@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.2.152.0" MinimumVersion="4.0">
+  <Collection>
+    <ReportDefinition name="Definition">
+      <RootFilter name="Filter">
+        <Comparison>All</Comparison>
+        <Filters type="list">
+          <ValueFilter>
+            <Table>Computer</Table>
+            <Column>NeverScanned</Column>
+            <Comparison>!IsTrue</Comparison>
+          </ValueFilter>
+        </Filters>
+      </RootFilter>
+      <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+      <Columns type="list">
+        <Column>
+          <Column>ComputerId</Column>
+          <Summary></Summary>
+          <Table>Computer</Table>
+          <Title></Title>
+        </Column>
+      </Columns>
+    </ReportDefinition>
+    <IsDrilldown value="false" />
+    <ImportedPath></ImportedPath>
+    <TypeName>DynamicCollection</TypeName>
+    <Created>2020-11-30T09:11:44.0000000-05:00</Created>
+    <Description></Description>
+    <Error></Error>
+    <Id value="1632" />
+    <LibraryCollectionId value="null" />
+    <IsEnabled value="true" />
+    <Modified>2020-11-30T09:12:09.0000000-05:00</Modified>
+    <Name>PowerShell Modules</Name>
+    <ParentId value="null" />
+    <Path>PowerShell Modules</Path>
+    <Type>DynamicCollection</Type>
+    <Children type="list">
+      <Collection>
+        <ReportDefinition name="Definition">
+          <RootFilter name="Filter">
+            <Comparison>All</Comparison>
+            <Filters type="list">
+              <ValueFilter>
+                <Table>Computer</Table>
+                <Column>ADPath</Column>
+                <Comparison>!Contains</Comparison>
+                <Value>Server</Value>
+              </ValueFilter>
+              <GroupFilter>
+                <Comparison>Any</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>PSWindowsUpdate</Value>
+                  </ValueFilter>
+                </Filters>
+              </GroupFilter>
+              <ValueFilter>
+                <Table>Computer</Table>
+                <Column>NeverScanned</Column>
+                <Comparison>!IsTrue</Comparison>
+              </ValueFilter>
+            </Filters>
+          </RootFilter>
+          <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+          <Columns type="list">
+            <Column>
+              <Column>ComputerId</Column>
+              <Summary></Summary>
+              <Table>Computer</Table>
+              <Title></Title>
+            </Column>
+          </Columns>
+        </ReportDefinition>
+        <IsDrilldown value="false" />
+        <ImportedPath></ImportedPath>
+        <TypeName>DynamicCollection</TypeName>
+        <Created>2018-12-12T15:21:47.0000000-05:00</Created>
+        <Description></Description>
+        <Error></Error>
+        <Id value="1591" />
+        <LibraryCollectionId value="null" />
+        <IsEnabled value="true" />
+        <Modified>2020-11-30T09:12:32.0000000-05:00</Modified>
+        <Name>PSWindowsUpdate Module</Name>
+        <ParentId value="1632" />
+        <Path>PowerShell Modules\PSWindowsUpdate Module</Path>
+        <Type>DynamicCollection</Type>
+        <Children type="list">
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>NotAny</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>PSWindowsUpdate</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>Computer</Table>
+                    <Column>ADPath</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>Server</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>Computer</Table>
+                    <Column>ADPath</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>Virtual</Value>
+                  </ValueFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="false" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2018-12-12T15:22:26.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1592" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2018-12-12T15:22:26.0000000-05:00</Modified>
+            <Name>PSWindowsUpdate Module (Not Installed)</Name>
+            <ParentId value="1591" />
+            <Path>PowerShell Modules\PSWindowsUpdate Module\PSWindowsUpdate Module (Not Installed)</Path>
+            <Type>DynamicCollection</Type>
+            <Children type="list" />
+          </Collection>
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>PSWindowsUpdate</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>Name</Column>
+                    <Comparison>!VersionLowerThan</Comparison>
+                    <Value>@(ModVerPSWindowsUpdate)</Value>
+                  </ValueFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="false" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2018-12-12T15:24:38.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1593" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2018-12-12T15:27:35.0000000-05:00</Modified>
+            <Name>PSWindowsUpdate Module (Latest)</Name>
+            <ParentId value="1591" />
+            <Path>PowerShell Modules\PSWindowsUpdate Module\PSWindowsUpdate Module (Latest)</Path>
+            <Type>DynamicCollection</Type>
+            <CustomVariables type="list">
+              <CustomVariable>
+                <Name>ModVerPSWindowsUpdate</Name>
+                <Value>2.1.0.1</Value>
+              </CustomVariable>
+            </CustomVariables>
+            <Children type="list" />
+          </Collection>
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>PSWindowsUpdate</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>Name</Column>
+                    <Comparison>VersionLowerThan</Comparison>
+                    <Value>@(ModVerPSWindowsUpdate)</Value>
+                  </ValueFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="false" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2018-12-12T15:29:13.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1594" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2018-12-12T15:29:32.0000000-05:00</Modified>
+            <Name>PSWindowsUpdate Module (Old)</Name>
+            <ParentId value="1591" />
+            <Path>PowerShell Modules\PSWindowsUpdate Module\PSWindowsUpdate Module (Old)</Path>
+            <Type>DynamicCollection</Type>
+            <CustomVariables type="list">
+              <CustomVariable>
+                <Name>ModVerPSWindowsUpdate</Name>
+                <Value>2.1.0.1</Value>
+              </CustomVariable>
+            </CustomVariables>
+            <Children type="list" />
+          </Collection>
+        </Children>
+      </Collection>
+      <Collection>
+        <ReportDefinition name="Definition">
+          <RootFilter name="Filter">
+            <Comparison>All</Comparison>
+            <Filters type="list">
+              <ValueFilter>
+                <Table>Computer</Table>
+                <Column>ADPath</Column>
+                <Comparison>!Contains</Comparison>
+                <Value>Server</Value>
+              </ValueFilter>
+              <ValueFilter>
+                <Table>Computer</Table>
+                <Column>Manufacturer</Column>
+                <Comparison>Contains</Comparison>
+                <Value>Dell</Value>
+              </ValueFilter>
+              <GroupFilter>
+                <Comparison>Any</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>DellBiosProvider</Value>
+                  </ValueFilter>
+                </Filters>
+              </GroupFilter>
+              <ValueFilter>
+                <Table>Computer</Table>
+                <Column>NeverScanned</Column>
+                <Comparison>!IsTrue</Comparison>
+              </ValueFilter>
+            </Filters>
+          </RootFilter>
+          <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+          <Columns type="list">
+            <Column>
+              <Column>ComputerId</Column>
+              <Summary></Summary>
+              <Table>Computer</Table>
+              <Title></Title>
+            </Column>
+          </Columns>
+        </ReportDefinition>
+        <IsDrilldown value="true" />
+        <ImportedPath></ImportedPath>
+        <TypeName>DynamicCollection</TypeName>
+        <Created>2020-11-28T12:57:31.0000000-05:00</Created>
+        <Description></Description>
+        <Error></Error>
+        <Id value="1623" />
+        <LibraryCollectionId value="null" />
+        <IsEnabled value="true" />
+        <Modified>2020-11-30T09:12:30.0000000-05:00</Modified>
+        <Name>Dell BIOS Provider</Name>
+        <ParentId value="1632" />
+        <Path>PowerShell Modules\Dell BIOS Provider</Path>
+        <Type>DynamicCollection</Type>
+        <Children type="list">
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>Computer</Table>
+                    <Column>Manufacturer</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>Dell</Value>
+                  </ValueFilter>
+                  <GroupFilter>
+                    <Comparison>NotAny</Comparison>
+                    <Filters type="list">
+                      <ValueFilter>
+                        <Table>File</Table>
+                        <TableTitle>Files &amp; Directories</TableTitle>
+                        <Column>PathName</Column>
+                        <Comparison>Contains</Comparison>
+                        <Value>DellBiosProvider</Value>
+                      </ValueFilter>
+                      <ValueFilter>
+                        <Table>Computer</Table>
+                        <Column>ADPath</Column>
+                        <Comparison>Contains</Comparison>
+                        <Value>Virtual</Value>
+                      </ValueFilter>
+                      <ValueFilter>
+                        <Table>Computer</Table>
+                        <Column>ADPath</Column>
+                        <Comparison>Contains</Comparison>
+                        <Value>Server</Value>
+                      </ValueFilter>
+                    </Filters>
+                  </GroupFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="false" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2020-11-28T12:57:32.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1624" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2020-11-28T13:49:46.0000000-05:00</Modified>
+            <Name>DellBiosProvider Module (Not Installed)</Name>
+            <ParentId value="1623" />
+            <Path>PowerShell Modules\Dell BIOS Provider\DellBiosProvider Module (Not Installed)</Path>
+            <Type>DynamicCollection</Type>
+            <Children type="list" />
+          </Collection>
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>DellBiosProvider</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>Name</Column>
+                    <Comparison>!VersionLowerThan</Comparison>
+                    <Value>2.3.1</Value>
+                  </ValueFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="true" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2020-11-28T12:57:32.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1625" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2020-11-28T13:47:15.0000000-05:00</Modified>
+            <Name>DellBiosProvider Module (Latest)</Name>
+            <ParentId value="1623" />
+            <Path>PowerShell Modules\Dell BIOS Provider\DellBiosProvider Module (Latest)</Path>
+            <Type>DynamicCollection</Type>
+            <Children type="list" />
+          </Collection>
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>PathName</Column>
+                    <Comparison>Contains</Comparison>
+                    <Value>DellBiosProvider</Value>
+                  </ValueFilter>
+                  <ValueFilter>
+                    <Table>File</Table>
+                    <TableTitle>Files &amp; Directories</TableTitle>
+                    <Column>Name</Column>
+                    <Comparison>VersionLowerThan</Comparison>
+                    <Value>2.3.1</Value>
+                  </ValueFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="true" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2020-11-28T12:57:32.0000000-05:00</Created>
+            <Description></Description>
+            <Error></Error>
+            <Id value="1626" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2020-11-28T13:40:40.0000000-05:00</Modified>
+            <Name>DellBiosProvider Module (Old)</Name>
+            <ParentId value="1623" />
+            <Path>PowerShell Modules\Dell BIOS Provider\DellBiosProvider Module (Old)</Path>
+            <Type>DynamicCollection</Type>
+            <Children type="list" />
+          </Collection>
+          <Collection>
+            <ReportDefinition name="Definition">
+              <RootFilter name="Filter">
+                <Comparison>All</Comparison>
+                <Filters type="list">
+                  <GroupFilter>
+                    <Comparison>NotAll</Comparison>
+                    <Filters type="list">
+                      <ValueFilter>
+                        <Table>Application</Table>
+                        <Column>Name</Column>
+                        <Comparison>Regex</Comparison>
+                        <Value>$(RTNameMSCPPRegEx)</Value>
+                      </ValueFilter>
+                      <ValueFilter>
+                        <Table>Application</Table>
+                        <Column>Name</Column>
+                        <Comparison>Contains</Comparison>
+                        <Value>x64</Value>
+                      </ValueFilter>
+                      <ValueFilter>
+                        <Table>Application</Table>
+                        <Column>Version</Column>
+                        <Comparison>StartsWith</Comparison>
+                        <Value>$(RTVerMSCPP2015-2019SW)</Value>
+                      </ValueFilter>
+                    </Filters>
+                  </GroupFilter>
+                  <GroupFilter>
+                    <Comparison>All</Comparison>
+                    <Filters type="list">
+                      <ValueFilter>
+                        <Table>Computer</Table>
+                        <Column>OSName</Column>
+                        <Comparison>!Contains</Comparison>
+                        <Value>Server</Value>
+                      </ValueFilter>
+                      <ValueFilter>
+                        <Table>Computer</Table>
+                        <Column>NeverScanned</Column>
+                        <Comparison>!IsTrue</Comparison>
+                      </ValueFilter>
+                    </Filters>
+                  </GroupFilter>
+                </Filters>
+              </RootFilter>
+              <ReportDefinitionTypeName>BasicReportDefinition</ReportDefinitionTypeName>
+              <Columns type="list">
+                <Column>
+                  <Column>ComputerId</Column>
+                  <Summary></Summary>
+                  <Table>Computer</Table>
+                  <Title></Title>
+                </Column>
+              </Columns>
+            </ReportDefinition>
+            <IsDrilldown value="true" />
+            <ImportedPath></ImportedPath>
+            <TypeName>DynamicCollection</TypeName>
+            <Created>2020-11-30T09:13:35.0000000-05:00</Created>
+            <Description>Workstations missing Visual C++ 2015-2019 64-bit</Description>
+            <Error></Error>
+            <Id value="1633" />
+            <LibraryCollectionId value="null" />
+            <IsEnabled value="true" />
+            <Modified>2020-11-30T09:15:17.0000000-05:00</Modified>
+            <Name>Microsoft Visual C++ 2015-2019 64-bit Runtime (Not Installed - Workstations)</Name>
+            <ParentId value="1623" />
+            <Path>PowerShell Modules\Dell BIOS Provider\Microsoft Visual C++ 2015-2019 64-bit Runtime (Not Installed - Workstations)</Path>
+            <Type>DynamicCollection</Type>
+            <Children type="list" />
+          </Collection>
+        </Children>
+      </Collection>
+    </Children>
+  </Collection>
+</AdminArsenal.Export>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.2.152.0" MinimumVersion="14.0">
+  <ScanProfile>
+    <Collections type="list">
+      <ScanProfileCollection>
+        <CollectionId value="1207" />
+        <ScanProfileId value="null" />
+      </ScanProfileCollection>
+    </Collections>
+    <Scanners type="list">
+      <Scanner>
+        <ExcludePatterns type="list" />
+        <FileScanType>Directory</FileScanType>
+        <IncludePatterns type="list">
+          <item>%SYSTEMDRIVE%\Program Files*\WindowsPowerShell\Modules\*\</item>
+          <item>%SYSTEMDRIVE%\Program Files*\PowerShell\7\Modules\*\</item>
+          <item>%SYSTEMDRIVE%\Users\**\Work Folders\Documents\WindowsPowerShell\Modules\*\</item>
+          <item>%SYSTEMDRIVE%\Users\**\Work Folders\Documents\PowerShell\Modules\*\</item>
+        </IncludePatterns>
+        <DateCreated>2018-12-12T15:14:31.0000000-05:00</DateCreated>
+        <DateModified>2020-11-22T17:27:00.0000000-05:00</DateModified>
+        <ExcludePatternText></ExcludePatternText>
+        <IncludePatternText>%SYSTEMDRIVE%\Program Files*\WindowsPowerShell\Modules\*\
+%SYSTEMDRIVE%\Program Files*\PowerShell\7\Modules\*\
+%SYSTEMDRIVE%\Users\**\Work Folders\Documents\WindowsPowerShell\Modules\*\
+%SYSTEMDRIVE%\Users\**\Work Folders\Documents\PowerShell\Modules\*\</IncludePatternText>
+        <RowLimit value="2500" />
+        <TypeName>Files</TypeName>
+        <SourceScannerId value="170" />
+      </Scanner>
+    </Scanners>
+    <Description></Description>
+    <ScanProfileId value="62" />
+    <Name>PowerShell Modules</Name>
+    <ScanAs>LocalSystem</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list">
+        <ScheduleTrigger>
+          <ScanAge>10.00:30:00</ScanAge>
+          <TimeOfDayIsEnabled value="false" />
+          <Description></Description>
+          <EndDateTime>2020-11-29T00:00:00.0000000-05:00</EndDateTime>
+          <EndDateTimeIsEnabled value="false" />
+          <IsEnabled value="false" />
+          <StartDateTime>2020-11-22T00:00:00.0000000-05:00</StartDateTime>
+          <EnableTriggerStartTime>08:00:00</EnableTriggerStartTime>
+          <EnableTriggerEndTime>17:00:00</EnableTriggerEndTime>
+          <TriggerTimeFrameIsEnabled value="false" />
+          <TriggerType>Scan Age</TriggerType>
+        </ScheduleTrigger>
+      </Triggers>
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

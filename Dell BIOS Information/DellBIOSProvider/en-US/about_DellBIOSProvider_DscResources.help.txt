@@ -1,0 +1,106 @@
+TOPIC
+	DellBIOSProvider DSC Resources
+	
+SHORT DESCRIPTION
+	Overview of DSC resources found in the DellBIOSProvider module
+    
+LONG DESCRIPTION
+	NOTE: As of version 2.3.0 of the DellBIOSProvider, there are 22 categories of DSC resources.
+		  
+    The DellBIOSProvider module contains the following Desired State Configuration (DSC) resources:
+		- DCPP_AdvancedBootOptions
+		- DCPP_AdvancedConfigurations
+		- DCPP_BIOSSetupAdvancedMode
+		- DCPP_BootSequence
+		- DCPP_IntelSoftwareGuardExtensions
+		- DCPP_Maintenance
+		- DCPP_Manageability
+		- DCPP_MiscellaneousDevices
+		- DCPP_POSTBehavior
+		- DCPP_Performance
+		- DCPP_PowerManagement
+		- DCPP_SecureBoot
+		- DCPP_Security
+		- DCPP_StealthModeControl
+		- DCPP_SupportAssistSystemResolution
+		- DCPP_SystemConfiguration
+		- DCPP_SystemLogs
+		- DCPP_TPMSecurity
+		- DCPP_USBConfiguration
+		- DCPP_Video
+		- DCPP_VirtualizationSupport
+		- DCPP_Wireless
+		
+	All the resources can be used to enforce the desired values for the BIOS attributes 
+	grouped under the PS path DellSmbios:\. They all share the following required parameter:
+	
+	- Category: A string describing the container or group for the SMBIOS attribute. 
+          
+	
+	The below sections gives an exemplary look at how a user can avail DCPP Resources for DSC.
+	In the below there are examples related to categories POSTBehavior and PowerManagement.
+	Other categories and their properties are closely allied in their implementation.
+	
+DCPP_POSTBehavior
+--------------------
+	This resource provides the ability to ensure the desired values for the BIOS attributes
+	grouped under the PS path DellSmbios:\<Category>\<Attribute> in DellBIOSProvider PowerShell provider. 
+    
+    
+SAMPLE ATTRIBUTES
+    PowerWarn 
+    Keypad 
+    PntDevice
+    Numlock
+    PostF2Key
+    PostF12Key
+	
+SYNTAX
+    POSTBehavior [string]  #resource name
+        {
+          Category = "POSTBehavior"
+          PowerWarn = [string]
+          Keypad = [string]
+          PostF2Key = [string]
+          Numlock = [string]
+         }
+    }
+	
+DCPP_PowerManagement
+---------------------
+	This resource provides the ability to ensure the desired values for the BIOS attributes
+	grouped under the PS path DellSmbios:\PowerManagement in DellBIOSProvider PowerShell provider. 
+	For PowerManagement category there is another mandatory property called BlockDefinition
+	that has to be unique for each resource block.
+	
+SAMPLE ATTRIBUTES
+	PeakShiftDayConfiguration
+	AdvancedBatteryChargeConfiguration
+	AutoOn
+	
+SYNTAX
+    PowerManagement [string]  #resource name
+        {
+          Category = "PowerManagement"
+          AutoOn = [string]
+		  BlockDefinition = "1"
+          AdvancedBatteryChargeConfiguration = "Tuesday"
+          BeginningOfDay = "10:30"
+          WorkPeriod = "15:45"
+        }
+		
+	PowerManagement [string]  #resource name
+        {
+          Category = "PowerManagement"
+		  BlockDefinition = "2"
+          PeakShiftDayConfiguration = "Sunday"
+          StartTime = "10:30"
+          EndTime = "12:30"
+          ChargeStartTime = "21:45"	
+		}  
+    }
+
+SEE ALSO	
+	http://en.community.dell.com/techcenter/enterprise-client/w/wiki/6901.dell-Command-powershell-provider
+
+

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.40.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-07-06T15:06:27.0000000-04:00</ModifiedDate>
+        <Name>Hosts File</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Hosts File\Hosts File.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+    </Scanners>
+    <Description>Audit hosts file entries</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - Hosts File</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

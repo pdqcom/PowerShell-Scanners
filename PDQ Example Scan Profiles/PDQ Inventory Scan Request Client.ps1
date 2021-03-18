@@ -1,0 +1,1 @@
+Invoke-RestMethod "http://$YourPDQServer:$Port/ScanRequest/$env:COMPUTERNAME

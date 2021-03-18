@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.0.0.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2020-04-02T15:26:01.0000000-06:00</ModifiedDate>
+        <Name>Get Windows Update History</Name>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get Windows Update History\Get Windows Update History.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles>C:\PowerShell-Scanners\PowerShell Scanners\_Shared\Install and Import Module.ps1</AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="49" />
+      </Scanner>
+    </Scanners>
+    <Description>Installs the PSWindowUpdate module to gather the complete history of Windows Update operations.</Description>
+    <ScanProfileId value="23" />
+    <Name>PS - Get Windows Update History</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

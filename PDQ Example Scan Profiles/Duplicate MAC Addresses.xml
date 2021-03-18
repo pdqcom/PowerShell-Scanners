@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.8.0" MinimumVersion="3.1">
+  <Report>
+    <ReportDefinition name="Definition">
+      <Sql>SELECT
+	  Computers.Name AS "Computer Name"
+	, MACDuplicates.MacAddress AS "MAC Address"
+FROM
+	-- https://stackoverflow.com/a/21980136
+	(
+		SELECT
+			Computers.MacAddress
+			, COUNT(*) AS "Count"
+		FROM
+			Computers
+		WHERE
+			&lt;ComputerFilter&gt;
+			AND
+			-- I don't know why "IS NOT NULL" didn't work here.
+			Computers.MacAddress &lt;&gt; ''
+		GROUP BY
+			Computers.MacAddress
+		HAVING
+			Count &gt; 1
+	) MACDuplicates
+INNER JOIN
+	Computers USING (MacAddress)
+WHERE
+	&lt;ComputerFilter&gt;
+ORDER BY
+	"Computer Name"</Sql>
+      <ReportDefinitionTypeName>SqlReportDefinition</ReportDefinitionTypeName>
+    </ReportDefinition>
+    <Created>2018-06-28T13:38:06.0000000-06:00</Created>
+    <Description></Description>
+    <IsNew value="false" />
+    <Modified>2020-07-02T10:43:09.0000000-06:00</Modified>
+    <Name>Duplicate MAC Addresses</Name>
+    <Path>Reports\Duplicate MAC Addresses</Path>
+    <ReportFolderId value="1" />
+    <TypeName>SqlReport</TypeName>
+    <ReportType>SqlReport</ReportType>
+  </Report>
+</AdminArsenal.Export>

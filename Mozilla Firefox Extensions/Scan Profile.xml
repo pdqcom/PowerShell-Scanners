@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.8.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate value="null" />
+        <Name>Mozilla Firefox Extensions</Name>
+        <UID>e0a50ca6d02046c58cd15f7bb955a93f</UID>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Mozilla Firefox Extensions\Mozilla Firefox Extensions.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="1000" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="84" />
+      </Scanner>
+    </Scanners>
+    <Description>Gathers data about the Firefox extensions each user has installed.</Description>
+    <ScanProfileId value="55" />
+    <Name>PS - Mozilla Firefox Extensions</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>

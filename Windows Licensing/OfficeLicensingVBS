@@ -1,0 +1,39 @@
+On Error Resume Next
+
+Const wbemFlagReturnImmediately = &h10
+Const wbemFlagForwardOnly = &h20
+
+Set wshNetwork = WScript.CreateObject("WScript.Network")
+strComputer = wshNetwork.ComputerName
+
+strQuery = "SELECT * FROM Win32_SoftwareFeature"
+
+WScript.StdOut.WriteLine ""
+WScript.StdOut.WriteLine "====================================="
+WScript.StdOut.WriteLine "COMPUTER : " & strComputer
+WScript.StdOut.WriteLine "CLASS    : ROOT\CIMV2:Win32_SoftwareFeature"
+WScript.StdOut.WriteLine "QUERY    : " & strQuery
+WScript.StdOut.WriteLine "====================================="
+WScript.StdOut.WriteLine ""
+
+Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\ROOT\CIMV2")
+Set colItems = objWMIService.ExecQuery(strQuery, "WQL", wbemFlagReturnImmediately + wbemFlagForwardOnly)
+
+For Each objItem in colItems
+
+    WScript.StdOut.WriteLine "Accesses: " & objItem.Accesses
+    WScript.StdOut.WriteLine "Attributes: " & objItem.Attributes
+    WScript.StdOut.WriteLine "Caption: " & objItem.Caption
+    WScript.StdOut.WriteLine "Description: " & objItem.Description
+    WScript.StdOut.WriteLine "IdentifyingNumber: " & objItem.IdentifyingNumber
+    WScript.StdOut.WriteLine "InstallDate: " & objItem.InstallDate
+    WScript.StdOut.WriteLine "InstallState: " & objItem.InstallState
+    WScript.StdOut.WriteLine "LastUse: " & objItem.LastUse
+    WScript.StdOut.WriteLine "Name: " & objItem.Name
+    WScript.StdOut.WriteLine "ProductName: " & objItem.ProductName
+    WScript.StdOut.WriteLine "Status: " & objItem.Status
+    WScript.StdOut.WriteLine "Vendor: " & objItem.Vendor
+    WScript.StdOut.WriteLine "Version: " & objItem.Version
+    WScript.StdOut.WriteLine ""
+
+Next
