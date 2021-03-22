@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.9.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-03-22T03:47:39.0000000-04:00</ModifiedDate>
+        <Name>Unsigned Drivers</Name>
+        <UID>cd1d922375974ae5afcc4b870153d422</UID>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Unsigned Drivers\Unsigned Drivers.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="79" />
+      </Scanner>
+    </Scanners>
+    <Description>Grabs information about unsigned drivers using driverquery.exe</Description>
+    <ScanProfileId value="31" />
+    <Name>PS - Unsigned Drivers</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
