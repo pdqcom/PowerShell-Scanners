@@ -8,7 +8,7 @@
         <Name>Neighbor Cache Information</Name>
         <UID>3f4493b1c3d8482d8b3e95b4cbbf7654</UID>
         <Script></Script>
-        <FileName>D:\PowerShell Scanners\Neighbor Cache Information\Neighbor Cache Information.ps1</FileName>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Neighbor Cache Information\Neighbor Cache Information.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
