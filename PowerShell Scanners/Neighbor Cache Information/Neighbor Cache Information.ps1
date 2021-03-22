@@ -1,10 +1,10 @@
 [CmdletBinding()]
 param(
-	# attempt NBTStat -A on each entry
-	[Boolean]$AddNbtName = $true,
+	# skip NBTStat -A on each entry
+	[Switch]$SkipNbtName,
 
-	# Add reverse lookup of each neighbor IP. PTR records must be enabled
-	[Boolean]$AddReverseLookup = $true
+	# skip reverse lookup of each neighbor IP
+	[Switch]$SkipReverseLookup
 )
 
 # Grab the ARP cache and filter out broadcast and multicast
@@ -17,7 +17,7 @@ $neighbors = Get-NetNeighbor | Where-Object {
 # Process each neighbor and add additional information
 foreach ($neighbor in $neighbors) {
 
-	if ($AddReverseLookup) {
+	if (-not $SkipReverseLookup) {
 
 		# Check DNS for the hostname associated with this IP
 		try {
@@ -31,7 +31,7 @@ foreach ($neighbor in $neighbors) {
 		}
 	}
 
-	if ($AddNbtName) {
+	if (-not $SkipNbtName) {
 
 		# Runs nbtstat, matches the output to regex, then grabs the match at index 1
 		$nbtstat = nbtstat -A $neighbor.IPAddress |
@@ -40,9 +40,20 @@ foreach ($neighbor in $neighbors) {
 
 	}
 
-	# Output some properties
-	$neighbor | Select-Object IfIndex, InterfaceAlias, IPAddress, State, Store, LinkLayerAddress,
-	@{ name = 'NetBiosName'; expression = { $nbtstat } },
-	@{ name = 'ReverseLookup'; expression = { $DNSName } }
+	# Grab standard properties
+	$output = $neighbor | Select-Object IfIndex, InterfaceAlias, IPAddress, State, Store, LinkLayerAddress
+
+	if (-not $SkipNbtName) {
+
+		$output = $output | Select-Object *, @{ name = 'NetBiosName'; expression = { $nbtstat } }
+
+	}
+
+	if (-not $SkipReverseLookup) {
+
+		$output = $output | Select-Object *, @{ name = 'ReverseLookup'; expression = { $DNSName } }
+
+	}
+	$output
 
 }
