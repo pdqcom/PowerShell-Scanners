@@ -1,1 +1,1 @@
-driverquery.exe /SI /FO CSV | ConvertFrom-Csv | Where-Object issigned -eq 'false'
+Get-CimInstance -Query 'SELECT * FROM Win32_PnpSignedDriver WHERE IsSigned != TRUE'
