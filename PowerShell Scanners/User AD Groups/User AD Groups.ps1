@@ -5,7 +5,13 @@ $ds = [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Find
 # Add in the desired memberof property to the query
 [void]$ds.PropertiesToLoad.Add('memberof')
 # We search by SID as while a SAM name is unique per domain it's not unique in a forest but the SID is unique in a forest
-$ds.Filter = 'objectsid={0}' -f $account.LastLoggedOnUserSID
+$lastuser = $account.LastLoggedOnUser -replace '\.\\', "\$env:COMPUTERNAME"
+$sidlookup = New-Object System.Security.Principal.NTAccount($lastuser)
+$sid = $sidlookup.Translate([System.Security.Principal.SecurityIdentifier]).Value
+if (-not $sid) {
+    throw "Unable to look up SID for: $lastuser"
+}
+$ds.Filter = "objectsid=$sid"
 $groups = $ds.FindOne().Properties['memberof']
 
 # Empty the properties to load from the last query, we don't need them anymore
