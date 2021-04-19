@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.30.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-04-19T03:32:41.1212621-06:00</ModifiedDate>
+        <Name>User Sessions</Name>
+        <UID>9bdef045bfc54ef3963c567629c3a953</UID>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\User Sessions\User Sessions.ps1</FileName>
+        <Parameters>-Lowercase</Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="55" />
+      </Scanner>
+    </Scanners>
+    <Description>Calculates how long users were logged in based on audit events.</Description>
+    <ScanProfileId value="29" />
+    <Name>PS - User Sessions</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
