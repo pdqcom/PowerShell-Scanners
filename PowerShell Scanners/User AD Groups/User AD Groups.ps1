@@ -1,5 +1,9 @@
 # Grab the current account from the registry
 $account = Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI'
+# Check LastLoggedOnUserSID
+if (-not $account.LastLoggedOnUserSID) {
+    throw "Unable to find LastLoggedOnUserSID."
+}
 # Grab a global catalog searcher as we have no guarantee in what domain in a forest the account is located
 $ds = [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().FindGlobalCatalog().GetDirectorySearcher()
 # Add in the desired memberof property to the query
