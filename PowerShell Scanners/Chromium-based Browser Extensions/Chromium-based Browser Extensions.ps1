@@ -4,35 +4,19 @@ param (
     [Switch]$EnablePermissions
 )
 
+$Template = @{
+    'AppData'      = 'Local'
+    'LastVersion'  = 'last_chrome_version'
+    # 'Default*' is intentionally a wildcard to prevent errors if it is missing.
+    # https://github.com/pdq/PowerShell-Scanners/pull/54#discussion_r626112183
+    'ProfileNames' = 'Default*', 'Profile*'
+    'Settings'     = 'settings'
+}
 $BrowserTable = @{
-    'Brave'          = @{
-        'AppData'      = 'Local'
-        'LastVersion'  = 'last_chrome_version'
-        'ProfileBase'  = 'BraveSoftware\Brave-Browser\User Data'
-        'ProfileNames' = 'Default', 'Profile*'
-        'Settings'     = 'settings'
-    }
-    'Chromium'       = @{
-        'AppData'      = 'Local'
-        'LastVersion'  = 'last_chrome_version'
-        'ProfileBase'  = 'Chromium\User Data'
-        'ProfileNames' = 'Default', 'Profile*'
-        'Settings'     = 'settings'
-    }
-    'Google Chrome'  = @{
-        'AppData'      = 'Local'
-        'LastVersion'  = 'last_chrome_version'
-        'ProfileBase'  = 'Google\Chrome\User Data'
-        'ProfileNames' = 'Default', 'Profile*'
-        'Settings'     = 'settings'
-    }
-    'Microsoft Edge' = @{
-        'AppData'      = 'Local'
-        'LastVersion'  = 'last_chrome_version'
-        'ProfileBase'  = 'Microsoft\Edge\User Data'
-        'ProfileNames' = 'Default', 'Profile*'
-        'Settings'     = 'settings'
-    }
+    'Brave'          = $Template.Clone()
+    'Chromium'       = $Template.Clone()
+    'Google Chrome'  = $Template.Clone()
+    'Microsoft Edge' = $Template.Clone()
     # Opera, why do you have to be so different? :'(
     'Opera'          = @{
         'AppData'      = 'Roaming'
@@ -41,14 +25,14 @@ $BrowserTable = @{
         'ProfileNames' = 'Opera*'
         'Settings'     = 'opsettings'
     }
-    'Vivaldi'        = @{
-        'AppData'      = 'Local'
-        'LastVersion'  = 'last_chrome_version'
-        'ProfileBase'  = 'Vivaldi\User Data'
-        'ProfileNames' = 'Default', 'Profile*'
-        'Settings'     = 'settings'
-    }
+    'Vivaldi'        = $Template.Clone()
 }
+$BrowserTable.Brave.ProfileBase = 'BraveSoftware\Brave-Browser\User Data'
+$BrowserTable.Chromium.ProfileBase = 'Chromium\User Data'
+$BrowserTable.'Google Chrome'.ProfileBase = 'Google\Chrome\User Data'
+$BrowserTable.'Microsoft Edge'.ProfileBase = 'Microsoft\Edge\User Data'
+$BrowserTable.Vivaldi.ProfileBase = 'Vivaldi\User Data'
+
 
 # Set up or check the list of browsers to scan.
 if ( -not $Browsers ) {
