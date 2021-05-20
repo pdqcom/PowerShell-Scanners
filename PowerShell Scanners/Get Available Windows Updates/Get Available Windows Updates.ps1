@@ -4,134 +4,95 @@
 # We have to assign it to a variable to get it to work properly in a pipeline.
 $GWU = Get-WindowsUpdate
 
-If ($null -ne $GWU) {
-    $GWU | ForEach-Object {
+<#
+Due to a bug in Inventory, we want this script to always emit an object, even if no updates were found.
 
-        [PSCustomObject]@{
-            "KB"                              = $_.KB
-            "Title"                           = $_.Title
-        
-            # Convert to bytes so it will display properly in Inventory
-            "Size"                            = [UInt64](Invoke-Expression $_.Size)
+When you set a variable equal to the output of a cmdlet and that cmdlet returns nothing, your variable
+will contain an empty PSCustomObject.
+ForEach-Object skips empty PSCustomObjects, but not objects that are truly empty (such as $null).
+Clear-Variable sets a variable back to a truly empty object, which causes this script to emit the
+PSCustomObject we build below with all of the values of its properties set to $null instead of skipping it.
 
-            "Status"                          = $_.Status
-            "Description"                     = $_.Description
-            "RebootRequired"                  = $_.RebootRequired
-        
-            # Indicates whether the update is flagged to be automatically selected by Windows Update.
-            "AutoSelectOnWebSites"            = $_.AutoSelectOnWebSites
+Here's some code you can use to test this yourself:
+$GWU = foreach ( $Thing in $null ) {}
+$GWU.PSObject
+$GWU | ForEach-Object { [PSCustomObject]@{ 'KB' = $_.KB } }
 
-            "CanRequireSource"                = $_.CanRequireSource
-            "Deadline"                        = $_.Deadline
-            "DeltaCompressedContentAvailable" = $_.DeltaCompressedContentAvailable
-            "DeltaCompressedContentPreferred" = $_.DeltaCompressedContentPreferred
-            "EulaAccepted"                    = $_.EulaAccepted
-            "IsBeta"                          = $_.IsBeta
-            "IsDownloaded"                    = $_.IsDownloaded
-            "IsHidden"                        = $_.IsHidden
-            "IsInstalled"                     = $_.IsInstalled
-            "IsMandatory"                     = $_.IsMandatory
-            "IsPresent"                       = $_.IsPresent
-            "IsUninstallable"                 = $_.IsUninstallable
-            "UninstallationNotes"             = $_.UninstallationNotes
-            "LastDeploymentChangeTime"        = $_.LastDeploymentChangeTime
+Clear-Variable 'GWU'
+$GWU.PSObject
+$GWU | ForEach-Object { [PSCustomObject]@{ 'KB' = $_.KB } }
+#>
+If ( $null -eq $GWU ) {
 
-            # Convert Decimal to 64-bit Integer
-            "MaxDownloadSize"                 = [UInt64]$_.MaxDownloadSize
-            "MinDownloadSize"                 = [UInt64]$_.MinDownloadSize
+    Clear-Variable 'GWU'
 
-            "MsrcSeverity"                    = $_.MsrcSeverity
-        
-            # MHz
-            "RecommendedCpuSpeed"             = $_.RecommendedCpuSpeed
-
-            # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/nf-wuapi-iupdate-get_recommendedharddiskspace
-            "RecommendedHardDiskSpace"        = [UInt64]($_.RecommendedHardDiskSpace * 1MB)
-
-            # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/nf-wuapi-iupdate-get_recommendedmemory
-            "RecommendedMemorySize"           = [UInt64]($_.RecommendedMemory * 1MB)
-
-            "ReleaseNotes"                    = $_.ReleaseNotes
-            "SupportUrl"                      = $_.SupportUrl
-
-            # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/ne-wuapi-updatetype
-            "Type"                            = switch ($_.Type) {
-                1 { "Software" }
-                2 { "Driver" }
-                Default { "Unknown" } 
-            }
-
-            "DeploymentAction"                = $_.DeploymentAction
-            "DownloadPriority"                = $_.DownloadPriority
-        
-            # Indicates whether an update can be discovered only by browsing through the available updates.
-            "BrowseOnly"                      = $_.BrowseOnly
-
-            "PerUser"                         = $_.PerUser
-            "AutoSelection"                   = $_.AutoSelection
-            "AutoDownload"                    = $_.AutoDownload
-        }
-    }
 }
-else {
+
+$GWU | ForEach-Object {
+
     [PSCustomObject]@{
-        "KB"                              = $null
-        "Title"                           = $null
-        
+        "KB"                              = $_.KB
+        "Title"                           = $_.Title
+    
         # Convert to bytes so it will display properly in Inventory
-        "Size"                            = $null
+        "Size"                            = [UInt64](Invoke-Expression $_.Size)
 
-        "Status"                          = $null
-        "Description"                     = $null
-        "RebootRequired"                  = $null
-        
+        "Status"                          = $_.Status
+        "Description"                     = $_.Description
+        "RebootRequired"                  = $_.RebootRequired
+    
         # Indicates whether the update is flagged to be automatically selected by Windows Update.
-        "AutoSelectOnWebSites"            = $null
+        "AutoSelectOnWebSites"            = $_.AutoSelectOnWebSites
 
-        "CanRequireSource"                = $null
-        "Deadline"                        = $null
-        "DeltaCompressedContentAvailable" = $null
-        "DeltaCompressedContentPreferred" = $null
-        "EulaAccepted"                    = $null
-        "IsBeta"                          = $null
-        "IsDownloaded"                    = $null
-        "IsHidden"                        = $null
-        "IsInstalled"                     = $null
-        "IsMandatory"                     = $null
-        "IsPresent"                       = $null
-        "IsUninstallable"                 = $null
-        "UninstallationNotes"             = $null
-        "LastDeploymentChangeTime"        = $null
+        "CanRequireSource"                = $_.CanRequireSource
+        "Deadline"                        = $_.Deadline
+        "DeltaCompressedContentAvailable" = $_.DeltaCompressedContentAvailable
+        "DeltaCompressedContentPreferred" = $_.DeltaCompressedContentPreferred
+        "EulaAccepted"                    = $_.EulaAccepted
+        "IsBeta"                          = $_.IsBeta
+        "IsDownloaded"                    = $_.IsDownloaded
+        "IsHidden"                        = $_.IsHidden
+        "IsInstalled"                     = $_.IsInstalled
+        "IsMandatory"                     = $_.IsMandatory
+        "IsPresent"                       = $_.IsPresent
+        "IsUninstallable"                 = $_.IsUninstallable
+        "UninstallationNotes"             = $_.UninstallationNotes
+        "LastDeploymentChangeTime"        = $_.LastDeploymentChangeTime
 
         # Convert Decimal to 64-bit Integer
-        "MaxDownloadSize"                 = $null
-        "MinDownloadSize"                 = $null
+        "MaxDownloadSize"                 = [UInt64]$_.MaxDownloadSize
+        "MinDownloadSize"                 = [UInt64]$_.MinDownloadSize
 
-        "MsrcSeverity"                    = $null
-        
+        "MsrcSeverity"                    = $_.MsrcSeverity
+    
         # MHz
-        "RecommendedCpuSpeed"             = $null
+        "RecommendedCpuSpeed"             = $_.RecommendedCpuSpeed
 
         # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/nf-wuapi-iupdate-get_recommendedharddiskspace
-        "RecommendedHardDiskSpace"        = $null
+        "RecommendedHardDiskSpace"        = [UInt64]($_.RecommendedHardDiskSpace * 1MB)
 
         # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/nf-wuapi-iupdate-get_recommendedmemory
-        "RecommendedMemorySize"           = $null
+        "RecommendedMemorySize"           = [UInt64]($_.RecommendedMemory * 1MB)
 
-        "ReleaseNotes"                    = $null
-        "SupportUrl"                      = $null
+        "ReleaseNotes"                    = $_.ReleaseNotes
+        "SupportUrl"                      = $_.SupportUrl
 
         # https://docs.microsoft.com/en-us/windows/win32/api/wuapi/ne-wuapi-updatetype
-        "Type"                            = $null
+        "Type"                            = switch ($_.Type) {
+            1 { "Software" }
+            2 { "Driver" }
+            Default { "Unknown" } 
+        }
 
-        "DeploymentAction"                = $null
-        "DownloadPriority"                = $null
-        
+        "DeploymentAction"                = $_.DeploymentAction
+        "DownloadPriority"                = $_.DownloadPriority
+    
         # Indicates whether an update can be discovered only by browsing through the available updates.
-        "BrowseOnly"                      = $null
+        "BrowseOnly"                      = $_.BrowseOnly
 
-        "PerUser"                         = $null
-        "AutoSelection"                   = $null
-        "AutoDownload"                    = $null
+        "PerUser"                         = $_.PerUser
+        "AutoSelection"                   = $_.AutoSelection
+        "AutoDownload"                    = $_.AutoDownload
     }
+
 }
