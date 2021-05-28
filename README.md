@@ -28,7 +28,7 @@ git pull
 An alternative download method if you can't/don't want to install Git.
 
 #### Setup
-1. Click the green "Clone or download" button toward the top-right of this page.
+1. Click the green "Code" button toward the top-right of this page.
 1. Click the "Download ZIP" link.
 1. Save the ZIP anywhere you want.
 1. Extract the contents of the ZIP to the root of your C drive. This is necessary because the PowerShell Scanner feature does not currently support variables.
