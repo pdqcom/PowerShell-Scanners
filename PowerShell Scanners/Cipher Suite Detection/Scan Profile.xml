@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.1.96.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2021-01-06T17:07:06.0000000-05:00</ModifiedDate>
+        <Name>detect_ciphers</Name>
+        <UID>b4d6c161208d4501955bb66b5641d436</UID>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Cipher Suite Detection\Cipher Suite Detection.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="51" />
+      </Scanner>
+    </Scanners>
+    <Description>Reveal Enabled Cipher Suites</Description>
+    <ScanProfileId value="17" />
+    <Name>Cipher Suite Detection</Name>
+    <ScanAs>Admin</ScanAs>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
