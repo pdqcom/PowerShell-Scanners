@@ -32,12 +32,6 @@ for ( $Count = 1; $Count -le $Entries; $Count ++ ) {
 
 # Define the CSV processing code that is unique to each script.
 $ScriptBlock = {
-    
-    # FileName can contain a comma, so we have to look for a comma that follows a double quote.
-    $FileName, $Remainder = $Reader.ReadLine() -split '",' -replace '"'
-
-    # Grab the size, then discard the rest.
-    [UInt64]$Size, $null = $Remainder -split ','
 
     # Is it larger than the smallest value in the List?
     if ( $Size -gt $global:LargestFiles[-1].Size ) {
