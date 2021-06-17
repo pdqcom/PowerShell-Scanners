@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
 	# Define the maximum number of runspaces. Default value is the number of processor son the machine + 1
-	[int]$MaxRunspaces = ( [int]$env:NUMBER_OF_PROCESSORS + 1),
+	[int]$MaxRunspaces = ( [int]$env:NUMBER_OF_PROCESSORS * 25),
 
 	# skip NBTStat -A on each entry
 	[Switch]$SkipNbtName,
