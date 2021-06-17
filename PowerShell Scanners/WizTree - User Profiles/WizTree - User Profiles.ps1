@@ -15,9 +15,6 @@ Invoke-WizTree -ArgumentList $ArgumentList
 # Define the CSV processing code that is unique to each script.
 $ScriptBlock = {
 
-    # Grab the first 2 fields, then discard the rest. Remove double quotes from FileName.
-    $FileName, [UInt64]$Size, $null = $Reader.ReadLine() -split ',' -replace '"'
-
     # Locate user profiles.
     if ( ($FileName -split '\\').Count -eq 4 ) {
 

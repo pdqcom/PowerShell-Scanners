@@ -71,7 +71,14 @@ function Read-WizTreeCsv {
 
         do {
     
+            # FileName can contain a comma, so we have to look for a comma that follows a double quote.
+            $FileName, $Remainder = $Reader.ReadLine() -split '",' -replace '"'
+
+            # Grab the size, then discard the rest.
+            [UInt64]$Size, $null = $Remainder -split ','
+
             #Initialize
+            
             $LineCount ++
     
         } until ( $Reader.EndOfStream )
