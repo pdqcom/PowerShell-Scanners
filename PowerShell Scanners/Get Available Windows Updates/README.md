@@ -5,7 +5,11 @@
 
 Installs the PSWindowsUpdate module, then runs Get-WindowsUpdate. This returns all updates that are currently available.
 
-WSUS switch added to work with all networks
+# Parameters
+
+## WSUS
+
+Specify to check WSUS for updates.
 
 # Author
 Colby Bouma
