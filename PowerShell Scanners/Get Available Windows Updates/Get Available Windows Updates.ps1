@@ -48,7 +48,7 @@ $GWU | ForEach-Object {
         "Title"                           = $_.Title
     
         # Convert to bytes so it will display properly in Inventory
-        "Size"                            = [UInt64](Invoke-Expression $_.Size)
+        "Size"                            = $Size
 
         "Status"                          = $_.Status
         "Description"                     = $_.Description
