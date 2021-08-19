@@ -6,9 +6,10 @@ Param(
 
 # The Collection object this cmdlet emits is really weird.
 # We have to assign it to a variable to get it to work properly in a pipeline.
-If($WSUS){
+If ($WSUS) {
     $GWU = Get-WindowsUpdate -WindowsUpdate
-}Else{
+}
+Else {
     $GWU = Get-WindowsUpdate 
 }
 
@@ -37,13 +38,21 @@ If ( $null -eq $GWU ) {
 }
 
 $GWU | ForEach-Object {
+    # This accounts for Updates that don't return a size
+    if ($_.Size) {
+        # Convert to bytes so it will display properly in Inventory
+        $Size = [UInt64](Invoke-Expression $_.Size)
+    }
+    else {
+        $Size = $Null
+    }
 
     [PSCustomObject]@{
         "KB"                              = $_.KB
         "Title"                           = $_.Title
     
         # Convert to bytes so it will display properly in Inventory
-        "Size"                            = [UInt64](Invoke-Expression $_.Size)
+        "Size"                            = $Size
 
         "Status"                          = $_.Status
         "Description"                     = $_.Description
@@ -102,5 +111,10 @@ $GWU | ForEach-Object {
         "AutoSelection"                   = $_.AutoSelection
         "AutoDownload"                    = $_.AutoDownload
     }
+
+}       "PerUser"                         = $_.PerUser
+"AutoSelection" = $_.AutoSelection
+"AutoDownload" = $_.AutoDownload
+}
 
 }
