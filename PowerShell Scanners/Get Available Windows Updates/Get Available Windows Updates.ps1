@@ -111,10 +111,4 @@ $GWU | ForEach-Object {
         "AutoSelection"                   = $_.AutoSelection
         "AutoDownload"                    = $_.AutoDownload
     }
-
-}       "PerUser"                         = $_.PerUser
-"AutoSelection" = $_.AutoSelection
-"AutoDownload" = $_.AutoDownload
-}
-
 }
