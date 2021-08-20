@@ -20,6 +20,13 @@ Each scanner gets its own folder. Give your folder a descriptive name. These are
 * README.md
   * Put in as much detail as you think is necessary. Look at the other scanners for ideas.
 
+You can use `New-Scanner.ps1` in the `PowerShell Scanners` folder to create these files for you.
+
+```PowerShell
+Set-Location 'C:\PowerShell-Scanners\PowerShell Scanners'
+.\New-Scanner.ps1 -Name 'Your desired name'
+```
+
 ## Bug Reports
 If you discover a bug, please [search existing issues](https://github.com/pdq/PowerShell-Scanners/search?type=Issues) to see if it has already been reported.
 

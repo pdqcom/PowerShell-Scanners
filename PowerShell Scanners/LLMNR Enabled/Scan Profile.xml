@@ -12,8 +12,8 @@
         <ModifiedDate>2020-12-23T16:47:01.0000000-05:00</ModifiedDate>
         <Name>LLMNR Enabled</Name>
         <UID>3cf796f8c56a445d86f8f0447675dbc2</UID>
-        <Script>C:\PowerShell-Scanners\PowerShell Scanners\LLMNR Enabled\LLMNR Enabled.ps1</Script>
-        <FileName></FileName>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\LLMNR Enabled\LLMNR Enabled.ps1</FileName>
         <Parameters></Parameters>
         <AdditionalFiles></AdditionalFiles>
         <RowLimit value="100" />
