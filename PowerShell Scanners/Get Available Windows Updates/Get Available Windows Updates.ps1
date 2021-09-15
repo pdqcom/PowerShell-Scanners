@@ -38,21 +38,14 @@ If ( $null -eq $GWU ) {
 }
 
 $GWU | ForEach-Object {
-    # This accounts for Updates that don't return a size
-    if ($_.Size) {
-        # Convert to bytes so it will display properly in Inventory
-        $Size = [UInt64](Invoke-Expression $_.Size)
-    }
-    else {
-        $Size = $Null
-    }
-
     [PSCustomObject]@{
         "KB"                              = $_.KB
         "Title"                           = $_.Title
     
-        # Convert to bytes so it will display properly in Inventory
-        "Size"                            = $Size
+        # Size is a string that represents a quantity of bytes as a numeric literal. For example, '321MB'.
+        # Converting it to an integer lets Inventory recognize and handle it properly.
+        # https://stackoverflow.com/a/41091259
+        "Size"                            = [UInt64]($_.Size / 1)
 
         "Status"                          = $_.Status
         "Description"                     = $_.Description
