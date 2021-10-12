@@ -1,8 +1,4 @@
 #reference https://community.spiceworks.com/scripts/show/3605-get-cellularadapter
-[CmdletBinding()]
-param (
-    #no Parameters
-)
 
 $cellularInfoprops = [ordered]@{}
 
@@ -10,7 +6,6 @@ $cellularInfoprops = [ordered]@{}
 $adapterInfo = netsh mbn show interfaces
 $stateInfo = netsh mbn show read interface=*
 
-# $cellPhoneInfo = New-Object CellularInfo
 
 foreach ($line in $adapterInfo) {
     $line = $line.Split(":").Trim()
