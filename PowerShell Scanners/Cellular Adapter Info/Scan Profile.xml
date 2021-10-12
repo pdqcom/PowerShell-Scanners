@@ -19,7 +19,7 @@
         <SourceScannerId value="90" />
       </Scanner>
     </Scanners>
-    <Description>REPLACE ME with a brief description.</Description>
+    <Description>Gets info on cellular network adapter if available</Description>
     <ScanProfileId value="33" />
     <Name>PS - Cellular Adapter Info</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">

@@ -1,15 +1,17 @@
-# Instructions
+# Cellular Network Adapter
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
-Describe what your script does, and share any important information about it.
+## Description
 
-# Requirements
-Optional section where you can list conditions that have to be met before running your script.
+Gets info on cellular network adapter if available
 
-# Parameters
-## Parameter name
-Describe what the parameter does.
+## Requirements
 
-# Author
-Your name (or username) here.
+Must be run as administrator
+
+## Author
+
+Sean Bolster
