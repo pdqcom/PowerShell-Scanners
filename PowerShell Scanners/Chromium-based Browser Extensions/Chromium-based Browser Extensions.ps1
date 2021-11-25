@@ -80,26 +80,30 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
         $Profiles = Get-Item -Path $Browser.ProfileNames
 
         Foreach ( $Profile in $Profiles ) {
+
+            $BrowserSettings = $null
         
             $SecurePreferencesFile = "$($Profile.FullName)\Secure Preferences"
+            $SecurePreferencesJson = $null
             if ( Test-Path $SecurePreferencesFile ) {
 
-                # Secure Preferences contains the vast majority of the information we want.
-                $SecurePreferencesText = Get-Content $SecurePreferencesFile
+                $SecurePreferencesText = Get-Content -Raw $SecurePreferencesFile
                 $SecurePreferencesJson = $JsonParser.DeserializeObject($SecurePreferencesText)
                 
-                # Make sure extension data is present.
-                if ( -not $SecurePreferencesJson.extensions."$($Browser.Settings)" ) {
+                # See if this file contains extension data.
+                if ( $SecurePreferencesJson.extensions."$($Browser.Settings)" ) {
 
+                    $BrowserSettings = $SecurePreferencesJson.extensions."$($Browser.Settings)".GetEnumerator()
+                    
+                } else {
+                    
                     Write-Verbose "Unable to find the extensions.$($Browser.Settings) node in: $SecurePreferencesFile"
-                    Continue
 
                 }
 
             } else {
 
                 Write-Verbose "Unable to find a 'Secure Preferences' file in: $($Profile.FullName)"
-                Continue
 
             }
 
@@ -108,17 +112,41 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
             if ( Test-Path $PreferencesFile ) {
 
                 # The only thing we care about in Preferences is the last browser version.
-                $PreferencesText = Get-Content $PreferencesFile
+                $PreferencesText = Get-Content -Raw $PreferencesFile
                 $PreferencesJson = $JsonParser.DeserializeObject($PreferencesText)
+
+                # Check for extension data if it wasn't in SecurePreferences.
+                if ( -not $BrowserSettings ) {
+
+                    if ( $PreferencesJson.extensions."$($Browser.Settings)" ) {
+
+                        Write-Verbose "Falling back to Preferences file for: $($Profile.FullName)"
+                        $BrowserSettings = $PreferencesJson.extensions."$($Browser.Settings)".GetEnumerator()
+                        
+                    } else {
+                        
+                        Write-Verbose "Unable to find the extensions.$($Browser.Settings) node in: $PreferencesFile"
+                        Write-Verbose "No extension data found for: $($Profile.FullName), moving to the next profile"
+                        Continue
+    
+                    }
+
+                }
 
             } else {
 
                 Write-Verbose "Unable to find a 'Preferences' file in: $($Profile.FullName)"
-                # It doesn't matter if this one is missing, so no need to skip.
 
             }
 
-            Foreach ( $Extension in $SecurePreferencesJson.extensions."$($Browser.Settings)".GetEnumerator() ) {
+            if ( -not $BrowserSettings ) {
+
+                Write-Verbose "No Preferences files found in: $($Profile.FullName), moving to the next profile"
+                Continue
+
+            }
+
+            Foreach ( $Extension in $BrowserSettings ) {
 
                 $ID = $Extension.Key
                 $Extension = $Extension.Value
