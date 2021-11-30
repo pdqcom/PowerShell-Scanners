@@ -59,6 +59,9 @@ if ( -not $Browsers ) {
 Add-Type -AssemblyName System.Web.Extensions
 $JsonParser = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
 
+$TimeZone = [TimeZoneInfo]::Local
+$Epoch = Get-Date -Date '1970-01-01 00:00:00'
+
 Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
 
     Foreach ( $BrowserName in $Browsers ) {
@@ -164,9 +167,8 @@ Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
                 $InstallTime = [Double]$Extension.install_time
                 # Divide by 1,000,000 because we are going to add seconds on to the base date.
                 $InstallTime = ($InstallTime - 11644473600000000) / 1000000
-                $UtcTime = Get-Date -Date '1970-01-01 00:00:00'
-                $UtcTime = $UtcTime.AddSeconds($InstallTime)
-                $InstallDate = [System.TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, (Get-TimeZone))
+                $UtcTime = $Epoch.AddSeconds($InstallTime)
+                $InstallDate = [TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, $TimeZone)
 
                 $Output = [Ordered]@{
                     'Browser'           = [String]  $BrowserName
