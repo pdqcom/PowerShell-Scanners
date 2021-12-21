@@ -31,6 +31,13 @@ if ( $Drives ) {
 
 } else {
 
-    Write-Verbose "No mapped drives were found"
+        # Writes null to all objects to Inventory updates
+        [PSCustomObject]@{
+            Username            = $null
+            DriveLetter         = $null
+            RemotePath          = $null
+            ConnectWithUsername = $null
+            SID                 = $null
+            }
 
 }
