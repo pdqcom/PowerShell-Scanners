@@ -38,6 +38,6 @@ if ( $Drives ) {
             RemotePath          = $null
             ConnectWithUsername = $null
             SID                 = $null
-            }
+        }
 
 }
