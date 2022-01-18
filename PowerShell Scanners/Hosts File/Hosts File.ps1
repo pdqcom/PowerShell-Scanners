@@ -7,6 +7,7 @@ param (
 $FileContents = (Get-Content "$env:SystemRoot\System32\drivers\etc\hosts").Trim() | Where-Object { $_ }
 
 $Count = 0
+$hostsinfile = $null
 Foreach ( $Line in $FileContents ) {
 
     $OriginalLine = $Line
@@ -79,13 +80,22 @@ Foreach ( $Line in $FileContents ) {
     # Output an object for each hostname.
     Foreach ( $PropertyNumber in 2..$PropertyCount ) {
 
-        [PSCustomObject]@{
+        $hostsinfile = [PSCustomObject]@{
             'HostName'  = $ParsedLine."P$PropertyNumber"
             'IPAddress' = $ParsedLine.P1
             'Enabled'   = $Enabled
             'Comments'  = $Comments
         }
-
+        $hostsinfile
     }
 
+}
+
+if ($hostsinfile -eq $null){
+    [PSCustomObject]@{
+        'HostName'  = $null
+        'IPAddress' = $null
+        'Enabled'   = $false
+        'Comments'  = $null
+    }
 }
