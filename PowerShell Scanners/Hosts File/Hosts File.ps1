@@ -91,7 +91,7 @@ Foreach ( $Line in $FileContents ) {
 
 }
 
-if ($hostsinfile -eq $null){
+if ($null -eq $hostsinfile){
     [PSCustomObject]@{
         'HostName'  = $null
         'IPAddress' = $null
