@@ -22,11 +22,11 @@ process {
 
     switch ($Enabled) {
         $true {
-            Get-NetFirewallRule -Enabled True | Select-Object $Properties
+            Get-NetFirewallRule -PolicyStore ActiveStore -PolicyStoreSourceType GroupPolicy,Local -Enabled True | Select-Object $Properties
         }
         $false {
             $Properties += @{Name = "Enabled"; Expression = { [System.Convert]::ToBoolean([String]$_.Enabled) } }
-            Get-NetFirewallRule | Select-Object $Properties
+            Get-NetFirewallRule -PolicyStore ActiveStore -PolicyStoreSourceType GroupPolicy,Local | Select-Object $Properties
         }
     }
 
