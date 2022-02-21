@@ -11,9 +11,9 @@ $ds = [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Find
 # We search by SID as while a SAM name is unique per domain it's not unique in a forest but the SID is unique in a forest
 $ds.Filter = 'objectsid={0}' -f $account.LastLoggedOnUserSID
 # certain users, like the .\Administrator account, are unable to perform an AD lookup so they will yield no results
-$groupMemberOf = $ds.FindOne()
-if ($groupMemberOf) {
-    $groups = $groupMemberOf.Properties['MemberOf']
+$dsResult = $ds.FindOne()
+if ($dsResult) {
+    $groups = $dsResult.Properties['MemberOf']
 }
 # Empty the properties to load from the last query, we don't need them anymore
 $ds.PropertiesToLoad.Clear()
