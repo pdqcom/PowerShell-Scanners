@@ -48,7 +48,7 @@ $output = [PSCustomObject]@{
 foreach ($Protocol in $Protocols.Keys) {
     $Status = $Protocols.$Protocol.Default
     if (Test-Path -Path $Protocols.$protocol.Path) {
-        $EnablePropertyValue = (Get-ItemProperty -Path $SSLv2Server | Select-Object -ExpandProperty Enabled -ErrorAction SilentlyContinue)
+        $EnablePropertyValue = (Get-ItemProperty -Path $Protocols.$protocol.Path | Select-Object -ExpandProperty Enabled -ErrorAction SilentlyContinue)
         if ($EnablePropertyValue -eq "0") {
             $Status = $false
         }
