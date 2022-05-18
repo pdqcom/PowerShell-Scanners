@@ -59,7 +59,7 @@ foreach ($Protocol in $Protocols.Keys) {
 
         if ($EnablePropertyValue -eq "1") {
             $Status = $true
-        } 
+        }
     }
 
     # Add this protocol name and the word Enabled along with the Status found to the output object
