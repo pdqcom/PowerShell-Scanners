@@ -24,6 +24,18 @@ $Protocols = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client'
         'Default' = $true
     }
+    'RC4 128/128'   = @{
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128'
+        'Default' = $true
+    }
+    'RC4 40/128'    = @{
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128'
+        'Default' = $true
+    }
+    'RC4 56/128'    = @{
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128'
+        'Default' = $true
+    }
 }
 
 # Create output object
