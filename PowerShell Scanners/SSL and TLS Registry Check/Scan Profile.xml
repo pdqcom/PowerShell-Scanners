@@ -5,7 +5,7 @@
     <Scanners type="list">
       <Scanner>
         <ModifiedDate>2021-01-06T17:07:06.0000000-05:00</ModifiedDate>
-        <Name>detect_ciphers</Name>
+        <Name>SSL_TLS</Name>
         <UID>b4d6c161208d4501955bb66b5641d436</UID>
         <Script></Script>
         <FileName>C:\powershell-scanners\PowerShell Scanners\SSL and TLS Registry Check\SSL and TLS Registry Check.ps1</FileName>
@@ -18,7 +18,7 @@
     </Scanners>
     <Description>Reports on the TLS and SSL registry values</Description>
     <ScanProfileId value="17" />
-    <Name>Cipher Suite Detection</Name>
+    <Name>SSL and TLS Check</Name>
     <ScanAs>Admin</ScanAs>
     <ScheduleTriggerSet name="ScheduleTriggers">
       <Triggers type="list" />
