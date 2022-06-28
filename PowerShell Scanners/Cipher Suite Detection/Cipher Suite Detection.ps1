@@ -118,11 +118,11 @@ if(Test-Path -Path $TLSv1Client){
 
 if(Test-Path -Path $TLSv1_1Server){
 
-    if((Get-ItemPropertyValue -Path $TLSv1_1ServerEnabled -Name Enabled -ErrorAction SilentlyContinue) -eq "0"){
+    if((Get-ItemPropertyValue -Path $TLSv1_1Server -Name Enabled -ErrorAction SilentlyContinue) -eq "0"){
         $TLSv1_1ServerEnabled = $false
     }
 
-    if((Get-ItemPropertyValue -Path $TLSv1_1ServerEnabled -Name Enabled -ErrorAction SilentlyContinue) -eq "1"){
+    if((Get-ItemPropertyValue -Path $TLSv1_1Server -Name Enabled -ErrorAction SilentlyContinue) -eq "1"){
         $TLSv1_1ServerEnabled = $true
     }
 
