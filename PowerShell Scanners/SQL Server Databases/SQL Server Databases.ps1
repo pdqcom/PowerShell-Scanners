@@ -16,8 +16,8 @@ $query = @"
 		
     FROM 
         master.sys.databases
-    WHERE 
-        name NOT IN ('master', 'model', 'msdb', 'tempdb')
+    WHERE
+        name NOT IN ('master','model','msdb','tempdb')
 
 "@
 
@@ -27,16 +27,17 @@ for($i = 2; $i -lt $dbs.Count - 2; $i++) {
     
     $tokens = $dbs[$i] -split "\|"
 
-    [PSCustomObject]@{
-        'Id' = [int]$tokens[0].Trim()
-        'Name' = $tokens[1].Trim()
-        'Status' = $tokens[2].Trim()
-        'Owner' = $tokens[3].Trim()
-        'CreateDate' = [DateTime]$tokens[4].Trim()
-        'CompatLevel' = [int]$tokens[5].Trim()
-        'Collation' = $tokens[6].Trim()
-        'RecoveryModel' = $tokens[7].Trim()
-        
-    } 
-}
+    if ($tokens.Count -eq 8) {
 
+        [PSCustomObject]@{
+            'Id' = [int]$tokens[0].Trim()
+            'Name' = $tokens[1].Trim()
+            'Status' = $tokens[2].Trim()
+            'Owner' = $tokens[3].Trim()
+            'CreateDate' = [DateTime]$tokens[4].Trim()
+            'CompatLevel' = [int]$tokens[5].Trim()
+            'Collation' = $tokens[6].Trim()
+            'RecoveryModel' = $tokens[7].Trim()
+        }
+    }
+}
