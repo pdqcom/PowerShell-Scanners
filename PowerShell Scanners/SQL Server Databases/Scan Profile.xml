@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.30.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2022-08-05T12:33:48.1552718+03:00</ModifiedDate>
+        <Name>SQL Server Databases</Name>
+        <UID>0b9ef7a45b12471f8ee709a4dd883a4c</UID>
+        <Script>
+        </Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\SQL Server Databases\SQL Server Databases.ps1</FileName>
+        <Parameters>
+        </Parameters>
+        <AdditionalFiles>
+        </AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+    </Scanners>
+    <Description>Lists all non-system databases for a particular SQL instance.</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - SQL Server Databases</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
