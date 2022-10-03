@@ -2,39 +2,47 @@
 $Protocols = @{
     'SSL2.0 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'SSL2.0 Client' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client'
-        'Default' = $true
+        'Default' = "False"
     }
     'SSL3.0 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'SSL3.0 Client' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client'
-        'Default' = $true
+        'Default' = "OS Default"
+    }
+    'TLS1.0 Server' = @{
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server'
+        'Default' = "True"
+    }
+    'TLS1.0 Client' = @{
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client'
+        'Default' = "True"
     }
     'TLS1.1 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'TLS1.1 Client' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'RC4 128/128'   = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'RC4 40/128'    = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128'
-        'Default' = $true
+        'Default' = "OS Default"
     }
     'RC4 56/128'    = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128'
-        'Default' = $true
+        'Default' = "OS Default"
     }
 }
 
@@ -45,20 +53,20 @@ $output = [PSCustomObject]@{
 
 # Loop over protocol keys
 foreach ($Protocol in $Protocols.Keys) {
-    # Set status of the protocol to the configured default. Windows by default has them enabled (for now)
     $Status = $Protocols.$Protocol.Default
 
     if (Test-Path -Path $Protocols.$protocol.Path) {
 
         # Get the property value of the registry path's Enabled key
+        # 4294967295 is the decimal equivalent of 0xffffffff. See https://www.nartac.com/Products/IISCrypto/FAQ/Why-does-iis-crypto-set-the-protocols-enabled-value-to-0xffffffff
         $EnablePropertyValue = (Get-ItemProperty -Path $Protocols.$protocol.Path | Select-Object -ExpandProperty Enabled -ErrorAction SilentlyContinue)
 
         if ($EnablePropertyValue -eq "0") {
-            $Status = $false
+            $Status = "False"
         }
 
-        if ($EnablePropertyValue -eq "1") {
-            $Status = $true
+        if (($EnablePropertyValue -eq "1") -or ($EnablePropertyValue -eq "4294967295")) {
+            $Status = "True"
         }
     }
 
