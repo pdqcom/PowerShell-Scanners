@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param (
     [String[]]$Browsers,
-    [Switch]$EnablePermissions
+    [Switch]$EnablePermissions,
+    [Switch]$OnlyCurrentUser
 )
 
 $Template = @{
@@ -62,7 +63,24 @@ $JsonParser = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSer
 $TimeZone = [TimeZoneInfo]::Local
 $Epoch = Get-Date -Date '1970-01-01 00:00:00'
 
-Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
+if ( $OnlyCurrentUser ) {
+
+    if ( (whoami) -eq 'NT AUTHORITY\SYSTEM' ) {
+
+        Write-Warning 'The current user is SYSTEM. This usually means no user is logged on to this computer.'
+        Exit
+
+    }
+    
+    $UserPaths = Get-Item '~'
+
+} else {
+
+    $UserPaths = Get-ChildItem -Directory -Path "$env:SystemDrive\Users"
+
+}
+
+Foreach ( $User in $UserPaths ) {
 
     Foreach ( $BrowserName in $Browsers ) {
 

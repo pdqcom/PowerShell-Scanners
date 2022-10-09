@@ -26,6 +26,11 @@ Example:
 ## EnablePermissions
 Enables the Permissions field. This field is disabled by default because it's a multi-line string that is quite ugly in Inventory.
 
+## OnlyCurrentUser
+Only returns extensions for the user the scan is running as. If no user is logged on, the result will be empty.
+
+IMPORTANT: Change the `Scan As` value to `Logged on User` in the Scan Profile!
+
 ## Verbose
 Adds additional information to the Output Log.
 
