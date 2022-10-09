@@ -13,6 +13,11 @@ Enables the Permissions field. I disabled this by default because it's a multi-l
 ## EnableDefaultExtensions
 Default extensions are discarded by default. This parameter allows you keep them.
 
+## OnlyCurrentUser
+Only returns extensions for the user the scan is running as. If no user is logged on, the result will be empty.
+
+IMPORTANT: Change the `Scan As` value to `Logged on User` in the Scan Profile!
+
 # Authors
 * Jerry Lord
 * Colby Bouma

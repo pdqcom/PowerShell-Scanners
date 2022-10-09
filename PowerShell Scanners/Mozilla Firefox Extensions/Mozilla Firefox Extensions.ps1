@@ -2,10 +2,28 @@
 [CmdletBinding()]
 param (
     [Switch]$EnablePermissions,
-    [Switch]$EnableDefaultExtensions
+    [Switch]$EnableDefaultExtensions,
+    [Switch]$OnlyCurrentUser
 )
 
-Foreach ( $User in (Get-ChildItem -Directory -Path "$env:SystemDrive\Users") ) {
+if ( $OnlyCurrentUser ) {
+
+    if ( (whoami) -eq 'NT AUTHORITY\SYSTEM' ) {
+
+        Write-Warning 'The current user is SYSTEM. This usually means no user is logged on to this computer.'
+        Exit
+
+    }
+    
+    $UserPaths = Get-Item '~'
+
+} else {
+
+    $UserPaths = Get-ChildItem -Directory -Path "$env:SystemDrive\Users"
+
+}
+
+Foreach ( $User in $UserPaths ) {
 
     # Get Profiles folder
     $ProfilesDir = $User.FullName + "\AppData\Roaming\Mozilla\Firefox\Profiles"
