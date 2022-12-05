@@ -13,7 +13,7 @@ $Protocols = @{
         'Default' = "OS Default"
     }
     'SSL3.0 Client' = @{
-        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client'
+        'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client'
         'Default' = "OS Default"
     }
     'TLS1.0 Server' = @{
