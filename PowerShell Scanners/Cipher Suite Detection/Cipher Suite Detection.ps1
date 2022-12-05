@@ -6,7 +6,7 @@ $Protocols = @{
     }
     'SSL2.0 Client' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client'
-        'Default' = "False"
+        'Default' = "Disabled"
     }
     'SSL3.0 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server'
@@ -18,11 +18,11 @@ $Protocols = @{
     }
     'TLS1.0 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server'
-        'Default' = "True"
+        'Default' = "Enabled"
     }
     'TLS1.0 Client' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client'
-        'Default' = "True"
+        'Default' = "Enabled"
     }
     'TLS1.1 Server' = @{
         'Path'    = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server'
@@ -62,11 +62,11 @@ foreach ($Protocol in $Protocols.Keys) {
         $EnablePropertyValue = (Get-ItemProperty -Path $Protocols.$protocol.Path | Select-Object -ExpandProperty Enabled -ErrorAction SilentlyContinue)
 
         if ($EnablePropertyValue -eq "0") {
-            $Status = "False"
+            $Status = "Disabled"
         }
 
         if (($EnablePropertyValue -eq "1") -or ($EnablePropertyValue -eq "4294967295")) {
-            $Status = "True"
+            $Status = "Enabled"
         }
     }
 
