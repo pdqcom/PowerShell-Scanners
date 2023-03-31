@@ -6,7 +6,7 @@ if (Get-CimInstance -ClassName Win32_ComputerSystem -Filter "Manufacturer LIKE '
     & '.\Install and Import Module.ps1' -ModuleName $ModuleName
     Get-ChildItem DellSmbios:\ | ForEach-Object {
         $Category = $_.Category
-        Get-ChildItem DellSmbios:\"$Category" | ForEach-Object {
+        Get-ChildItem DellSmbios:\"$Category" -ErrorAction SilentlyContinue | ForEach-Object {
             [PSCustomObject]@{
                 Category     = $Category
                 Attribute    = $_.Attribute
