@@ -108,7 +108,7 @@ Foreach ( $User in $UserPaths ) {
             $SecurePreferencesJson = $null
             if ( Test-Path $SecurePreferencesFile ) {
 
-                $SecurePreferencesText = Get-Content -Raw $SecurePreferencesFile
+                $SecurePreferencesText = Get-Content -Raw $SecurePreferencesFile -Encoding utf8
                 $SecurePreferencesJson = $JsonParser.DeserializeObject($SecurePreferencesText)
                 
                 # See if this file contains extension data.
@@ -133,7 +133,7 @@ Foreach ( $User in $UserPaths ) {
             if ( Test-Path $PreferencesFile ) {
 
                 # The only thing we care about in Preferences is the last browser version.
-                $PreferencesText = Get-Content -Raw $PreferencesFile
+                $PreferencesText = Get-Content -Raw $PreferencesFile -Encoding utf8
                 $PreferencesJson = $JsonParser.DeserializeObject($PreferencesText)
 
                 # Check for extension data if it wasn't in SecurePreferences.
