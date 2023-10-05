@@ -8,7 +8,7 @@ param (
 $UserArray = New-Object System.Collections.ArrayList
 
 # Query all logon events with id 4624 
-Get-EventLog -LogName "Security" -InstanceId 4624 -ErrorAction "SilentlyContinue" | ForEach-Object {
+Get-EventLog -LogName "Security" -newest 200 -InstanceId 4624 -ErrorAction "SilentlyContinue" | ForEach-Object {
 
     $EventMessage = $_
     $AccountName = $EventMessage.ReplacementStrings[5]
@@ -22,7 +22,7 @@ Get-EventLog -LogName "Security" -InstanceId 4624 -ErrorAction "SilentlyContinue
     }
 
     # Look for events that contain local or remote logon events, while ignoring Windows service accounts
-    if ( ( $LogonType -in "2", "10" ) -and ( $AccountName -notmatch "^(DWM|UMFD)-\d" ) ) {
+    if ( ( $LogonType -in "2", "10", "11" ) -and ( $AccountName -notmatch "^(DWM|UMFD)-\d" ) ) {
     
         # Skip duplicate names
         if ( $UserArray -notcontains $AccountName ) {
@@ -38,6 +38,9 @@ Get-EventLog -LogName "Security" -InstanceId 4624 -ErrorAction "SilentlyContinue
 
                 $LogonTypeName = "Remote"
 
+            } elseif ( $LogonType -eq "11" ) {
+                
+                $LogonTypeName = "Cached"
             }
 
             # Build an object containing the Username, Logon Type, and Last Logon time
