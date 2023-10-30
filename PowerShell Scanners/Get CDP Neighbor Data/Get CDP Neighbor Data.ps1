@@ -13,9 +13,9 @@ if($CDPPacket) {
     If($Results) {
         ForEach($Result in $Results){
             [PSCustomObject]@{
-                "Switch" = $Result.Device
-                "SwitchPort" = $Result.Port
-                "SwitchIP" = $Result.IPAddress[0]
+                "NeighborDeviceName" = $Result.Device
+                "NeighborDevicePort" = $Result.Port
+                "NeighborDeviceIP" = $Result.IPAddress[0]
                 "LocalInterface" = $Result.Interface
                 "VLAN" = $Result.VLAN
                 "AsOf" = Get-Date
@@ -23,9 +23,9 @@ if($CDPPacket) {
         }
     } else {
         [PSCustomObject]@{
-            "Switch" = "Parsing Error"
-            "SwitchPort" = "Parsing Error"
-            "SwitchIP" = "Parsing Error"
+            "NeighborDeviceName" = "Parsing Error"
+            "NeighborDevicePort" = "Parsing Error"
+            "NeighborDeviceIP" = "Parsing Error"
             "LocalInterface" = "Parsing Error"
             "VLAN" = "Parsing Error"
             "AsOf" = Get-Date
@@ -33,9 +33,9 @@ if($CDPPacket) {
     }
 } else {
     [PSCustomObject]@{
-        "Switch" = "No CDP Packet Received"
-        "SwitchPort" = "No CDP Packet Received"
-        "SwitchIP" = "No CDP Packet Received"
+        "NeighborDeviceName" = "No CDP Packet Received"
+        "NeighborDevicePort" = "No CDP Packet Received"
+        "NeighborDeviceIP" = "No CDP Packet Received"
         "LocalInterface" = "No CDP Packet Received"
         "VLAN" = "No CDP Packet Received"
         "AsOf" = Get-Date
