@@ -4,9 +4,9 @@ param (
 )
 Import-Module '.\PSDiscoveryProtocol.psm1'
 if($PacketWaitDuration){
-    $CDPPacket = Invoke-DiscoveryProtocolCapture -Type CDP -Duration $PacketWaitDuration    
+    $CDPPacket = Invoke-DiscoveryProtocolCapture -Type CDP -Duration $PacketWaitDuration -Force
 } else {
-    $CDPPacket = Invoke-DiscoveryProtocolCapture -Type CDP
+    $CDPPacket = Invoke-DiscoveryProtocolCapture -Type CDP -Force
 }
 if($CDPPacket) {
     $Results = Get-DiscoveryProtocolData -Packet $CDPPacket
