@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.30.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2023-10-30T09:27:40.0782623-05:00</ModifiedDate>
+        <Name>Get CDP Neighbor Data</Name>
+        <UID>1d0b907df486494d8a3c94115c721267</UID>
+        <Script>
+        </Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get CDP Neighbor Data\Get CDP Neighbor Data.ps1</FileName>
+        <Parameters>
+        </Parameters>
+        <AdditionalFiles>C:\PowerShell-Scanners\PowerShell Scanners\Get CDP Neighbor Data\PSDiscoveryProtocol.psm1</AdditionalFiles>
+        <RowLimit value="10" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+    </Scanners>
+    <Description>Collects CDP neighbor information (switch info if connected directly) as long as the device is wired and receiving CDP packets.</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - Get CDP Neighbor Data</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
