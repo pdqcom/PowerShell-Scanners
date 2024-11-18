@@ -24,7 +24,7 @@ You can use `New-Scanner.ps1` in the `PowerShell Scanners` folder to create thes
 
 ```PowerShell
 Set-Location 'C:\PowerShell-Scanners\PowerShell Scanners'
-.\New-Scanner.ps1 -Name 'Your desired name'
+.\New-Scanner.ps1 -Name 'Your desired name' -Description "Your desired brief description"
 ```
 
 ## Bug Reports
