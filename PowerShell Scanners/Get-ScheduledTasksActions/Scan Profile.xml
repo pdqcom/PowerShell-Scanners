@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.30.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2024-11-18T13:52:01.7672096+01:00</ModifiedDate>
+        <Name>Get-ScheduledTasksActions</Name>
+        <UID>4614b4ed4b734b14bb32b15df48937d4</UID>
+        <Script>
+        </Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Get-ScheduledTasksActions\Get-ScheduledTasksActions.ps1</FileName>
+        <Parameters>
+        </Parameters>
+        <AdditionalFiles>
+        </AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+    </Scanners>
+    <Description>REPLACE ME with a brief description.</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - Get-ScheduledTasksActions</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
