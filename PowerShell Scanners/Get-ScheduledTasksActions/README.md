@@ -2,14 +2,15 @@
 [How to use this repository](../../README.md)
 
 # Description
-Describe what your script does, and share any important information about it.
-
-# Requirements
-Optional section where you can list conditions that have to be met before running your script.
+Retrieve Scheduled Tasks including action(s). Tasks can be filtered by TaskName and TaskPath.
+Run `Get-Help Get-ScheduledTasksActions.ps1` for more information and examples. 
 
 # Parameters
-## Parameter name
-Describe what the parameter does.
+## TaskName
+Specifies an array of one or more names of a scheduled task. You can use "*" for a wildcard character query.
+
+## TaskPath
+Specifies an array of one or more paths for scheduled tasks in Task Scheduler namespace. You can use "*" for a wildcard character query. You can use \* for the root folder. To specify a full TaskPath you need to include the leading and trailing \.
 
 # Author
-Your name (or username) here.
+David Bekker

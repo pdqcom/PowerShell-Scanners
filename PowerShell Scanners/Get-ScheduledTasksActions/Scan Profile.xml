@@ -19,7 +19,7 @@
         <SourceScannerId value="90" />
       </Scanner>
     </Scanners>
-    <Description>REPLACE ME with a brief description.</Description>
+    <Description>Retrieve Scheduled Tasks including action(s)</Description>
     <ScanProfileId value="33" />
     <Name>PS - Get-ScheduledTasksActions</Name>
     <ScheduleTriggerSet name="ScheduleTriggers">
