@@ -1,4 +1,8 @@
-﻿$Batteries = (Get-WmiObject -Class "BatteryStatus" -Namespace "ROOT\WMI" -ErrorAction SilentlyContinue)
+﻿$culture = [System.Globalization.CultureInfo]::CurrentCulture.Clone()
+$culture.NumberFormat.NumberDecimalSeparator = "."
+[System.Threading.Thread]::CurrentThread.CurrentCulture = $culture
+
+$Batteries = (Get-WmiObject -Class "BatteryStatus" -Namespace "ROOT\WMI" -ErrorAction SilentlyContinue)
 $AllBatteryData = Get-WmiObject -Class "BatteryStaticData" -Namespace "ROOT\WMI"
 $AllCharges = (Get-WmiObject -Class "BatteryFullChargedCapacity" -Namespace "ROOT\WMI").FullChargedCapacity
 $BatteryIndex = 0
