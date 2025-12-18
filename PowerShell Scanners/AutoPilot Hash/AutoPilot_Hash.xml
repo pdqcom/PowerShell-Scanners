@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export>
+  <ScanProfile>
+    <Name>Hardware Hash</Name>
+    <Description>Harvests Windows Autopilot Hardware Hashes for Intune enrollment.</Description>
+    <Scanners>
+      <Scanner>
+        <Name>HardwareHash</Name>
+        <Type>PowerShell</Type>
+        <ScriptSource>File</ScriptSource>
+        <ScriptFile>Get-AutoPilotHash.ps1</ScriptFile>
+      </Scanner>
+    </Scanners>
+  </ScanProfile>
+</AdminArsenal.Export>
