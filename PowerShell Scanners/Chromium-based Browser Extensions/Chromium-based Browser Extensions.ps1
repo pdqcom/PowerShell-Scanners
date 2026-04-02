@@ -5,6 +5,33 @@ param (
     [Switch]$OnlyCurrentUser
 )
 
+function ConvertFrom-InstallTime {
+
+    [CmdletBinding()]
+    param (
+        $RawInstallTime
+    )
+
+    if ( $RawInstallTime ) {
+    
+        $TimeZone = [TimeZoneInfo]::Local
+        $Epoch = Get-Date -Date '1970-01-01 00:00:00'
+
+        # Convert install_time from Webkit format.
+        $InstallTime = [Double]$RawInstallTime
+
+        # Divide by 1,000,000 because we are going to add seconds on to the base date.
+        $InstallTime = ($InstallTime - 11644473600000000) / 1000000
+        $UtcTime = $Epoch.AddSeconds($InstallTime)
+
+        [TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, $TimeZone)
+
+    }
+
+}
+
+
+
 $Template = @{
     'AppData'      = 'Local'
     'LastVersion'  = 'last_chrome_version'
@@ -59,9 +86,6 @@ if ( -not $Browsers ) {
 # https://github.com/pdq/PowerShell-Scanners/issues/23
 Add-Type -AssemblyName System.Web.Extensions
 $JsonParser = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
-
-$TimeZone = [TimeZoneInfo]::Local
-$Epoch = Get-Date -Date '1970-01-01 00:00:00'
 
 if ( $OnlyCurrentUser ) {
 
@@ -181,24 +205,30 @@ Foreach ( $User in $UserPaths ) {
 
                 }
 
-                # Convert install_time from Webkit format.
-                $InstallTime = [Double]$Extension.install_time
-                # Divide by 1,000,000 because we are going to add seconds on to the base date.
-                $InstallTime = ($InstallTime - 11644473600000000) / 1000000
-                $UtcTime = $Epoch.AddSeconds($InstallTime)
-                $InstallDate = [TimeZoneInfo]::ConvertTimeFromUtc($UtcTime, $TimeZone)
+                # install_time got replaced by first_install_time at some point.
+                # https://github.com/pdqcom/PowerShell-Scanners/issues/119
+                if ( $Extension.first_install_time ) {
+
+                    $InstallDate = ConvertFrom-InstallTime $Extension.first_install_time
+
+                } else {
+
+                    $InstallDate = ConvertFrom-InstallTime $Extension.install_time
+
+                }
 
                 $Output = [Ordered]@{
-                    'Browser'           = [String]  $BrowserName
-                    'Name'              = [String]  $Name
+                    'Browser'           =           $BrowserName
+                    'Name'              =           $Name
                     'Enabled'           = [Bool]    $Extension.state
                     'Description'       = [String]  $Extension.manifest.description
                     'Extension Version' = [String]  $Extension.manifest.version
                     'Browser Version'   = [String]  $PreferencesJson.extensions."$($Browser.LastVersion)"
                     'Default Install'   = [Bool]    $Extension.was_installed_by_default
                     'OEM Install'       = [Bool]    $Extension.was_installed_by_oem
-                    'ID'                = [String]  $ID
-                    'Install Date'      = [DateTime]$InstallDate
+                    'ID'                =           $ID
+                    'Install Date'      =           $InstallDate
+                    'Last Update'       =           ConvertFrom-InstallTime $Extension.last_update_time
                     'User'              = [String]  $User.Name
                     'Profile'           = [String]  $Profile.Name
                 }
