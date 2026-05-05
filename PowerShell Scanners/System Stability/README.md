@@ -1,7 +1,10 @@
-# Instructions
+# System Stability
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
 Collects System Stability statistics from Win32_ReliabilityStabilityMetrics and returns:
 
@@ -11,13 +14,18 @@ Collects System Stability statistics from Win32_ReliabilityStabilityMetrics and 
 - The last generated Stability Index
 - Date and time of the last generated Stability Index
 
-# Requirements
+## Requirements
 
 Windows 7+
 
-# Parameters
+## Compatibility
 
-## Count
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Yes
+
+## Parameters
+
+### Count
 
 The number of System Stability Indexes to return.
 
@@ -25,6 +33,6 @@ Windows generates these hourly.
 
 The default is a four week rolling window (24 * 7 * 4)
 
-# Author
+## Author
 
 Ben Gibb

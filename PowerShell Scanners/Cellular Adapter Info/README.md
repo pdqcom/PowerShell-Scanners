@@ -1,4 +1,4 @@
-# Cellular Network Adapter
+# Cellular Adapter Info
 
 ## Instructions
 
@@ -11,6 +11,11 @@ Gets info on cellular network adapter if available
 ## Requirements
 
 Must be run as administrator
+
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Maybe
 
 ## Author
 

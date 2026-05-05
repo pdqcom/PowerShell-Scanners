@@ -1,8 +1,18 @@
-# Instructions
+# PowerShell Modules
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
+
 Returns a list of PowerShell modules installed to the computer.
 
-# Author
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Yes
+
+## Author
+
 Dakota Clark

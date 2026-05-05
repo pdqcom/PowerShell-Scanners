@@ -1,9 +1,18 @@
-# Instructions
+# Dell BIOS Information
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
 Uses DellBIOSProvider module to gather current BIOS settings. Script is not setup for passwords on BIOS.
 
-# Author
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: No
+
+## Author
+
 James Wood
