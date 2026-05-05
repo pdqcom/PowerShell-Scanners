@@ -1,28 +1,36 @@
-# Instructions
+# Important Events
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
 Returns the desired list of events from the event log
 
-# Parameters
+## Compatibility
 
-## Days
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Yes
 
-Number of days worth of entries to collect  
+## Parameters
+
+### Days
+
+Number of days worth of entries to collect
 Defaults to 28 (four weeks)
 
-## EventLimit
+### EventLimit
 
-Limit the total number of returned events  
+Limit the total number of returned events
 Defaults to 30 events
 
-## EventLog
+### EventLog
 
-Either "System", or "Application"  
+Either "System", or "Application"
 Defaults to "System"
 
-## EventLevel
+### EventLevel
 
 Sets the severity of events to collect. Accepts a list of integers.
 
@@ -35,31 +43,33 @@ Defaults to 1 (Critical)
 0 - Mistake
 Applications should not use this level, but it can happen.
 
-1 - Critical  
+1 - Critical
 An abnormal exit or termination event.
 
-2 - Error  
+2 - Error
 A severe error event.
 
-3 - Warning  
+3 - Warning
 A warning event such as an allocation failure.
 
-4 - Informational  
+4 - Informational
 A non-error event such as an entry or exit event.
 
 5 - Verbose
 A detailed trace event.
 
-# Notes
+## Notes
 
 I recommended setting up two instances of this:
 
-## Critical System Events
+### Critical System Events
+
 `-EventLog` System `-EventLevel` 1
 
-## Error Application Events
+### Error Application Events
+
 `-EventLog` Application `-EventLevel` 2
 
-# Author
+## Author
 
 Ben Gibb

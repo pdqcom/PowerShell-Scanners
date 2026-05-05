@@ -1,13 +1,22 @@
-# Instructions
+# BitLocker Information
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
-Runs `Get-BitLockerVolume` and returns BitLocker volumes and status. 
+Runs `Get-BitLockerVolume` and returns BitLocker volumes and status.
 
-# Requirements
+## Requirements
 
 * Windows 10/Server 2016 or higher
 
-# Author
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Yes
+
+## Author
+
 Andrew Baker

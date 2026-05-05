@@ -1,13 +1,22 @@
-# Instructions
+# IIS App Pools
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
-Runs `Get-IISAppPool` and returns app pool names and their status. 
+Runs `Get-IISAppPool` and returns app pool names and their status.
 
-# Requirements
+## Requirements
 
 * Internet Information Services (IIS)
 
-# Author
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: probably on your IIS servers
+
+## Author
+
 Bryan Mason

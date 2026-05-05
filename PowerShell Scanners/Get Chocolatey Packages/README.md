@@ -1,17 +1,26 @@
-# Instructions
+# Get Chocolatey Packages
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
 
 Queries a machine for Chocolatey Package information. If using FOSS choco, you get Name and Version, if licensed you get a full audit.
 
-# Requirements
+## Requirements
 
 A version of choco to be installed on the workstation/server
 
-# Parameters
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Maybe
+
+## Parameters
 
 None directly. Parameters are nested on the helper function, and are invoked appropriately depending on FOSS/licensed choco
 
-# Author
+## Author
+
 Stephen Valdinger

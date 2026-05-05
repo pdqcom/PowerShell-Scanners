@@ -1,7 +1,11 @@
-# Instructions
+# Chromium-based Browser Extensions
+
+## Instructions
+
 [How to use this repository](../../README.md)
 
-# Description
+## Description
+
 Returns a list of installed extensions for all Chromium-based browsers listed below by reading the Secure Preferences JSON file of each user, and all of their browser profiles.
 
 - Brave
@@ -15,25 +19,36 @@ If you would like a browser to be added to this list, please [open an issue](htt
 
 The core logic of this scanner is based on [this script by Jerry Lord](https://help.pdq.com/hc/en-us/community/posts/360050592031-chrome-extension-inventory)
 
-# Parameters
-## Browsers
+## Compatibility
+
+* **PDQ Inventory**: Yes
+* **PDQ Connect**: Yes
+
+## Parameters
+
+### Browsers
+
 An array of the browsers you would like to scan for. If this parameter is not specified, all browsers will be scanned.
 
 Example:
 
 `-Browsers 'Google Chrome', 'Microsoft Edge'`
 
-## EnablePermissions
+### EnablePermissions
+
 Enables the Permissions field. This field is disabled by default because it's a multi-line string that is quite ugly in Inventory.
 
-## OnlyCurrentUser
+### OnlyCurrentUser
+
 Only returns extensions for the user the scan is running as. If no user is logged on, the result will be empty.
 
 IMPORTANT: Change the `Scan As` value to `Logged on User` in the Scan Profile!
 
-## Verbose
+### Verbose
+
 Adds additional information to the Output Log.
 
-# Authors
+## Authors
+
 * Colby Bouma
 * Jerry Lord

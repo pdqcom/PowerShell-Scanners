@@ -1,33 +1,45 @@
-# Table of contents
-* [Downloading](#Downloading)
-  * [Git](#Git)
-  * [ZIP](#ZIP)
-* [Importing](#Importing)
-* [Contributing](#Contributing)
+# PowerShell Scanners
 
-# Downloading
-## Git
+## Table of Contents
+
+* [Downloading](#downloading)
+  * [Git](#git)
+  * [ZIP](#zip)
+* [Importing](#importing)
+* [Using in PDQ Connect](#using-in-pdq-connect)
+* [Contributing](#contributing)
+
+## Downloading
+
+### Git
+
 The best way to use this repository is with Git. It makes updating very easy and allows you to contribute your own PowerShell scanners or fixes.
 
 #### Setup
+
 1. Install Git. We have a package for this in [PDQ Deploy](https://www.pdq.com/pdq-deploy/)'s [Package Library](https://www.pdq.com/package-library/) ;)
-1. Clone this repository to the root of your C drive. This is necessary because the [PowerShell Scanner](https://link.pdq.com/docs-inventory?powershell-scanner.htm) feature does not currently support variables all will assume `C:\PowerShell-Scanners`.
+1. Clone this repository to the root of your C drive. This is necessary because the [PowerShell Scanner](https://link.pdq.com/docs-inventory?powershell-scanner.htm) feature does not currently support variables, and all paths assume `C:\PowerShell-Scanners`.
+
 ```PowerShell
 git clone https://github.com/pdq/PowerShell-Scanners.git C:\PowerShell-Scanners
 ```
 
 #### Updating
+
 1. Navigate to your clone of this repository.
 1. Run `git pull`.
+
 ```PowerShell
 cd C:\PowerShell-Scanners
 git pull
 ```
 
-## ZIP
+### ZIP
+
 An alternative download method if you can't/don't want to install Git.
 
 #### Setup
+
 1. Click the green "Code" button toward the top-right of this page.
 1. Click the "Download ZIP" link.
 1. Save the ZIP anywhere you want.
@@ -35,19 +47,33 @@ An alternative download method if you can't/don't want to install Git.
 1. Rename `PowerShell-Scanners-master` to `PowerShell-Scanners`.
 
 #### Updating
+
 1. Delete `C:\PowerShell-Scanners` (as long as you haven't edited anything!).
 1. Follow the Setup instructions again.
 
-# Importing
+## Importing
+
 Now that you have this repository downloaded, it's time to import the PowerShell Scanner profile(s) that you want!
 
 1. Open [PDQ Inventory](https://www.pdq.com/pdq-inventory/) (version 19.0.40.0 or later).
-1. Go to File --> Import.
+1. Go to `File > Import`.
 1. Navigate to the folder of the PowerShell Scanner you want, such as `C:\PowerShell-Scanners\PowerShell Scanners\Mapped Drives`.
 1. Click on `Scan Profile.xml`.
 1. Click the Open button.
 
 That's it! To update your imported profile(s), follow the appropriate Updating section above. You shouldn't have to re-import any Scan Profiles unless you see a note telling you to in that profile's README file.
 
-# Contributing
+## Using in PDQ Connect
+
+Many of these scanners are compatible with PDQ Connect for remote execution. To use a scanner in PDQ Connect:
+
+1. Check the scanner's README file for the **Compatibility** section to verify PDQ Connect support.
+1. Copy the PowerShell code from the scanner's `.ps1` file.
+1. Paste it into a PDQ Connect Run PowerShell script action.
+1. Configure any required parameters as noted in the scanner's README.
+
+For a list of scanner compatibility with PDQ Connect, see the **Compatibility** section in each scanner's README under `PowerShell Scanners\<Scanner Name>\README.md`.
+
+## Contributing
+
 If you have created a PowerShell Scanner that you would like to add to this repository, please read the [Contributing guide](CONTRIBUTING.md).
