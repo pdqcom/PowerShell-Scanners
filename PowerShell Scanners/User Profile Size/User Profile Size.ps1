@@ -10,6 +10,7 @@ ForEach ( $Folder in $UserFolders ) {
         FolderName    = $Folder.BaseName
         FolderPath    = $Folder.FullName
         Size          = $FolderSize
+        GBSize = [math]::Round( $FolderSize / 1GB, 2 )
     }
 
 }
