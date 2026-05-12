@@ -217,10 +217,21 @@ Foreach ( $User in $UserPaths ) {
 
                 }
 
+                # If disable_reasons is empty, it means extension is enabled.
+                # https://chromium.googlesource.com/chromium/src/+/refs/heads/main/extensions/browser/disable_reason.h
+				if ( $Extension.disable_reasons ) {
+
+                    $Status = $false
+                }
+                else {
+                    
+                    $Status = $true
+                }
+
                 $Output = [Ordered]@{
                     'Browser'           =           $BrowserName
                     'Name'              =           $Name
-                    'Enabled'           = [Bool]    $Extension.state
+                    'Enabled'           = [Bool]    $Status
                     'Description'       = [String]  $Extension.manifest.description
                     'Extension Version' = [String]  $Extension.manifest.version
                     'Browser Version'   = [String]  $PreferencesJson.extensions."$($Browser.LastVersion)"
