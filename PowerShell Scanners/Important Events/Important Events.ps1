@@ -8,14 +8,28 @@ param (
     [String]$EventLog = "System", # Defaults to "System"
     # The level of events to gather
     [ValidateRange(0, 5)]
-    [UInt32[]]$EventLevel = 1 # Critical
+    [UInt32[]]$EventLevel = @(1, 2) # Critical, Error
 )
 
 # Set the start date to be $Days before now
 $StartDate = (Get-Date).AddDays(-$Days)
 
 # Collect and output all relevant events
-Get-WinEvent -FilterHashtable @{LogName = $EventLog; Level = $EventLevel; StartTime = $StartDate } -ErrorAction SilentlyContinue | Select-Object -Last $EventLimit | ForEach-Object {
+$Events = @(Get-WinEvent -FilterHashtable @{LogName = $EventLog; Level = $EventLevel; StartTime = $StartDate } -ErrorAction SilentlyContinue | Select-Object -Last $EventLimit)
+
+if (-not $Events) {
+    [PSCustomObject]@{
+        Id          = $null
+        Provider    = $null
+        Message     = $null
+        TimeCreated = $null
+        Level       = $null
+    }
+
+    return
+}
+
+$Events | ForEach-Object {
     [PSCustomObject]@{
         Id          = $_.Id
         Provider    = $_.ProviderName

@@ -38,7 +38,7 @@ Example: `1,2,3`
 
 Mostly based on [this list](https://docs.microsoft.com/en-us/windows/win32/wes/eventmanifestschema-leveltype-complextype#remarks).
 
-Defaults to 1 (Critical)
+Defaults to 1,2 (Critical and Error)
 
 0 - Mistake
 Applications should not use this level, but it can happen.
