@@ -17,7 +17,7 @@ WizTree must be installed on the target. A package for it is available in the [P
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No
+* **PDQ Connect**: Yes, use `WizTree - User Profiles (Connect).ps1` (untested; self-contained single file)
 
 ## Parameters
 

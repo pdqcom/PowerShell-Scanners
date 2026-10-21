@@ -11,7 +11,7 @@ Uses DellBIOSProvider module to gather current BIOS settings. Script is not setu
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No
+* **PDQ Connect**: Yes, use `Dell BIOS Information (Connect).ps1` (untested; self-contained single file)
 
 ## Author
 

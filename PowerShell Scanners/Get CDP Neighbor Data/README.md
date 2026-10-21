@@ -15,7 +15,7 @@ All files are present in this folder. Network equipment has to send CDP packets 
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No, but it's possible
+* **PDQ Connect**: Yes, use `Get CDP Neighbor Data (Connect).ps1` (untested; self-contained single file)
 
 ## Parameters
 
