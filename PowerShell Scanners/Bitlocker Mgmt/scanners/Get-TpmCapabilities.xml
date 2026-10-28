@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AdminArsenal.Export Code="PDQInventory" Name="PDQ Inventory" Version="19.3.30.0" MinimumVersion="19.0">
+  <ScanProfile>
+    <Collections type="list" />
+    <Scanners type="list">
+      <Scanner>
+        <ModifiedDate>2026-10-28T17:50:45.0000000-06:00</ModifiedDate>
+        <Name>TPM Capabilities</Name>
+        <UID>4bf251c30b3148ffa02567737db6ad81</UID>
+        <Script></Script>
+        <FileName>C:\PowerShell-Scanners\PowerShell Scanners\Bitlocker Mgmt\scanners\Get-TpmCapabilities.ps1</FileName>
+        <Parameters></Parameters>
+        <AdditionalFiles></AdditionalFiles>
+        <RowLimit value="100" />
+        <TypeName>PowerShell</TypeName>
+        <SourceScannerId value="90" />
+      </Scanner>
+    </Scanners>
+    <Description>Reports TPM presence, state and platform capabilities (firmware type, Secure Boot, virtual machine).</Description>
+    <ScanProfileId value="33" />
+    <Name>PS - TPM Capabilities</Name>
+    <ScheduleTriggerSet name="ScheduleTriggers">
+      <Triggers type="list" />
+    </ScheduleTriggerSet>
+  </ScanProfile>
+</AdminArsenal.Export>
