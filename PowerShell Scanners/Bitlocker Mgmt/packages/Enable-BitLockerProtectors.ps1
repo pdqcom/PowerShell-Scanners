@@ -27,13 +27,13 @@
     Aes128, Aes256, XtsAes128, XtsAes256 (default). Used only when encryption starts.
 
 .PARAMETER UsedSpaceOnly / SkipHardwareTest
-    Default $true. SkipHardwareTest avoids the restart-and-test cycle on OS drives.
+    UsedSpaceOnly defaults to $false (encrypt the whole volume); SkipHardwareTest defaults to $true and avoids the restart-and-test cycle on OS drives.
 
 .PARAMETER BackupToAD / BackupToEntra
     Escrow every RecoveryPassword on the drive to AD DS / Entra ID afterwards.
 
 .PARAMETER ReturnRecoveryPassword
-    Include the recovery password in the output. Default $false: output is kept in PDQ logs.
+    Include the recovery password in the output. Default $true. Set $false to keep it out of the output, which is kept in PDQ logs.
 
 .PARAMETER DryRun
     $true = report only, change nothing.
