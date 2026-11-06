@@ -60,46 +60,46 @@ Get-EventLog -LogName "Security" -newest 200 -InstanceId 4624 -ErrorAction "Sile
 # Fall back to quser to catch currently logged-on users that have no matching security event
 # (common on machines where only logon types 3/5 are present, e.g. remote-only or VDI sessions)
 try {
-    $queryUser = quser 2>&1
-} catch {
-    $Results
-    return
-}
 
-if ( $LASTEXITCODE -ne 0 ) {
+    $QuserOutput = @(quser 2>&1)
 
-    $Results
-    return
+    # quser exits non-zero when nobody is logged on, in which case its output is just an error message.
+    if ( $LASTEXITCODE -ne 0 ) {
 
-}
+        $QuserOutput = @()
 
-$userName = $null
-if ( $queryUser ) {
-
-    if ( $queryUser -match '\s(\S+)\s+\d+\s' ) {
-        $userName = $matches[1]
     }
 
-}
+} catch {
 
-if ( $null -eq $userName ) {
-
-    $Results
-    return
+    Write-Verbose "Unable to run quser: $_"
+    $QuserOutput = @()
 
 }
 
-if ( $Lowercase ) {
-    $userName = $userName.ToLower()
-}
+# The first line is a localized header, the rest are fixed-width. Each starts with a 1-character current
+# session marker, followed by the username column. Usernames can contain spaces, so don't split on whitespace.
+Foreach ( $QuserLine in ($QuserOutput | Select-Object -Skip 1) ) {
 
-if ( $UserArray -notcontains $userName ) {
+    $UserName = ("$QuserLine" -replace '^.(.{0,21}).*$', '$1').Trim()
 
-    $null = $Results.Add([PSCustomObject]@{
-        Username  = $userName
-        LogonType = "Current User"
-        LastLogon = [DateTime](Get-Date)
-    })
+    if ( $Lowercase ) {
+
+        $UserName = $UserName.ToLower()
+
+    }
+
+    # Skip blank lines, users found in the event log, and additional sessions of the same user.
+    if ( $UserName -and ( $UserArray -notcontains $UserName ) ) {
+
+        $null = $UserArray.Add($UserName)
+        $null = $Results.Add([PSCustomObject]@{
+            Username  = $UserName
+            LogonType = "Current User"
+            LastLogon = [DateTime](Get-Date)
+        })
+
+    }
 
 }
 
