@@ -11,7 +11,7 @@ Runs `Get-FileHash` on files in a directory to calculate their hash values
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No - different version needed
+* **PDQ Connect**: Yes, see Connect-File Hash.ps1
 
 ## Parameters
 

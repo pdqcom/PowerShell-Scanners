@@ -11,7 +11,7 @@ Installs the PSWindowsUpdate module, then runs Get-WindowsUpdate. This returns a
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No, working on a version that does
+* **PDQ Connect**: Yes, see Connect-Get Available Windows Updates.ps1
 
 ## Parameters
 

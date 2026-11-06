@@ -15,7 +15,7 @@ You may want to change the Scan As setting to `Logged on User` for this Scan Pro
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes, but output needs to be trimmed
+* **PDQ Connect**: Yes, see Connect-Certificates.ps1 for trimmed output
 
 ## Parameters
 

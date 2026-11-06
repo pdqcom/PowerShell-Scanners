@@ -26,7 +26,7 @@ it.crowd | 3.4.5.6 | False | I'm disabled.
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes, check more first
+* **PDQ Connect**: Yes, see Connect-Hosts File.ps1 for PowerShell 7 compatibility
 
 ## Parameters
 
