@@ -17,7 +17,7 @@ WizTree must be installed on the target. A package for it is available in the [P
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No
+* **PDQ Connect**: Yes, see Connect-WizTree - Largest Files.ps1
 
 ## Parameters
 

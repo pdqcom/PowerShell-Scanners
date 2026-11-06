@@ -46,7 +46,8 @@ function Read-WizTreeCsv {
         # https://www.pdq.com/blog/viewing-powershell-function-contents/#method-2-using-function
         # I had to make the pattern different than the target it's searching for, so I added a + after the #.
         # This works because -replace uses regex, so I'm telling -replace to search for 1 or more #.
-        ${Function:Read-WizTreeCsv} = ${Function:Read-WizTreeCsv} -replace '#+Initialize', $ScriptBlock
+        # .ToString() is required because in PowerShell 6.1 and later, -replace executes a ScriptBlock replacement.
+        ${Function:Read-WizTreeCsv} = ${Function:Read-WizTreeCsv} -replace '#+Initialize', $ScriptBlock.ToString()
 
         # From my testing, I determined that this recursive call is necessary.
         # PowerShell got stuck when I tried to make it keep executing the same function after it had changed itself.
