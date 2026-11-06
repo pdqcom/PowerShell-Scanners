@@ -17,7 +17,9 @@ Installs the PSWindowsUpdate module, then runs Get-WindowsUpdate. This returns a
 
 ### WSUS
 
-Specify to check WSUS for updates.
+Specify to check WSUS for updates. The target must be configured to use a WSUS server.
+
+If this is not specified, the scanner uses whichever update service the target is configured to use.
 
 ## Author
 
