@@ -11,7 +11,7 @@ This scanner query wmi and looks for default printer and mapped printers
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes
+* **PDQ Connect**: Only when run as the logged on user. Printer connections are per-user, so this will not find mapped printers when run as SYSTEM.
 
 ## Parameters
 
