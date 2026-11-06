@@ -16,7 +16,7 @@ Gather active and past malware threats that Windows Defender detected in the sys
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes but test
+* **PDQ Connect**: Yes
 
 ## Author
 

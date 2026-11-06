@@ -15,7 +15,7 @@ Must be run as administrator
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Maybe
+* **PDQ Connect**: Yes
 
 ## Author
 

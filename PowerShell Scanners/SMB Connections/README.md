@@ -13,7 +13,7 @@ Compatible with Windows 8 or later.
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No, but maybe
+* **PDQ Connect**: Yes
 
 ## Author
 

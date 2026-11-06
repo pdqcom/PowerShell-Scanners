@@ -11,7 +11,7 @@ Retrieves information about each battery's capacity and calculates health from t
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Maybe
+* **PDQ Connect**: Yes
 
 ## Author
 

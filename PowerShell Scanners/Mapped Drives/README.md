@@ -11,7 +11,7 @@ This scanner looks at the HKEY_USERS registry hive to find the mapped drives of 
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: I think it does, gotta test
+* **PDQ Connect**: Yes
 
 ## Parameters
 

@@ -15,7 +15,7 @@ A version of choco to be installed on the workstation/server
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Maybe
+* **PDQ Connect**: Yes, if Chocolatey is installed
 
 ## Parameters
 

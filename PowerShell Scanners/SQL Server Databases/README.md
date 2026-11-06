@@ -17,7 +17,7 @@ Internally the script uses sqlcmd.exe.
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No, but test
+* **PDQ Connect**: Yes, if SQL Server command-line tools are installed
 
 ## Parameters
 

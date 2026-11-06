@@ -12,7 +12,7 @@ Run `Get-Help Get-ScheduledTasksActions.ps1` for more information and examples.
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes, but Connect version probably needs ot output less
+* **PDQ Connect**: Yes
 
 ## Parameters
 

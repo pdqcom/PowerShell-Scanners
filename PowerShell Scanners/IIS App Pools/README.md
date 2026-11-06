@@ -15,7 +15,7 @@ Runs `Get-IISAppPool` and returns app pool names and their status.
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: probably on your IIS servers
+* **PDQ Connect**: Yes, if IIS is installed
 
 ## Author
 

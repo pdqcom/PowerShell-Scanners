@@ -21,7 +21,7 @@ Returns the following Group Information:
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No
+* **PDQ Connect**: Yes, on domain-joined machines
 
 ## Author
 
