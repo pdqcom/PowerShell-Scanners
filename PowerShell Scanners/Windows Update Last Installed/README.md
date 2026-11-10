@@ -13,7 +13,7 @@ Installs the PSWindowsUpdate module, then runs the following cmdlets:
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: Yes, use `Windows Update Last Installed (Connect).ps1` (untested; self-contained single file)
+* **PDQ Connect**: Yes, use `Windows Update Last Installed (Connect).ps1`
 
 ## Author
 
