@@ -19,7 +19,35 @@ $Updates = $Searcher.Search('IsInstalled=0 and IsHidden=0').Updates
 
 if ( $Updates.Count -eq 0 ) {
 
-    Write-Output 'No updates available.'
+    # Connect expects an object, so emit one with null values instead of nothing.
+    [PSCustomObject]@{
+        'KB'                       = $null
+        'Title'                    = $null
+        'Size'                     = $null
+        'Description'              = $null
+        'RebootRequired'           = $null
+        'EulaAccepted'             = $null
+        'IsBeta'                   = $null
+        'IsDownloaded'             = $null
+        'IsHidden'                 = $null
+        'IsInstalled'              = $null
+        'IsMandatory'              = $null
+        'IsUninstallable'          = $null
+        'Deadline'                 = $null
+        'LastDeploymentChangeTime' = $null
+        'MsrcSeverity'             = $null
+        'RecommendedCpuSpeed'      = $null
+        'RecommendedHardDiskSpace' = $null
+        'RecommendedMemorySize'    = $null
+        'ReleaseNotes'             = $null
+        'SupportUrl'               = $null
+        'Type'                     = $null
+        'DeploymentAction'         = $null
+        'DownloadPriority'         = $null
+        'BrowseOnly'               = $null
+        'PerUser'                  = $null
+        'AutoSelectOnWebSites'     = $null
+    }
     return
 
 }

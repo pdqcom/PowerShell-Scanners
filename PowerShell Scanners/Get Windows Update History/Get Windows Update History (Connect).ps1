@@ -21,7 +21,18 @@ $Results = @{
 
 if ( $Count -eq 0 ) {
 
-    Write-Output 'No Windows Update history found.'
+    # Connect expects an object, so emit one with null values instead of nothing.
+    [PSCustomObject]@{
+        'Date'        = $null
+        'Operation'   = $null
+        'Result'      = $null
+        'KB'          = $null
+        'Title'       = $null
+        'Description' = $null
+        'HResult'     = $null
+        'UpdateId'    = $null
+        'SupportUrl'  = $null
+    }
     return
 
 }

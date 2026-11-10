@@ -2,7 +2,13 @@
 # The device needs internet access to the PowerShell Gallery the first time this runs.
 if ( -not (Get-CimInstance -ClassName Win32_ComputerSystem -Filter "Manufacturer LIKE '%Dell%'") ) {
 
-    Write-Output 'Not a Dell device.'
+    # Connect expects an object, so emit one with null values instead of nothing.
+    [PSCustomObject]@{
+        Category     = $null
+        Attribute    = $null
+        Description  = $null
+        CurrentValue = $null
+    }
     return
 
 }
