@@ -11,7 +11,7 @@ Installs the PSWindowsUpdate module, then runs Get-WUHistory. This returns the c
 ## Compatibility
 
 * **PDQ Inventory**: Yes
-* **PDQ Connect**: No, but i think it's possible
+* **PDQ Connect**: Yes, use `Get Windows Update History (Connect).ps1`
 
 ## Author
 
